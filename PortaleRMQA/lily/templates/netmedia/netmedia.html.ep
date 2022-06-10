@@ -1,0 +1,36 @@
+% layout 'default';
+% title 'Net media';
+
+
+<link href="css/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet">
+<script src="js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/netmedia.js'))%>"></script>
+
+
+<script type="text/javascript">
+	var data = jQuery.parseJSON('<%==$tree%>');
+	$(document).ready(function () {
+	    // update calendars
+	    parseMediaBlocks(data);
+        parseMediaTabs(data);
+        parseMediaFiles(data);
+        removeEmptyDivs(data);
+	});
+</script>
+
+<div class="row live-menu" id="add_boxes"></div>
+
+
+
+
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>

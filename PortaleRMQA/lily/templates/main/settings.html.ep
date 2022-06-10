@@ -1,0 +1,156 @@
+% layout 'default';
+% title 'Impostazioni utente';
+
+
+
+<script src="js/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="js-lily/settings.js"></script>
+
+<div class="row animated fadeInRight">
+    <div class="col-md-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Profilo utente</h5>
+            </div>
+            <div>
+                <div class="ibox-content no-padding border-left-right img-profile">
+                    
+                    <img alt="image" class="img-responsive" src="img-lily/users/<%=$settings->{'user_avatar'}%>" />
+                </div>
+                <div class="ibox-content profile-content">
+                    <h4><strong><%= $settings->{'user_fullname'} %></strong></h4>
+                    <p><i class="fa fa-envelope"></i> <%= $settings->{'user_email'} %></p>
+                    <h4>
+                        Modifica password
+                    </h4>
+                    <form role="form" class="form-inline form-mod-psw" id="change-psw" accept-charset="utf-8">
+                        <div class="form-group">
+                        	<label for="exampleInputEmail2" class="sr-only">Vecchia Password</label>
+                            <input type="password" placeholder="Vecchia Password" id="old-psw" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                        	<label for="exampleInputPassword2" class="sr-only">Nuova Password</label>
+                            <input type="password" placeholder="Nuova Password" id="new-psw" class="form-control" required>
+                        </div>
+                        <button class="btn btn-info" type="submit">MODIFICA</button>
+                    </form>
+                </div>
+        	</div>
+    	</div>
+    </div>
+    <div class="col-md-8">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Proprietà Homepage</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+
+            <script type="text/javascript">
+            function getSorted(selector, attrName) {
+                console.log('getSorted');
+                return $($(selector).toArray().sort(function(a, b){
+                    var aVal = parseInt(a.getAttribute(attrName)),
+                        bVal = parseInt(b.getAttribute(attrName));
+                    return aVal - bVal;
+                }));
+            }
+            $(function() {
+                console.log('swap-sortable');
+                $("#sortable").html( getSorted('.movit', 'data-sort') );
+            });
+            /*
+            console.log('sortable-positions');
+            var row1_pos = '<%=$settings_homepage->{'row1_pos'}%>';
+            var row2_pos = '<%=$settings_homepage->{'row2_pos'}%>';
+            var row3_pos = '<%=$settings_homepage->{'row3_pos'}%>';
+            var row4_pos = '<%=$settings_homepage->{'row4_pos'}%>';
+            var row5_pos = '<%=$settings_homepage->{'row5_pos'}%>';
+            console.dir('row1_pos -> '+row1_pos); // -> 4
+            console.dir('row2_pos -> '+row2_pos); // -> 2
+            console.dir('row3_pos -> '+row3_pos); // -> 3
+            console.dir('row4_pos -> '+row4_pos); // -> 1
+            console.dir('row5_pos -> '+row5_pos); // -> 1
+            */
+            </script>
+
+            % my $checked;
+
+            <div class="ibox-content grid-content" id="setting-homepage">
+            	<p>Scegli l'<strong>ordine dei box in homepage</strong> secondo le tue esigenze. </p>
+                <p>Ogni <strong>riga può essere spostata in alto o in basso</strong> trascinandola, oppure se non vuoi visualizzarla basta "spegnerla" grazie all'interrutore posto a destra della stessa. </p>
+                <p>Per <strong>rendere effettiva la modifica</strong> premi "SALVA MODIFICHE"</p>
+                <div id="sortable">
+
+                    <div class="row movit" data-sort="<%=$settings_homepage->{'row1_pos'}%>" id="1">
+                    	<div class="col-md-12">
+                            % if ( $settings_homepage->{'row1_on'} eq 'true' ) { $checked = 'checked'; } else { $checked = ''; }
+                            <p class="switch-settings"><input type="checkbox" class="js-switch" <%=$checked%> /></p>
+                    		<div class="row show-grid">
+                                <div class="col-md-6 my-handler">1 Aggiornamento dati</div>
+                                <div class="col-md-6 my-handler">Allarmi nelle ultime 24 ore</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row movit" data-sort="<%=$settings_homepage->{'row2_pos'}%>" id="2">
+                        <div class="col-md-12">
+                            % if ( $settings_homepage->{'row2_on'} eq 'true' ) { $checked = 'checked'; } else { $checked = ''; }
+                            <p class="switch-settings"><input type="checkbox" class="js-switch" <%=$checked%> /></p>
+                            <div class="row show-grid">
+                                <div class="col-md-4 my-handler">2 Sopralluoghi</div>
+                                <div class="col-md-4 my-handler">Tarature</div>
+                                <div class="col-md-4 my-handler">Manutenzione</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row movit" data-sort="<%=$settings_homepage->{'row3_pos'}%>" id="3">
+                        <div class="col-md-12">
+                            % if ( $settings_homepage->{'row3_on'} eq 'true' ) { $checked = 'checked'; } else { $checked = ''; }
+                            <p class="switch-settings"><input type="checkbox" class="js-switch" <%=$checked%> /></p>
+                            <div class="row show-grid">
+                                <div class="col-md-12 my-handler">3 Statistiche</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row movit" data-sort="<%=$settings_homepage->{'row4_pos'}%>" id="4">
+                        <div class="col-md-12">
+                            % if ( $settings_homepage->{'row4_on'} eq 'true' ) { $checked = 'checked'; } else { $checked = ''; }
+                            <p class="switch-settings"><input type="checkbox" class="js-switch" <%=$checked%> /></p>
+                            <div class="row show-grid">
+                                <div class="col-md-12 my-handler">4 Lista Tasks</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row movit" data-sort="<%=$settings_homepage->{'row5_pos'}%>" id="5">
+                        <div class="col-md-12">
+                            % if ( $settings_homepage->{'row5_on'} eq 'true' ) { $checked = 'checked'; } else { $checked = ''; }
+                            <p class="switch-settings"><input type="checkbox" class="js-switch" <%=$checked%> /></p>
+                            <div class="row show-grid">
+                                <div class="col-md-6 my-handler">5 Bombole</div>
+                                <div class="col-md-6 my-handler">Altro</div>
+                            </div>
+                    	</div>
+                    </div>
+
+                </div>
+
+                <p class="grid-buttons">
+                    <button type="button" class="btn btn-w-m btn-success" id="save-setting-hp">SALVA MODIFICHE</button>
+                    <button type="button" class="btn btn-w-m btn-success" id="reset-setting-hp">REIMPOSTA</button>
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+</div>

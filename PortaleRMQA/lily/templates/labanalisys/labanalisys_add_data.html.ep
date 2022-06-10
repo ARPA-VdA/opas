@@ -1,0 +1,12 @@
+% layout 'default';
+% title 'TODO';
+
+
+<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+
+
+
+
+<div class="row">
+</div>

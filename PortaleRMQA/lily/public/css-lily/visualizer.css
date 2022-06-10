@@ -1,0 +1,368 @@
+
+
+
+
+.ibox-smaller .ibox-title{
+	padding: 10px 10px 5px 10px;
+	height: 40px;
+}
+.ibox-smaller .ibox-content{
+	padding: 7px 10px 10px 10px;
+}
+.menu-orr-visualizer{
+	background-color: #f2f2f2;
+	padding: 7px 10px;
+	font-size: 13px;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+.menu-orr-visualizer i{
+	font-size: 10px;
+	color: #adadad;
+}
+.list-visualizer{
+	margin: 0px;
+	padding: 0px 0px 10px 0px;
+}
+.list-visualizer li{
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+	width: 46%;
+	margin: 0px 2%;
+	padding: 1%;
+	border-bottom: 1px solid #f0f0f0;
+	float: left;
+}
+.list-visualizer li a:hover,
+.list-visualizer li a:focus{
+	color: #888;
+}
+.list-visualizer li a.text-warning:hover,
+.list-visualizer li a.text-warning:focus{
+	color: #f8ac59!important;
+}
+.visualizer-chart{
+	min-width: 250px;
+	width: 100%;
+	height: 365px;
+}
+.visualizer-chart-big{
+	height: 580px!important;
+}
+#visualizer .dataTables_scroll{
+    overflow: auto;
+    overflow-x: hidden;
+    height: 365px;
+}
+#visualizer .topbar .col-lg-4{
+	padding: 0px 8px 0px 8px!important;
+	font-size: 11px;
+}
+.bottombar{
+	background-color: #acb4ba;
+	font-size: 17px;
+	padding: 3px;
+}
+.bottombar > a{
+	background-color: #f4f4f4;
+	width: 28px;
+	text-align: center;
+	padding: 1px;
+	display: inline-block;
+	color: #00aa88;
+}
+.bottombar > .dif-colors{
+	background-color: #00aa88;
+	color: #f4f4f4;
+}
+.bottombar > a:hover{
+	color: #00755e;
+}
+.bottombar > .dif-colors:hover{
+	background-color: #00aa88;
+	color: #fff;
+}
+.dropdown-user .btn-default{
+	background-color: #FFF!important;
+	border-color: #FFF!important;
+	color: #00aa88!important;
+	font-size: 13px;
+	margin-bottom: 0px!important;
+	padding: 6px 8px;
+	border-radius: 0!important;
+	border-right: 1px solid #eee!important;
+	margin-right: 1px!important;
+}
+.dropdown-user .btn-default:hover{
+	color: #cf6600!important;
+}
+.dropdown-user .buttons-excel{
+	border-right: none!important;
+}
+.dropdown-visualizer{
+	min-width: 100px!important;
+}
+.visualizer-table{
+	height: 365px;
+	overflow: auto;
+	overflow-x: hidden;
+	position: relative;
+	background-color: #FFF;
+	z-index: 120;
+}
+.visualizer-table-body{
+}
+.visualizer-table table{
+	font-size: 12px;
+	margin-top: 0px!important;
+}
+.visualizer-table table th,
+.visualizer-table table td{
+	padding: 3px!important;
+}
+.visualizer-table .dataTables_length,
+.visualizer-table .dataTables_filter,
+.visualizer-table .dataTables_info,
+.visualizer-table .dataTables_paginate{
+	font-size: 12px;
+}
+.visualizer-table .dataTables_length,
+.visualizer-table .dataTables_filter{
+	padding-top: 5px;
+}
+.visualizer-table .dataTables_length .form-control,
+.visualizer-table .dataTables_filter .form-control{
+	padding: 0px;
+	font-size: 12px;
+	height: 22px;
+	line-height: 22px;
+}
+.visualizer-table .dataTables_paginate .paginate_button a{
+	padding: 2px 6px;
+}
+.visualizer-table .dataTables_paginate .pagination{
+	margin: 0px;
+}
+.visualizer-table .dataTables_info{
+	padding-top: 2px;
+}
+.range-visualizer{
+
+}
+.range-visualizer #reportrange{
+	display: inline-block;
+}
+.range-visualizer #refresh-range{
+	display: inline-block;
+	padding: 3px 7px;
+}
+.view-info{
+	background-color: #00aa88;
+	padding: 6px;
+	max-width: 450px;
+	position: absolute;
+	bottom: 70px;
+}
+.view-info h4{
+	font-size: 13px;
+	margin-top: 3px;
+	color: #FFF;
+}
+.view-info .wd_type{
+	font-weight: bold;
+}
+.view-info table{
+	background-color: #fff;
+	font-size: 11px;
+	margin: 7px 0px 0px 0px!important;
+	min-width: 200px;
+}
+.view-info tbody > tr > td{
+	padding: 4px 5px!important;
+}
+.view-info .close-infos{
+	color: #FFF;
+	position: absolute;
+	right: 4px;
+	top: 2px;
+	cursor: pointer;
+}
+#visualizer .open-calendar,
+#visualizer .open-pie-chart {
+	position: absolute;
+	background-color: #0A8;
+	bottom: 70px;
+	border: 1px solid #008a6e;
+	padding: 7px;
+	font-size: 12px;
+}
+#visualizer .open-pie-chart {
+	margin-left: 120px;
+}
+#visualizer .open-calendar h4,
+#visualizer .open-pie-chart h4{
+	font-size: 13px;
+	color: #FFF;
+}
+#visualizer .open-calendar .btn,
+#visualizer .open-pie-chart .btn{
+	margin: 1px 0px 0px 6px;
+}
+#visualizer .open-calendar select,
+#visualizer .open-pie-chart select{
+	height: 22px;
+	border: none;
+}
+#visualizer .open-pie-chart .type-chart{
+	display: block;
+}
+#visualizer .open-pie-chart .check-options{
+	display: block;
+	color: #FFF;
+	border-top: 1px solid #5DC5B0;
+	margin-top: 5px;
+	padding: 4px 2px 0px 2px;
+	height: 20px;
+}
+#visualizer .open-pie-chart .check-options input[type=checkbox]{
+	display: block;
+	float: left;
+	margin: 3px 2px 0px 0px;
+}
+#visualizer .open-pie-chart .check-options input.labels{
+	margin-left: 15px;
+}
+#visualizer .open-pie-chart .check-options label{
+	display: block;
+	float: left;
+	margin: 0px;
+	font-weight: normal;
+}
+.el-colorpicker{
+	margin: 0px 0px 0px 10px!important;
+	border: none;
+	line-height: 15px;
+	font-size: 11px;
+}
+.common-bar{
+	background-color: #fff;
+	border: 1px solid #dfdfdf;
+	margin: 0px 0px 15px 0px!important;
+}
+.common-bar .common-head{
+	background-color: #f5f5f5;
+	border-right: 1px solid #dfdfdf;
+}
+.common-bar .common-head h2{
+	font-size: 18px;
+	margin: 0px;
+	padding: 10px;
+}
+.common-bar .common-days{
+	padding: 7px 10px 0px 10px;
+}
+.common-bar .common-days span i{
+	font-size: 16px;
+}
+.common-bar .common-days .range-days input{
+	margin-top: -3px;
+}
+.common-bar .pull-right h4{
+	line-height: 28px;
+	text-align: right;
+	padding-right: 15px;
+	margin: 0px!important;
+}
+.common-bar #col-reportrange{
+	max-width: 300px;
+	padding-right: 0px!important;
+}
+.common-bar #col-integration{
+	max-width: 115px;
+	padding-right: 0px!important;
+}
+.common-bar #col-integration select{
+	width: 100%;
+}
+.common-bar #col-refresh{
+	max-width: 100px;
+	padding-right: 0px!important;
+}
+.common-days .form-control{
+	font-size: 12px!important;
+	height: 26px;
+	padding: 4px 5px;
+}
+#groups .sel-group{
+	background-color: #E8FFCE!important;
+}
+#groups .sel-group .view-groups,
+#sub-groups .sel-group .view-params{
+	color: #ed5565;
+}
+#sub-groups .sel-group{
+	background-color: #E6F4FF!important;
+}
+#open-popup #param-color{
+	color: #FFF;
+}
+.hot-pluv{
+	display: block;
+    background-color: #FFB100;
+    color: #FFF;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    font-size: 19px;
+    position: absolute;
+    right: 25px;
+	z-index: 100;
+    bottom: 75px;
+}
+#col-chkb{
+	font-size: 11px;
+}
+
+
+
+#visualizer_map{
+	height: 600px;
+}
+
+
+.greenc .icheckbox_square-green,
+.yellow .icheckbox_square-green,
+.bluec .icheckbox_square-green,
+.blued .icheckbox_square-green,
+.greend .icheckbox_square-green,
+.orange .icheckbox_square-green{
+	background-position: -24px 0px;
+}
+.greenc .icheckbox_square-green.checked,
+.yellow .icheckbox_square-green.checked,
+.bluec .icheckbox_square-green.checked,
+.blued .icheckbox_square-green.checked,
+.greend .icheckbox_square-green.checked,
+.orange .icheckbox_square-green.checked{
+	background-position: -48px 0px;
+}
+
+.greenc .icheckbox_square-green{
+	background: url(../js-lily/plugins/leaflet/iCheck/greenc.png) no-repeat;
+}
+.yellow .icheckbox_square-green{
+	background: url(../js-lily/plugins/leaflet/iCheck/yellow.png) no-repeat;
+}
+.bluec .icheckbox_square-green{
+	background: url(../js-lily/plugins/leaflet/iCheck/bluec.png) no-repeat;
+}
+.blued .icheckbox_square-green{
+	background: url(../js-lily/plugins/leaflet/iCheck/blued.png) no-repeat;
+}
+.greend .icheckbox_square-green{
+	background: url(../js-lily/plugins/leaflet/iCheck/greend.png) no-repeat;
+}
+.orange .icheckbox_square-green{
+	background: url(../js-lily/plugins/leaflet/iCheck/orange.png) no-repeat;
+}

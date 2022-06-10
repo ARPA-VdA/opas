@@ -1,0 +1,83 @@
+% layout 'default';
+% title 'Stazioni - Dati stazioni in ritardo';
+
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/station_late.js'))%>"></script>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Stazioni - Dati stazioni in ritardo</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                <table class="table table-striped table-bordered table-hover dataTables-example table-with-tools tooltip-table">
+                    <thead>
+                        <tr>
+                            <th>Stazione</th>
+                            <th>Data</th>
+                            <th>Stato</th>
+                            <th>Ip</th>
+                            <th>StID</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        % foreach my $station ( @{$station_status} )
+                        % {
+                            <tr>
+                                <td><%= $station->{'stationname'} =%></td>
+                                <td><i class="fa fa-clock-o"></i>
+                                    % if ( $station->{'gap'} == 1 ) { # 2 hour
+                                        <span class="label label-information">
+                                    % }
+                                    % if ( $station->{'gap'} == 2 ) { # 4 hour
+                                        <span class="label label-warning">
+                                    % }
+                                    % if ( $station->{'gap'} == 3 ) { # 8 hour
+                                        <span class="label label-danger">
+                                    % }
+                                    &nbsp;<%= $station->{'lastupdate_format'} =%>
+                                    
+                                    % if ( $station->{'gap'} > 0 ) {
+                                        </span>
+                                    % }
+                                </td>
+                                <td><%= $station->{'status_desc'} =%></td>
+                                
+                                <td><%= $station->{'tcpip2'} =%></td>
+                                <td><%= $station->{'st_id'} =%></td>
+                                <td>
+                                    <a href="#" class="btn btn-primary btn-circle btn-ping" type="button" data-toggle="tooltip" data-placement="top" title="Ping"><i class="fa fa-rss"></i></a>
+                                    
+                                </td>
+                            </tr>
+                        % }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Stazione</th>
+                            <th>Data</th>
+                            <th>Stato</th>
+                            <th>Ip</th>
+                            <th>StID</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title><%= title %></title>
+
+	<link rel="shortcut icon" type="image/png" href="img-lily/favicon.png"/>
+	<link href="<%=url_for(helperGetFileVersion('/css/bootstrap.min.css'))%>" rel="stylesheet">
+	<link href="<%=url_for(helperGetFileVersion('/font-awesome/css/font-awesome.css'))%>" rel="stylesheet">
+
+	
+	<link href="css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+
+	
+	<link href="js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+    
+    <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
+
+    
+    <link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+
+    
+    
+    <link href="<%=url_for(helperGetFileVersion('/css/plugins/dataTables/buttons.bootstrap.css'))%>" rel="stylesheet">
+    <link href="<%=url_for(helperGetFileVersion('/css/plugins/dataTables/buttons.dataTables.css'))%>" rel="stylesheet">
+    <link href="<%=url_for(helperGetFileVersion('/css/plugins/dataTables/dataTables.bootstrap.css'))%>" rel="stylesheet">
+    <link href="<%=url_for(helperGetFileVersion('/css/plugins/dataTables/dataTables.responsive.css'))%>" rel="stylesheet">
+    <link href="<%=url_for(helperGetFileVersion('/css/plugins/dataTables/responsive.bootstrap.css'))%>" rel="stylesheet">
+    <link href="<%=url_for(helperGetFileVersion('/css/plugins/dataTables/responsive.dataTables.css'))%>" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/magnific-popup.css" />
+
+    <link href="css/plugins/switchery/switchery.css" rel="stylesheet">
+
+	<link href="css/animate.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+
+    
+	<link href="<%=url_for(helperGetFileVersion('/css-lily/default.css'))%>" rel="stylesheet">
+
+    
+    <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    
+    <script src="js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="js/plugins/validate/additional-methods.min.js"></script>
+
+    
+
+    
+    <script src="js/plugins/moment-js/moment.js"></script>
+    <script src="js/plugins/moment-js/moment.it.js"></script>
+
+    
+    <link href="css/plugins/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
+    <script src="js/plugins/bootstrap3-editable/bootstrap-editable.js"></script>
+
+    
+    <script src="js/plugins/chosen/chosen.jquery.js"></script>
+
+    
+    <script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="js/plugins/datapicker/bootstrap-datepicker.it.js"></script>
+
+    
+    <script src="js/plugins/timepicker/bootstrap-timepicker.js"></script>
+    <link href="css/plugins/timepicker/bootstrap-timepicker.css" rel="stylesheet" />
+
+    
+    <script src="js/plugins/daterangepicker/daterangepicker.js"></script>
+    <link href="css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
+
+    
+    <script src="js/bootbox.min.js"></script>
+
+    
+    <script src="js/plugins/peity/jquery.peity.min.js"></script>
+    <script src="js/demo/peity-demo.js"></script>
+
+    
+    
+    <script src="<%=url_for(helperGetFileVersion('/js/plugins/dataTables/jquery.dataTables.js'))%>"></script>
+    <script src="<%=url_for(helperGetFileVersion('/js/plugins/dataTables/dataTables.bootstrap.js'))%>"></script>
+    <script src="<%=url_for(helperGetFileVersion('/js/plugins/dataTables/dataTables.buttons.js'))%>"></script>
+    <script src="<%=url_for(helperGetFileVersion('/js/plugins/dataTables/dataTables.responsive.js'))%>"></script>
+    <script src="<%=url_for(helperGetFileVersion('/js/plugins/dataTables/buttons.bootstrap.js'))%>"></script>
+    <script src="<%=url_for(helperGetFileVersion('/js/plugins/dataTables/buttons.html5.js'))%>"></script>
+    <script src="<%=url_for(helperGetFileVersion('/js/plugins/dataTables/buttons.print.js'))%>"></script>
+    <script src="<%=url_for(helperGetFileVersion('/js/plugins/dataTables/responsive.bootstrap.js'))%>"></script>
+    <script src="<%=url_for(helperGetFileVersion('/js/plugins/dataTables/jszip.min.js'))%>"></script>
+    <script src="<%=url_for(helperGetFileVersion('/js/plugins/dataTables/datetime-moment.js'))%>"></script>
+
+    
+    <script src="js/plugins/switchery/switchery.js"></script>
+
+    
+    <script src="js/inspinia.js"></script>
+    <script src="js/plugins/pace/pace.min.js"></script>
+
+    
+    <script src="js/plugins/gritter/jquery.gritter.min.js"></script>
+
+    <script src="js/jquery.magnific-popup.min.js"></script>
+
+    
+    <script src="js/plugins/easypiechart/jquery.easypiechart.js"></script>
+
+    
+    <script src="js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+    
+    <script src="js/demo/sparkline-demo.js"></script>
+
+    
+    <script src="js/plugins/chartJs/Chart.min.js"></script>
+
+    
+    <script src="js/plugins/iCheck/icheck.min.js"></script>
+
+    
+    <script src="js/plugins/toastr/toastr.min.js"></script>
+
+   
+    <script src="js/plugins/idle-timer/idle-timer.min.js"></script>
+
+    
+    <script src="<%=url_for(helperGetFileVersion('/js-lily/default.js'))%>"></script>
+
+    
+    <script type="text/javascript">
+        // websocket url path
+        var ws_url = '<%= url_for('websocket')->to_abs %>';
+    </script>
+
+</head>
+
+
+<body onbeforeunload="handleBrowserCloseButton(event);">
+    <div id="wrapper">
+
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                        	<span>
+                                % my $avatar = url_for(helperGetFileVersion('/img-lily/users/'.$user->{'user_avatar'}));
+                            	<img alt="image" class="img-circle" src="<%=$avatar%>" />
+                            </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">
+                                <%= $user->{'user_fullname'} %>
+                            </strong>
+                            </span> <span class="text-muted text-xs block"><%=$user->{'group_name'}%> <b class="caret"></b></span> </span> </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a href="<%= url_for('/settings')%>"><i class="fa  fa-cog"></i>&nbsp;Impostazioni</a></li>
+                                
+                                % if ( $item_tutorial ) {
+                                    <li><a href="<%= url_for('/tutorial')%>"><i class="fa  fa-play-circle"></i>&nbsp;Tutorial</a></li>
+                                % }
+                                <li class="divider"></li>
+                                <li><a href="<%= url_for('logout')%>"><i class="fa fa-sign-out"></i>&nbsp;Esci</a></li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">
+                            MENU
+                        </div>
+                    </li>
+
+                    
+                    <%==$navlist%>
+                    
+                </ul>
+                
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+	        <div class="row border-bottom">
+		        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+			        <div class="navbar-header">
+			            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+			        </div>
+		            <ul class="nav navbar-top-links navbar-right">
+                        <li class="main-logo-nav"><img src="<%= url_for('/img-lily/logo-piattaforma-nav.png')%>"></li>
+		                <li>
+		                    <span class="m-r-sm text-muted welcome-message">
+                            Benvenuto <strong><%=$user->{'user_name'}%></strong> nel sistema di amministrazione della rete <%= $self->config->{'title'}%>.<br>
+                            <small>Ultimo accesso @ <%=$user->{'user_last_login_format'}%></small>
+                            </span>
+		                </li>
+
+                        
+                        % my @groups = (100, 200, 300);
+                        % if ( $user->{'gr_id'} ~~ @groups ) {
+    		                <li class="dropdown">
+    		                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+    		                        <i class="fa fa-bell"></i>
+                                    <span class="label label-primary"><%=$homepage_counters->{'all_count'}%></span>
+    		                    </a>
+
+    		                    <ul class="dropdown-menu dropdown-alerts">
+
+    		                        <li>
+    		                            <a href="<%=url_for('task');%>">
+    		                                <div>
+    		                                    <i class="fa fa-exchange fa-fw text-info"></i>
+                                                <%=$homepage_counters->{'new_tasks'}%> &nbsp; Nuovi task assegnati
+    		                                </div>
+    		                            </a>
+    		                        </li>
+    		                        <li class="divider"></li>
+
+                                    <li>
+                                        <a href="<%=url_for('report_survey');%>">
+                                            <div>
+                                                <i class="fa fa-binoculars fa-fw text-info"></i>
+                                                <%=$homepage_counters->{'new_surveys'}%> &nbsp; Sopralluoghi effettuati
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+
+    		                        <li>
+    		                            <a href="<%=url_for('report_calibration');%>">
+    		                                <div>
+    		                                    <i class="fa fa-ellipsis-h fa-fw text-info"></i>
+                                                <%=$homepage_counters->{'new_calibrations'}%> &nbsp; Tarature effettuate
+    		                                </div>
+    		                            </a>
+    		                        </li>
+    		                        <li class="divider"></li>
+
+                                    <li>
+                                        <a href="<%=url_for('report_maintenance');%>">
+                                            <div>
+                                                <i class="fa fa-wrench fa-fw text-info"></i>
+                                                <%=$homepage_counters->{'new_maintenances'}%> &nbsp; Manutenzioni effettuate
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+
+                                    <li>
+                                        <a href="<%=url_for('station_alarm');%>">
+                                            <div>
+                                                <i class="fa fa-exclamation-triangle fa-fw text-info"></i>
+                                                <%=$homepage_counters->{'new_alarms'}%> &nbsp; Allarmi ultime 24h
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+
+                                    <li>
+                                        <a href="<%=url_for('station_abnormal');%>">
+                                            <div>
+                                                <i class="fa fa-eyedropper fa-fw text-info"></i>
+                                                <%=$homepage_counters->{'new_warnings'}%> &nbsp; Allarmi dati anomali
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+
+                                    <li>
+                                        <a href="<%=url_for('station_late');%>">
+                                            <div>
+                                                <i class="fa fa-refresh fa-fw text-info"></i>
+                                                <%=$homepage_counters->{'station_late'}%> &nbsp; Ritardo aggiornamento dati
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+
+    		                    </ul>
+    		                </li>
+
+                        % }
+
+		                <li>
+		                    <a href="<%= url_for('logout')%>">
+		                        <i class="fa fa-sign-out"></i> Esci
+		                    </a>
+		                </li>
+		            </ul>
+
+		        </nav>
+	        </div>
+	        <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2><%==$pagetitle%></h2>
+                    <%==$breadcrumb%>
+                    
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+
+            <div class="row">
+	            <div class="col-lg-12">
+	            	<div class="wrapper wrapper-content"><%= content %></div>
+				</div>
+			</div>
+
+	        <div class="row">
+	            <div class="col-lg-12">
+	                <div class="footer">
+	                    <div class="pull-right">
+	                        Developer <%== $config->{ developer }%>
+	                    </div>
+	                    <div>
+	                        <strong>Copyright</strong> <%== $config->{ copyright }%>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+
+        </div>
+    </div>
+
+    
+
+    <div class="modal fade" id="sessionModal" tabindex="-1" role="dialog" aria-labelledby="sessionModalLabel" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Sessione in scadenza</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Il tuo utente è inattivo da un po' di tempo, per la tua sicurezza sarai sloggato automaticamente. Clicca "Resta online" per continuare la tua sessione</p>
+                    <p>La sessione scadrà tra <span class="bold" id="sessionSecondsRemaining">120</span> secondi.</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="extendSession" type="button" class="btn btn-w-m btn-info" data-dismiss="modal">Resta online</button>
+                    <button id="logoutSession" type="button" class="btn btn-w-m btn-default" data-dismiss="modal">Esci</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="sessionlLoggedOut" tabindex="-1" role="dialog" aria-labelledby="sessionModalLabel" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Sei stato sloggato</h4>
+                </div>
+                <div class="modal-body">
+                    <p>La tua sessione è stata chiusa.</p>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    <div class="sk-spinner sk-spinner-wave loading-spinner">
+        <div class="sk-rect1">1</div>
+        <div class="sk-rect2">2</div>
+        <div class="sk-rect3">3</div>
+        <div class="sk-rect4">4</div>
+        <div class="sk-rect5">5</div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+% layout 'default';
+% title 'Homepage';
+
+
+<link href="css/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet">
+<script src="js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/index.js'))%>"></script>
+
+<div class="home-orion">
+	<span class="main-icon text-warning"><i class="fa fa-bullhorn"></i></span>
+	<h1 class="text-info">Benvenuto nel portale ARPA</h1>
+    <p><img src="/img-lily/geie.png"></p>
+    <h3>Sezione dedicata al Geie TMB</h3>
+</div>

@@ -1,0 +1,201 @@
+% layout 'default';
+% title 'Stazioni - Dati Anomali';
+
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/station_abnormal.js'))%>"></script>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins ibox-as-bar">
+            <div class="ibox-title mod-title-height">
+                <div class="row">
+                	<div class="form-group">
+	                	<form class="form-top-inline" id="">
+	                		<label class="col-sm-2 control-label label-staz">Stazione</label>
+	                        <div class="col-sm-3"><select class="form-control" name="account">
+	                            <option>Tutte</option>
+	                            <option>Plouves</option>
+	                            <option>Dora</option>
+	                            <option>Cogne</option>
+	                        </select></div>
+	                        <label class="col-sm-1 control-label label-date">Dal</label>
+	                        <div class="input-group date col-sm-2">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" value="">
+                            </div>
+	                        <label class="col-sm-1 control-label label-date">Al</label>
+	                        <div class="input-group date col-sm-2">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" value="">
+                            </div>
+	                        <div class="col-sm-1"><input class="btn btn-info" type="button" value="aggiorna"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Lista delle bombole</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                <table class="table table-striped table-bordered table-hover dataTables-example table-with-tools" >
+                    <thead>
+                        <tr>
+                            <th>Data e ora</th>
+                            <th>Stazione</th>
+                            <th>Parametro</th>
+                            <th>Dato anomalo</th>
+                            <th>Valore</th>
+                            <th>Limite</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>05/02/2015 08:00</td>
+                            <td>Plouves</td>
+                            <td>Umidità</td>
+                            <td>Soglia massimo</td>
+                            <td>99.7</td>
+                            <td>99</td>
+                        </tr>
+                        <tr>
+                            <td>03/02/2015 07:00</td>
+                            <td>Dora</td>
+                            <td>Umidità</td>
+                            <td>Soglia massimo</td>
+                            <td>112</td>
+                            <td>99</td>
+                        </tr>
+                        <tr>
+                            <td>31/01/2015 08:00</td>
+                            <td>Cogne</td>
+                            <td>Umidità</td>
+                            <td>Soglia massimo</td>
+                            <td>100.15</td>
+                            <td>99</td>
+                        </tr>
+                        <tr>
+                            <td>18/01/2015 08:00</td>
+                            <td>La Thuile</td>
+                            <td>Umidità</td>
+                            <td>Soglia massimo</td>
+                            <td>106.69</td>
+                            <td>99</td>
+                        </tr>
+                        <tr>
+                            <td>10/01/2015 12:30</td>
+                            <td>Plouves</td>
+                            <td>Umidità</td>
+                            <td>Soglia massimo</td>
+                            <td>99.9</td>
+                            <td>99</td>
+                        </tr>
+                        <tr>
+                            <td>05/02/2015 08:00</td>
+                            <td>Plouves</td>
+                            <td>Umidità</td>
+                            <td>Soglia massimo</td>
+                            <td>99.7</td>
+                            <td>99</td>
+                        </tr>
+                        <tr>
+                            <td>03/02/2015 07:00</td>
+                            <td>Dora</td>
+                            <td>Umidità</td>
+                            <td>Soglia massimo</td>
+                            <td>112</td>
+                            <td>99</td>
+                        </tr>
+                        <tr>
+                            <td>31/01/2015 08:00</td>
+                            <td>Cogne</td>
+                            <td>Umidità</td>
+                            <td>Soglia massimo</td>
+                            <td>100.15</td>
+                            <td>99</td>
+                        </tr>
+                        <tr>
+                            <td>18/01/2015 08:00</td>
+                            <td>La Thuile</td>
+                            <td>Umidità</td>
+                            <td>Soglia massimo</td>
+                            <td>106.69</td>
+                            <td>99</td>
+                        </tr>
+                        <tr>
+                            <td>10/01/2015 12:30</td>
+                            <td>Plouves</td>
+                            <td>Umidità</td>
+                            <td>Soglia massimo</td>
+                            <td>99.9</td>
+                            <td>99</td>
+                        </tr>
+                        <tr>
+                            <td>05/02/2015 08:00</td>
+                            <td>Plouves</td>
+                            <td>Umidità</td>
+                            <td>Soglia massimo</td>
+                            <td>99.7</td>
+                            <td>99</td>
+                        </tr>
+                        <tr>
+                            <td>03/02/2015 07:00</td>
+                            <td>Dora</td>
+                            <td>Umidità</td>
+                            <td>Soglia massimo</td>
+                            <td>112</td>
+                            <td>99</td>
+                        </tr>
+                        <tr>
+                            <td>31/01/2015 08:00</td>
+                            <td>Cogne</td>
+                            <td>Umidità</td>
+                            <td>Soglia massimo</td>
+                            <td>100.15</td>
+                            <td>99</td>
+                        </tr>
+                        <tr>
+                            <td>18/01/2015 08:00</td>
+                            <td>La Thuile</td>
+                            <td>Umidità</td>
+                            <td>Soglia massimo</td>
+                            <td>106.69</td>
+                            <td>99</td>
+                        </tr>
+                        <tr>
+                            <td>10/01/2015 12:30</td>
+                            <td>Plouves</td>
+                            <td>Umidità</td>
+                            <td>Soglia massimo</td>
+                            <td>99.9</td>
+                            <td>99</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Data e ora</th>
+                            <th>Stazione</th>
+                            <th>Parametro</th>
+                            <th>Dato anomalo</th>
+                            <th>Valore</th>
+                            <th>Limite</th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

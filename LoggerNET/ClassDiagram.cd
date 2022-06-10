@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Ecometer.ClassLogger">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAgAAEAAABABQQAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>ClassLogger.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ecometer.ClassModule">
+    <Position X="2.5" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Ecometer.ClassModule.EnumSerialPortName" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ClassModule.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="Ecometer.ClassModule.EnumModuleType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ClassModule.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AABAQAAAAQgEiAQkAABgAEQAIAAAAAAiAgCAIEACEAA=</HashCode>
+      <FileName>ClassModule.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Ecometer.ClassChannelBase">
+    <Position X="5.25" Y="0.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="Ecometer.ClassChannelBase.ChannelAlgorithm">
+        <TypeIdentifier>
+          <NewMemberFileName>ClassChannel.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgIQgAAAAAAQAAAAAAAAgAAAAAAACAAA=</HashCode>
+      <FileName>ClassChannel.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Ecometer.ClassChannel">
+    <Position X="7.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>gAQAgAAQACCgAAgEIIAgAUAICABABAAAYgBgAEQEBAA=</HashCode>
+      <FileName>ClassChannel.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Ecometer.ClassChannelCommand">
+    <Position X="5.25" Y="6" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAkAAAABAAAAAAAAAQAAAIgAAAAAAA=</HashCode>
+      <FileName>ClassChannel.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Ecometer.ClassLoggerDisplay">
+    <Position X="10" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAQAAAAgAgAAoIgAAAAAgAAAAACAABgAAAEAAA=</HashCode>
+      <FileName>ClassLoggerDisplay.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ecometer.ClassLoggerDisplayCommand">
+    <Position X="10" Y="4.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAQAAAAgAgAAIIgAAAAAgAAAAACAABgAAAEAAA=</HashCode>
+      <FileName>ClassLoggerDisplay.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,213 @@
+% layout 'default';
+% title 'Tasks list';
+
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/task.js'))%>"></script>
+
+
+<script type="text/javascript">
+    var user = '<%=$user->{'user_fullname'}%>';
+</script>
+
+<div class="row">
+    <div class="col-lg-7">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Task da Eseguire</h5>
+                <div class="ibox-tools">
+
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                <form role="form" class="form-refres-tasks" id="refres-tasks" action="task" method="post">
+                    % my $selected;
+                    <div class="row select-row">
+                        <div class="col-lg-4">
+                            
+                            <select class="form-control m-b" id="count" name="count" required>
+                                % $selected = '';
+                                % if ( $count == 10 ) { $selected = 'selected="selected"'; }
+                                <option value="10"  <%= $selected %>>Ultimi 10 task</option>
+                                % $selected = '';
+                                % if ( $count == 50 ) { $selected = 'selected="selected"'; }
+                                <option value="50"  <%= $selected %>>Ultimi 50 task</option>
+                                % $selected = '';
+                                % if ( $count == 100 ) { $selected = 'selected="selected"'; }
+                                <option value="100" <%= $selected %>>Ultimi 100 task</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3">
+                            <select class="form-control m-b" id="assignee" name="assignee" required>
+                                % $selected = '';
+                                % if ( $assignee eq 'All' ) { $selected = 'selected="selected"'; }
+                                <option value="All" <%= $selected %>>Tutti</option>
+                                % $selected = '';
+                                % if ( $assignee eq 'Arpa' ) { $selected = 'selected="selected"'; }
+                                <option value="Arpa" <%= $selected %>>Arpa</option>
+                                % $selected = '';
+                                % if ( $assignee eq 'Ecometer' ) { $selected = 'selected="selected"'; }
+                                <option value="Ecometer" <%= $selected %>>Ecometer</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3">
+                            <select class="form-control m-b" id="done" name="done" required>
+                                % $selected = '';
+                                % if ( $done eq 'All' ) { $selected = 'selected="selected"'; }
+                                <option value="All" <%= $selected %>>Tutti</option>
+                                % $selected = '';
+                                % if ( $done eq 'Todo' ) { $selected = 'selected="selected"'; }
+                                <option value="Todo" <%= $selected %>>Da fare</option>
+                                % $selected = '';
+                                % if ( $done eq 'Done' ) { $selected = 'selected="selected"'; }
+                                <option value="Done" <%= $selected %>>Fatti</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2">
+                            <button class="btn btn-w-m btn-success" type="submit">invia</button>
+                            
+                        </div>
+                    </div>
+                </form>
+
+                <ul class="todo-list m-t small-list" id="all-tasks">
+
+                    
+                    % my $todo_class1;
+                    % my $todo_class2;
+                    % my $todo_class3;
+                    % my $todo_class4;
+                    % foreach my $report ( @{$report_tasks} )
+                    % {
+                        <li data-id="<%=$report->{'ta_id'}%>">
+                            % if ( $report->{'task_assignee'} eq 'Arpa' ) {
+                                % $todo_class3 = ' label-warning';
+                            % } else {
+                                % $todo_class3 = ' label-info';
+                            % }
+                            % if ( $report->{'ty_id'} == 1 ) {
+                                % $todo_class4 = ' fa-tag ';
+                            % } elsif ( $report->{'ty_id'} == 2 ) {
+                                % $todo_class4 = ' fa-sign-in ';
+                            % } elsif ( $report->{'ty_id'} == 3 ) {
+                                % $todo_class4 = ' fa-wrench ';
+                            % } elsif ( $report->{'ty_id'} == 4 ) {
+                                % $todo_class4 = ' fa-magic ';
+                            % } elsif ( $report->{'ty_id'} == 5 ) {
+                                % $todo_class4 = ' fa-map-marker ';
+                            % }
+                            
+                            % if ( $report->{'task_done'} ) {
+                                % $todo_class1 = ' todo-completed';
+                                % $todo_class2 = ' fa-check';
+                            % } else {
+                                % $todo_class1 = '';
+                                % $todo_class2 = ' fa-times';
+                            % }
+                            
+                            <small class="always-right label <%=$todo_class3=%>">
+                                <i class="fa <%=$todo_class2=%>"></i>
+                                <%= $report->{'task_assignee'} =%>
+                            </small>
+                            <div class="task-details">
+                                <a href="JavaScript:void(0);" class="check-link">
+                                    
+                                    % if ( $report->{'task_done'} ) {
+                                        <i class="fa fa-check-square"></i>
+                                    % } else {
+                                        <i class="fa fa-square-o"></i>
+                                    % }
+                                </a>
+                                <span class="m-l-xs <%=$todo_class1=%>">&nbsp;
+                                    <i class="fa <%=$todo_class4=%> ico-label"></i>&nbsp;
+                                    <strong><%= $report->{'task_station'} =%></strong>:&nbsp; <%= $report->{'task_name'} =%>
+                                </span>
+                            </div>
+
+                            <div class="row task-ouverture">
+                                <div class="col-lg-6 text-muted">
+                                    APERTO:&nbsp;<%= $report->{'user_fullname'} =%>,&nbsp;<%= $report->{'task_insert_time_format'} =%>
+                                </div>
+
+                                % if ( $report->{'task_close_time'} ) {
+                                    <div class="col-lg-6 text-right text-success">
+                                        CHIUSO:&nbsp;<%= $report->{'user_fullname_close'} =%>,&nbsp;<%= $report->{'task_close_time_format'} =%>
+                                    </div>
+                                % }
+                            </div>
+                        </li>
+                    % }
+
+                </ul>
+
+                <div class="file-manager clearfix tag-legend">
+                    <h5>Legenda TAG dei Task</h5>
+                    <ul class="tag-list" style="padding: 0">
+                        <li><a href="#"><i class="fa fa-tag font-big"></i> Generale</a></li>
+                        <li><a href="#"><i class="fa fa-sign-in font-big"></i> Verifica</a></li>
+                        <li><a href="#"><i class="fa fa-wrench font-big"></i> Manutenzione</a></li>
+                        <li><a href="#"><i class="fa fa-magic font-big"></i> Taratura</a></li>
+                        <li><a href="#"><i class="fa fa-map-marker font-big"></i> Sopralluogo</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Aggiungi Task</h5>
+                <div class="ibox-tools">
+
+                </div>
+            </div>
+            <div class="ibox-content">
+                <p>Inserisci la descrizione del task ed assegnalo al destinatario, grazie.</p>
+                <form role="form" class="form-insert-task" id="insert-task">
+                    <div class="form-group">
+                        <label for="tag">Aggiungi Tag/Categoria</label>
+                        <select class="form-control" id="tag" name="tag" required>
+                            <option value="0">Seleziona...</option>
+                            <option value="1">Generale</option>
+                            <option value="2">Verifica</option>
+                            <option value="3">Manutenzione</option>
+                            <option value="4">Taratura</option>
+                            <option value="5">Sopralluogo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sid">Aggiungi Stazione</label>
+                        <select class="form-control" id="sid" name="sid" required>
+                            <option value="0">Nessuna stazione...</option>
+                            % foreach my $station ( @{$stations} )
+                            % {
+                                <option value="<%=$station->{'st_id'}%>"><%=$station->{'stationname'}%></option>
+                            % }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Descrizione task</label>
+                        <textarea id="description" name="description" placeholder="Descrizione task" class="textarea-style" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="dest">Destinatario del task</label>
+                        <div class="radio-columns clearfix">
+                            <div class="radio i-checks"><label class="first">
+                                <input type="radio" value="Arpa" name="dest" checked="checked">
+                                <i></i> Arpa </label>
+                            </div>
+                            <div class="radio i-checks"><label>
+                                <input type="radio" checked="" value="Ecometer" name="dest">
+                                <i></i> Ecometer </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-lists">
+                        <button class="btn btn-w-m btn-danger" type="submit">Inserisci task</button>
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

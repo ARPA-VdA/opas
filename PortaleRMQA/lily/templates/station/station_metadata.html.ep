@@ -1,0 +1,305 @@
+% layout 'default';
+% title 'Stazioni - Anagrafica';
+
+
+<link href="css/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet">
+<script src="js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+
+
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/station_metadata.js'))%>"></script>
+
+
+<script type="text/javascript">
+    var appLocation = '<%=$location%>';
+    $(document).ready(function () {
+        console.log('location: '+appLocation);
+    });
+</script>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Seleziona le stazioni di cui vuoi visualizzare l'anagrafica</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                <div class="form-group clearfix" id="all-parameters">
+                    <div class="col-sm-8">
+                        <select data-placeholder="Stazioni..." class="chosen-select form-control m-b" id="select-params">
+                            % foreach my $workstation ( @{$workstations} )
+                            % {
+                                <option value="<%= $workstation->{'st_id'} =%>"><%= $workstation->{'station_title'} =%></option>
+                            % }
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <input class="btn btn-info" type="button" value="Visualizza" id="show-stats">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeInRight show-stations">
+    <div class="col-md-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5 class="text-success">Stazione: <span class="stat_name empty_txt"></span></h5>
+            </div>
+            <div>
+                <div class="ibox-content no-padding border-left-right img-profile">
+                    <img alt="image" class="img-responsive" id="stat_img" src="" />
+                </div>
+                <div class="ibox-content profile-content">
+                    <h4 class="text-info"><i class="fa fa-info-circle"></i> Informazioni</h4>
+                    <table class="table table-striped pad-low">
+                        <tbody>
+                            <tr>
+                                <td class="f-w">ID Stazione</td>
+                                <td id="stat_id" class="empty_txt"></td>
+                            </tr>
+                            <tr>
+                                <td class="f-w">Indirizzo IP</td>
+                                <td id="stat_ip" class="empty_txt"></td>
+                            </tr>
+                            <tr>
+                                <td class="f-w">Staz. attiva</td>
+                                <td id="stat_active" class="empty_txt"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5 class="text-success">Proprietà</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="ibox-content grid-content" id="stat_metadata">
+                <div class="panel blank-panel">
+
+                    <div class="panel-heading">
+                        <div class="panel-options">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#tab-1"><i class="fa fa-cogs"></i> Generali</a></li>
+                                <li class="themap"><a data-toggle="tab" href="#tab-2"><i class="fa fa-globe"></i> Geografiche</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab-3"><i class="fa fa-cubes"></i> Parametri</a></li>
+                                <li class=""><a data-toggle="tab" href="#tab-4"><i class="fa fa-cubes"></i> Media</a></li>
+                                
+                                <li class="thewall" id="show-tab-5"><a data-toggle="tab" href="#tab-5"><i class="fa fa-cubes"></i> Pozzo</a></li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <div class="tab-content">
+                            <div id="tab-1" class="tab-pane active">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h3 class="stat_name empty_txt"></h3>
+                                        <table class="table table-striped pad-low">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="f-w">Zona</td>
+                                                    <td id="stat_zone" class="empty_txt"></td>
+                                                    <td class="f-w">Bacino</td>
+                                                    <td id="stat_basin" class="empty_txt"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="f-w">Località</td>
+                                                    <td id="stat_place" class="empty_txt"></td>
+                                                    <td class="f-w">Comune</td>
+                                                    <td id="stat_district" class="empty_txt"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="f-w">Provincia</td>
+                                                    <td id="stat_province" class="empty_txt"></td>
+                                                    <td class="f-w">Regione</td>
+                                                    <td id="stat_region" class="empty_txt"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="f-w">Note</td>
+                                                    <td colspan="3" id="stat_notes" class="empty_txt"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table table-striped pad-low">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="f-w">Tipo stazione</td>
+                                                    <td id="stat_type" class="empty_txt"></td>
+                                                    <td class="f-w">Rete</td>
+                                                    <td id="stat_network" class="empty_txt"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="f-w">Data inizio</td>
+                                                    <td id="stat_datestart" class="empty_txt"></td>
+                                                    <td class="f-w">Data fine</td>
+                                                    <td id="stat_datend" class="empty_txt"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table table-striped pad-low">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="f-w">Canopy</td>
+                                                    <td id="stat_canopy" class="empty_txt"></td>
+                                                    <td class="f-w">Polling Attivo</td>
+                                                    <td id="stat_polling" class="empty_txt"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="f-w">Frequenza</td>
+                                                    <td id="stat_frequency" class="empty_txt"></td>
+                                                    <td class="f-w"></td>
+                                                    <td id=""></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab-2" class="tab-pane">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <table class="table table-striped pad-low">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="f-w" style="width:18%;">Quota</td>
+                                                    <td id="stat_altitude" class="empty_txt"></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="f-w">Utm ED50 nord</td>
+                                                    <td id="stat_ED50nord" class="empty_txt"></td>
+                                                    <td class="f-w">Utm ED50 est</td>
+                                                    <td id="stat_ED50est" class="empty_txt"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="f-w">Utm WGS84 nord</td>
+                                                    <td id="stat_WGS84nord" class="empty_txt"></td>
+                                                    <td class="f-w">Utm WGS84 est</td>
+                                                    <td id="stat_WGS84est" class="empty_txt"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="f-w">WGS84 latitudine</td>
+                                                    <td id="stat_WGS84lat" class="empty_txt"></td>
+                                                    <td class="f-w">WGS84 longitudine</td>
+                                                    <td id="stat_WGS84lon" class="empty_txt"></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <h4 id="map-default" class="text-danger">Posizione di default: sede Arpa</h4>
+                                        <div id="station_map"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab-3" class="tab-pane">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div id="container-p-meteo">
+                                            <h4>Meteo</h4> 
+                                            <ul id="param-meteo">
+                                            </ul>
+                                        </div>
+                                        <div id="container-p-analis">
+                                            <h4>Analysis</h4> 
+                                            <ul id="param-analis">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div id="container-p-chem">
+                                            <h4>Chimici</h4>
+                                            <ul id="param-chem">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab-4" class="tab-pane">
+                                <div class="row" id="gallery-images">
+                                    <div class="col-lg-12">
+                                        <div id="content-media-pdf">
+                                            <h3>PDF</h3>
+                                            
+                                            <ul>
+                                                <li>
+                                                    <a href="<%=url_for(helperGetFileVersion('/media-lily/Piano_di_manutenzione_generale_stazioni_rilevamento_27-09-2016.pdf'))%>" target="_blank">
+                                                        <i class="fa fa-file-text text-danger"></i> Piano di manutenzione generale stazioni
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <ul id="stat-media-pdf"></ul>
+                                        </div>
+                                        <div id="content-media-images">
+                                            <h3>Immagini</h3>
+                                            <div id="stat-media-images" class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="tab-5" class="tab-pane">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div id="svg-schema">
+                                            <object type="image/svg+xml" data="<%=url_for(helperGetFileVersion('/img-lily/schema-pozzo.svg'))%>" class="logo" id="svg-wall">
+                                                Pozzo
+                                            </object>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>

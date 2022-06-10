@@ -1,0 +1,16 @@
+% layout 'default';
+% title 'Homepage';
+
+
+<link href="css/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet">
+<script src="js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/index.js'))%>"></script>
+
+<div class="home-orion">
+	<span class="main-icon text-warning"><i class="fa fa-bullhorn"></i></span>
+	<h1 class="text-info">Benvenuto nel portale Valeco</h1>
+	<h2 class="subtitle text-danger"><img src="img-lily/logo-valeco/logo-trasp.png" alt="logo VALECO"></h2>
+    <h3>Visita il <a href="http://www.valecospa.it/" target="_blank">nostro portale &raquo;</a></h3>
+</div>

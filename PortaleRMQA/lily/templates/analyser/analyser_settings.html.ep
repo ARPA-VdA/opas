@@ -1,0 +1,24 @@
+% layout 'default';
+% title 'Strumenti - Analyser - Impostazioni';
+
+
+<script src="js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/instrument_analyser_settings.js'))%>"></script>
+
+
+<div class="row animated fadeInTop">
+    <div class="col-md-4">
+        pippoooo
+    </div>
+
+    <div class="col-md-4">
+        plutooooooooooo
+    </div>
+
+    <div class="col-md-4">
+        paperino
+    </div>
+</div>
+

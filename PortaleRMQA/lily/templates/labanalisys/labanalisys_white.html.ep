@@ -1,0 +1,446 @@
+% layout 'default';
+% title 'Gestione bianchi';
+
+
+<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+
+
+<link href="css/plugins/footable/footable.core.css" rel="stylesheet">
+<script src="js/plugins/footable/footable.all.min.js"></script>
+
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/plugins/highcharts/highcharts.js'))%>"></script>
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/plugins/highcharts/modules/exporting.js'))%>"></script>
+
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/labanalisys_white.js'))%>"></script>
+
+
+<script type="text/javascript">
+var date1 = '<%=$date_from%>';
+var date2 = '<%=$date_to%>';
+repid     = '<%=$repid%>';
+$(document).ready(function () {
+    // update calendars
+    updateDataRange(date1, date2);
+
+    console.log('repid: '+repid);
+    if (repid)
+        showReportFromGet(repid);
+});
+</script>
+
+
+<div class="panel blank-panel" id="stations">
+
+    <div class="panel-heading">
+        <div class="panel-options">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" id="0" href="#tab-1">Tabelle</a></li>
+                <li class=""><a data-toggle="tab" id="1" href="#tab-2">Grafici bianchi metalli</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel-body" id="gallery-images">
+
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane active">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins ibox-as-bar">
+                            <div class="ibox-title mod-title-height">
+                                <div class="row">
+                                    <div class="col-sm-12">
+
+                                        <select class="form-control m-b short-select-mod" name="filter_analysis" id="filter_analysis">
+                                            <option value="-1">Analisi - tutte</option>
+                                            % foreach my $analys ( @{$analysis} )
+                                            % {
+                                                %   my $selected = '';
+                                                %   if ($analys->{'an_id'} == $filter_an_id) { $selected = 'selected'; }
+                                                    <option value="<%= $analys->{'an_id'} =%>" <%= $selected %>><%= $analys->{'analysis'} =%></option>
+                                                }
+                                            % }
+                                        </select>
+
+                                        <select class="form-control m-b short-select-mod" name="filter_stations" id="filter_stations">
+                                            <option value="-1">Stazioni - tutte</option>
+                                            % foreach my $station ( @{$stations} )
+                                            % {
+                                                %   my $selected = '';
+                                                %   if ($station->{'st_id'} == $filter_st_id) { $selected = 'selected'; }
+                                                    <option value="<%= $station->{'st_id'} =%>" <%= $selected %>><%= $station->{'stationname'} =%></option>
+                                                }
+                                            % }
+                                        </select>
+
+                                        <div id="reportrange" class="form-control short-range-mod">
+                                            <i class="fa fa-calendar"></i>
+                                            <span></span> <b class="caret"></b>
+                                        </div>
+                                        <input class="btn btn-warning" id="refresh-list" type="button" value="aggiorna">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" id="cont-metal">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>10 Metalli PM10</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            
+                            <div class="ibox-content">
+                                <table class="footable table table-stripped toggle-arrow-tiny">
+                                    <thead>
+                                        <tr>
+                                            <th data-toggle="true">Campione</th>
+                                            <th>Stazione</th>
+                                            <th>Filtro</th>
+                                            <th>Analisi</th>
+                                            <th>Data</th>
+                                            
+                                            <th data-hide="all">Volume</th>
+                                            <th data-hide="all">Nota</th>
+                                            <th data-hide="all">&nbsp;</th>
+                                            <th data-hide="all">Parametro</th>
+                                            <th data-hide="all">Cadmio su PM10</th>
+                                            <th data-hide="all">Cromo su PM10</th>
+                                            <th data-hide="all">Ferro su PM10</th>
+                                            <th data-hide="all">Manganese su PM10</th>
+                                            <th data-hide="all">Nichel su PM10</th>
+                                            <th data-hide="all">Piombo su PM10</th>
+                                            <th data-hide="all">Rame su PM10</th>
+                                            <th data-hide="all">Zinco su PM10</th>
+                                            <th data-hide="all">Arsenico su PM10</th>
+                                            <th data-hide="all">Molibdeno su PM10</th>
+                                            <th data-hide="all">Cobalto su PM10</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        % foreach my $white ( @{$whites} )
+                                        % {
+                                            % if ($white->{'an_id'} != 53) { next; }
+                                            <tr>
+                                                <td><%= $white->{'sp_id'} =%></td>
+                                                <td><%= $white->{'station_name'} =%></td>
+                                                <td><%= $white->{'filter'} =%></td>
+                                                <td><%= $white->{'analysis'} =%></td>
+                                                <td><%= $white->{'date_start'} =%></td>
+                                                
+                                                <td><%= $white->{'volume'} =%></td>
+                                                <td><%= $white->{'note'} =%></td>
+                                                <td>&nbsp;</td>
+                                                <td><span class="mass_white"><strong>Massa</strong></span><strong>Conc</strong></td>
+                                                <td><span class="mass_white"><%= $white->{'cadmio_mass'} =%></span><%= $white->{'cadmio_conc'} =%></td>
+                                                <td><span class="mass_white"><%= $white->{'cromo_mass'} =%></span><%= $white->{'cromo_conc'} =%></td>
+                                                <td><span class="mass_white"><%= $white->{'ferro_mass'} =%></span><%= $white->{'ferro_conc'} =%></td>
+                                                <td><span class="mass_white"><%= $white->{'manganese_mass'} =%></span><%= $white->{'manganese_conc'} =%></td>
+                                                <td><span class="mass_white"><%= $white->{'nichel_mass'} =%></span><%= $white->{'nichel_conc'} =%></td>
+                                                <td><span class="mass_white"><%= $white->{'piombo_mass'} =%></span><%= $white->{'piombo_conc'} =%></td>
+                                                <td><span class="mass_white"><%= $white->{'rame_mass'} =%></span><%= $white->{'rame_conc'} =%></td>
+                                                <td><span class="mass_white"><%= $white->{'zinco_mass'} =%></span><%= $white->{'zinco_conc'} =%></td>
+                                                <td><span class="mass_white"><%= $white->{'arsenico_mass'} =%></span><%= $white->{'arsenico_conc'} =%></td>
+                                                <td><span class="mass_white"><%= $white->{'molibdeno_mass'} =%></span><%= $white->{'molibdeno_conc'} =%></td>
+                                                <td><span class="mass_white"><%= $white->{'cobalto_mass'} =%></span><%= $white->{'cobalto_conc'} =%></td>
+                                            </tr>
+                                        % }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5">
+                                                <ul class="pagination pull-right"></ul>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" id="cont-anion">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Anioni &amp; Cationi</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                            
+                            <div class="ibox-content">
+                                <table class="footable table table-stripped toggle-arrow-tiny">
+                                    <thead>
+                                        <tr>
+                                            <th data-toggle="true">Campione</th>
+                                            <th>Stazione</th>
+                                            <th>Filtro</th>
+                                            <th>Analisi</th>
+                                            <th>Data</th>
+                                            
+                                            <th data-hide="all">Volume</th>
+                                            <th data-hide="all">Nota</th>
+                                            <th data-hide="all">&nbsp;</th>
+                                            <th data-hide="all">Parametro</th>
+                                            <th data-hide="all">Sodio</th>
+                                            <th data-hide="all">Ammonio</th>
+                                            <th data-hide="all">Magnesio</th>
+                                            <th data-hide="all">Potassio</th>
+                                            <th data-hide="all">Calcio</th>
+                                            <th data-hide="all">Cloruri</th>
+                                            <th data-hide="all">Nitrati</th>
+                                            <th data-hide="all">Solfati</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        % foreach my $white ( @{$whites} )
+                                        % {
+                                            % if ($white->{'an_id'} != 57) { next; }
+                                            <tr>
+                                                <td><%= $white->{'sp_id'} =%></td>
+                                                <td><%= $white->{'station_name'} =%></td>
+                                                <td><%= $white->{'filter'} =%></td>
+                                                <td><%= $white->{'analysis'} =%></td>
+                                                <td><%= $white->{'date_start'} =%></td>
+                                                
+                                                <td><%= $white->{'volume'} =%></td>
+                                                <td><%= $white->{'note'} =%></td>
+                                                <td>&nbsp;</td>
+                                                <td><span class="mass_white"><strong>Massa</strong></span><strong>Conc</strong></td>
+                                                <td><span class="mass_white"><%= $white->{'ac_sodio_mass'} =%></span><%= $white->{'ac_sodio_conc'} =%></td>
+                                                <td><span class="mass_white"><%= $white->{'ac_ammonio_mass'} =%></span><%= $white->{'ac_ammonio_conc'} =%></td>
+                                                <td><span class="mass_white"><%= $white->{'ac_magnesio_mass'} =%></span><%= $white->{'ac_magnesio_conc'} =%></td>
+                                                <td><span class="mass_white"><%= $white->{'ac_potassio_mass'} =%></span><%= $white->{'ac_potassio_conc'} =%></td>
+                                                <td><span class="mass_white"><%= $white->{'ac_calcio_mass'} =%></span><%= $white->{'ac_calcio_conc'} =%></td>
+                                                <td><span class="mass_white"><%= $white->{'ac_cloruri_mass'} =%></span><%= $white->{'ac_cloruri_conc'} =%></td>
+                                                <td><span class="mass_white"><%= $white->{'ac_nitrati_mass'} =%></span><%= $white->{'ac_nitrati_conc'} =%></td>
+                                                <td><span class="mass_white"><%= $white->{'ac_solfati_mass'} =%></span><%= $white->{'ac_solfati_conc'} =%></td>
+                                            </tr>
+                                        % }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5">
+                                                <ul class="pagination pull-right"></ul>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+            
+            <div id="tab-2" class="tab-pane">
+                <div class="row">
+                    <div class="col-lg-4" id="panel-cd">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Cd cadmio [µg/l]</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link collapse-live"><i class="fa fa-chevron-up"></i></a>
+                                    <a class="fullscreen-link fullscreen-live"><i class="fa fa-expand"></i></a>
+                                    <a class="close-link close-live"><i class="fa fa-times"></i></a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div id="chart-cd" style="width: 100%;" class="all-charts"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4" id="panel-cr">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Cr Cromo [µg/l]</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link collapse-live"><i class="fa fa-chevron-up"></i></a>
+                                    <a class="fullscreen-link fullscreen-live"><i class="fa fa-expand"></i></a>
+                                    <a class="close-link close-live"><i class="fa fa-times"></i></a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div id="chart-cr" style="width: 100%;" class="all-charts"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4" id="panel-fe">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Fe Ferro [µg/l]</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link collapse-live"><i class="fa fa-chevron-up"></i></a>
+                                    <a class="fullscreen-link fullscreen-live"><i class="fa fa-expand"></i></a>
+                                    <a class="close-link close-live"><i class="fa fa-times"></i></a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div id="chart-fe" style="width: 100%;" class="all-charts"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4" id="panel-mn">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Mn Manganese [µg/l]</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link collapse-live"><i class="fa fa-chevron-up"></i></a>
+                                    <a class="fullscreen-link fullscreen-live"><i class="fa fa-expand"></i></a>
+                                    <a class="close-link close-live"><i class="fa fa-times"></i></a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div id="chart-mn" style="width: 100%;" class="all-charts"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4" id="panel-ni">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Ni Nichel [µg/l]</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link collapse-live"><i class="fa fa-chevron-up"></i></a>
+                                    <a class="fullscreen-link fullscreen-live"><i class="fa fa-expand"></i></a>
+                                    <a class="close-link close-live"><i class="fa fa-times"></i></a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div id="chart-ni" style="width: 100%;" class="all-charts"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4" id="panel-pb">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Pb Piombo [µg/l]</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link collapse-live"><i class="fa fa-chevron-up"></i></a>
+                                    <a class="fullscreen-link fullscreen-live"><i class="fa fa-expand"></i></a>
+                                    <a class="close-link close-live"><i class="fa fa-times"></i></a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div id="chart-pb" style="width: 100%;" class="all-charts"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4" id="panel-cu">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Cu Rame [µg/l]</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link collapse-live"><i class="fa fa-chevron-up"></i></a>
+                                    <a class="fullscreen-link fullscreen-live"><i class="fa fa-expand"></i></a>
+                                    <a class="close-link close-live"><i class="fa fa-times"></i></a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div id="chart-cu" style="width: 100%;" class="all-charts"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4" id="panel-zn">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Zn Zinco [µg/l]</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link collapse-live"><i class="fa fa-chevron-up"></i></a>
+                                    <a class="fullscreen-link fullscreen-live"><i class="fa fa-expand"></i></a>
+                                    <a class="close-link close-live"><i class="fa fa-times"></i></a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div id="chart-zn" style="width: 100%;" class="all-charts"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4" id="panel-as">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>As Arsenico [µg/l]</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link collapse-live"><i class="fa fa-chevron-up"></i></a>
+                                    <a class="fullscreen-link fullscreen-live"><i class="fa fa-expand"></i></a>
+                                    <a class="close-link close-live"><i class="fa fa-times"></i></a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div id="chart-as" style="width: 100%;" class="all-charts"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4" id="panel-mo">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Mo Molibdeno [µg/l]</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link collapse-live"><i class="fa fa-chevron-up"></i></a>
+                                    <a class="fullscreen-link fullscreen-live"><i class="fa fa-expand"></i></a>
+                                    <a class="close-link close-live"><i class="fa fa-times"></i></a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div id="chart-mo" style="width: 100%;" class="all-charts"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4" id="panel-co">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Co Cobalto [µg/l]</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link collapse-live"><i class="fa fa-chevron-up"></i></a>
+                                    <a class="fullscreen-link fullscreen-live"><i class="fa fa-expand"></i></a>
+                                    <a class="close-link close-live"><i class="fa fa-times"></i></a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div id="chart-co" style="width: 100%;" class="all-charts"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

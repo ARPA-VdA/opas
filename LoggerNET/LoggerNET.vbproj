@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{75E40248-D528-4FB5-B1F6-7F5F17605667}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Ecometer.My.MyApplication</StartupObject>
+    <RootNamespace>Ecometer</RootNamespace>
+    <AssemblyName>LoggerNET</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>On</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <ApplicationIcon>connection88.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <PublishUrl>http://localhost/LoggerNET/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>LoggerNET.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>LoggerNET.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="INIFileParser, Version=2.2.4.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c, processorArchitecture=MSIL">
+      <HintPath>packages\ini-parser.2.2.4\lib\net20\INIFileParser.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\..\..\svn_development_libraries\DotNetZip\zip-v1.9\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="NCalc">
+      <HintPath>..\..\..\svn_development_libraries\Ncalc\NCalc.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClassChannel.vb" />
+    <Compile Include="ClassLogger.vb" />
+    <Compile Include="ClassLoggerDisplay.vb" />
+    <Compile Include="ClassMain.vb" />
+    <Compile Include="ClassModule.vb" />
+    <Compile Include="ClassSerializer.vb" />
+    <Compile Include="ClassStopWatch.vb" />
+    <Compile Include="ClassTcpServer.vb" />
+    <Compile Include="ClassUtils.vb" />
+    <Compile Include="ClassZip.vb" />
+    <Compile Include="FormAbout.designer.vb">
+      <DependentUpon>FormAbout.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormAbout.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEvents.Designer.vb">
+      <DependentUpon>FormEvents.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormEvents.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLiveChart.Designer.vb">
+      <DependentUpon>FormLiveChart.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormLiveChart.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLiveTable.Designer.vb">
+      <DependentUpon>FormLiveTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormLiveTable.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLogger.Designer.vb">
+      <DependentUpon>FormLogger.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormLogger.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLoggerExplorer.Designer.vb">
+      <DependentUpon>FormLoggerExplorer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormLoggerExplorer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMDI.Designer.vb">
+      <DependentUpon>FormMDI.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMDI.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMessage.Designer.vb">
+      <DependentUpon>FormMessage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormMessage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSplashScreen.designer.vb">
+      <DependentUpon>FormSplashScreen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormSplashScreen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModuleData.vb" />
+    <Compile Include="ModuleTEST.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FormAbout.resx">
+      <DependentUpon>FormAbout.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEvents.resx">
+      <DependentUpon>FormEvents.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLiveChart.resx">
+      <DependentUpon>FormLiveChart.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLiveTable.resx">
+      <DependentUpon>FormLiveTable.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLogger.resx">
+      <DependentUpon>FormLogger.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLoggerExplorer.resx">
+      <DependentUpon>FormLoggerExplorer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMDI.resx">
+      <DependentUpon>FormMDI.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMessage.resx">
+      <DependentUpon>FormMessage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSplashScreen.resx">
+      <DependentUpon>FormSplashScreen.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="ClassDiagram.cd" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="connection88.ico" />
+    <None Include="Icons\16\arrow84.png" />
+    <Content Include="Icons\16\arrange1.png" />
+    <Content Include="Icons\16\calendar163.png" />
+    <None Include="Icons\16\clean11.png" />
+    <None Include="Icons\16\chart59.png" />
+    <Content Include="Icons\16\connection88.png" />
+    <None Include="Icons\16\document114.png" />
+    <Content Include="Icons\16\door9.png" />
+    <None Include="Icons\16\educational15.png" />
+    <None Include="Icons\16\education20.png" />
+    <None Include="Icons\16\educational8.png" />
+    <None Include="Icons\16\increasing5.png" />
+    <Content Include="Icons\16\info28.png" />
+    <Content Include="Icons\16\info31.png" />
+    <None Include="Icons\16\log1.png" />
+    <None Include="Icons\16\open131.png" />
+    <None Include="Icons\16\internet6.png" />
+    <Content Include="Icons\16\play133.png" />
+    <Content Include="Icons\16\problems.png" />
+    <None Include="Icons\16\runer.png" />
+    <None Include="Icons\16\save31.png" />
+    <None Include="Icons\16\spreadsheet6.png" />
+    <None Include="Icons\16\spreadsheet7.png" />
+    <Content Include="Icons\16\synchronization3.png" />
+    <None Include="Icons\16\table27.png" />
+    <Content Include="Icons\16\time39.png" />
+    <Content Include="Icons\64\connection88.png" />
+    <None Include="Icons\16\xml8.png" />
+    <None Include="Icons\16\xml6.png" />
+    <None Include="Icons\16\warning45.png" />
+    <None Include="Icons\16\clock104.png" />
+    <None Include="Icons\16\alert9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+</Project>

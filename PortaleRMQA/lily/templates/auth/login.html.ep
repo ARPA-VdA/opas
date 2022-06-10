@@ -1,0 +1,65 @@
+% title  'Entra nel portale ' . $self->config->{'title'};
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="img-lily/favicon.png"/>
+
+    <title><%= title %></title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <link href="css-lily/default.css" rel="stylesheet">
+
+    
+    <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+
+                <h1 class="login-logo"><img src="<%= url_for('/img-lily/logo-piattaforma.png')%>"></h1>
+
+            </div>
+            <h3>Benvenuto nel portale<br><%= $self->config->{'title'}%></h3>
+            
+
+
+            <form class="m-t" role="form" action="<%= url_for('login')%>" method="post">
+                <div class="form-group">
+                    <input type="text" name="login_name" class="form-control" placeholder="Username" required="">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="login_password" class="form-control" placeholder="Password" required="">
+                </div>
+
+                <% if (my $message = flash 'login_error' ) { %>
+                    <div class="flash text-danger" style="padding-bottom:10px;"><strong class="passwd-label"><%= $message %></strong></div>
+                <% } %>
+
+                <button type="submit" class="btn btn-primary block full-width m-b">Accedi</button>
+
+                
+            </form>
+            <p class="m-t"> <small><%== $self->config->{'copyright'}%></small> </p>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

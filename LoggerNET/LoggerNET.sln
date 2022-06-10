@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "LoggerNET", "LoggerNET.vbproj", "{75E40248-D528-4FB5-B1F6-7F5F17605667}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75E40248-D528-4FB5-B1F6-7F5F17605667}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75E40248-D528-4FB5-B1F6-7F5F17605667}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75E40248-D528-4FB5-B1F6-7F5F17605667}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75E40248-D528-4FB5-B1F6-7F5F17605667}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+	EndGlobalSection
+EndGlobal

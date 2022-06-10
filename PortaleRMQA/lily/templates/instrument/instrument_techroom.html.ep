@@ -1,0 +1,297 @@
+% layout 'default';
+% title 'Strumenti - Resp Sala';
+
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/plugins/highcharts/highcharts.js'))%>"></script>
+<script src="<%=url_for(helperGetFileVersion('/js-lily/plugins/highcharts/modules/exporting.js'))%>"></script>
+
+
+<link href="css/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet">
+<script src="js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+
+
+<link href="js/plugins/magnific-popup/magnific-popup.css" rel="stylesheet">
+<script src="js/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/instrument_respsala.js'))%>"></script>
+
+<div class="panel blank-panel" id="stations">
+
+    <div class="panel-heading">
+        <div class="panel-options">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#tab-1">Osservazione</a></li>
+                <li class=""><a data-toggle="tab" href="#tab-2">Stazioni</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel-body" id="gallery-images">
+
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane active">
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Valori medi stazioni</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Stazione</th>
+                                    <th>Valore 1</th>
+                                    <th>Valore 2</th>
+                                    <th>Valore 3</th>
+                                    <th>Valore 4</th>
+                                    <th>Valore 5</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Plouves</td>
+                                    <td>6</td>
+                                    <td>8</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td>Cogne</td>
+                                    <td>6</td>
+                                    <td>8</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td>Donnas</td>
+                                    <td>6</td>
+                                    <td>8</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Temperature osservate</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <h4>Dato 1</h4>
+                                <div class="text-center data-chart">
+                                    <a href="chart-lily/resp-sala/01.png" data-gallery="temp" title="Dato 3 nella lightbox" class="single-image-gallery"><img src="chart-lily/resp-sala/01.png" class="img-responsive" alt="Dato 1" /></a>
+                                    <span class="label label-warning"><i class="fa fa-times-circle"></i> 3/3/15 11:21 GMT</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <h4>Dato 2</h4>
+                                <div class="text-center data-chart">
+                                    <a href="chart-lily/resp-sala/01.png" data-gallery="temp" title="Dato 3 nella lightbox" class="single-image-gallery"><img src="chart-lily/resp-sala/01.png" class="img-responsive" alt="Dato 2" /></a>
+                                    <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <h4>Dato 3</h4>
+                                <div class="text-center data-chart">
+                                    <a href="chart-lily/resp-sala/01.png" data-gallery="temp" title="Dato 3 nella lightbox" class="single-image-gallery"><img src="chart-lily/resp-sala/01.png" class="img-responsive" alt="Dato 3" /></a>
+                                    <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <h4>Dato 4</h4>
+                                <div class="text-center data-chart">
+                                    <a href="chart-lily/resp-sala/01.png" data-gallery="temp" title="Dato 3 nella lightbox" class="single-image-gallery"><img src="chart-lily/resp-sala/01.png" class="img-responsive" alt="Dato 4" /></a>
+                                    <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Precipitazioni</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <h4>Dato 1</h4>
+                                <div class="text-center data-chart">
+                                    <a href="chart-lily/resp-sala/02.png" data-gallery="Precipitazioni" title="Dato 3 nella lightbox" class="single-image-gallery"><img src="chart-lily/resp-sala/02.png" class="img-responsive" alt="Dato 1" /></a>
+                                    <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <h4>Dato 2</h4>
+                                <div class="text-center data-chart">
+                                    <a href="chart-lily/resp-sala/02.png" data-gallery="Precipitazioni" title="Dato 3 nella lightbox" class="single-image-gallery"><img src="chart-lily/resp-sala/02.png" class="img-responsive" alt="Dato 2" /></a>
+                                    <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <h4>Dato 3</h4>
+                                <div class="text-center data-chart">
+                                    <a href="chart-lily/resp-sala/02.png" data-gallery="Precipitazioni" title="Dato 3 nella lightbox" class="single-image-gallery"><img src="chart-lily/resp-sala/02.png" class="img-responsive" alt="Dato 3" /></a>
+                                    <span class="label label-warning"><i class="fa fa-times-circle"></i> 3/3/15 11:21 GMT</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <h4>Dato 4</h4>
+                                <div class="text-center data-chart">
+                                    <a href="chart-lily/resp-sala/02.png" data-gallery="Precipitazioni" title="Dato 3 nella lightbox" class="single-image-gallery"><img src="chart-lily/resp-sala/02.png" class="img-responsive" alt="Dato 4" /></a>
+                                    <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="tab-2" class="tab-pane">
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Stazioni fisse</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Stazione</th>
+                                    <th>Valore 1</th>
+                                    <th>Valore 2</th>
+                                    <th>Valore 3</th>
+                                    <th>Valore 4</th>
+                                    <th>Valore 5</th>
+                                    <th>Valore 6</th>
+                                    <th>Valore 7</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="#open-popup" class="open-popup-link"><i class="fa fa-external-link-square"></i> Plouves</a></td>
+                                    <td>6</td>
+                                    <td>8</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                    <td>8</td>
+                                    <td>3</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#open-popup" class="open-popup-link"><i class="fa fa-external-link-square"></i> Cogne</a></td>
+                                    <td>6</td>
+                                    <td>8</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#open-popup" class="open-popup-link"><i class="fa fa-external-link-square"></i> Donnas</a></td>
+                                    <td>6</td>
+                                    <td>8</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                    <td>6</td>
+                                    <td>8</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#open-popup" class="open-popup-link"><i class="fa fa-external-link-square"></i> Liconi</a></td>
+                                    <td>6</td>
+                                    <td>8</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                    <td>8</td>
+                                    <td>3</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#open-popup" class="open-popup-link"><i class="fa fa-external-link-square"></i> La Thuile</a></td>
+                                    <td>6</td>
+                                    <td>8</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#open-popup" class="open-popup-link"><i class="fa fa-external-link-square"></i> Mt-Fleury</a></td>
+                                    <td>6</td>
+                                    <td>8</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                    <td>6</td>
+                                    <td>8</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="open-popup" class="white-popup mfp-hide">
+                    <div id="containerchart" style="min-width: 310px; width: 95%; height: 500px; margin: 0 auto"></div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>

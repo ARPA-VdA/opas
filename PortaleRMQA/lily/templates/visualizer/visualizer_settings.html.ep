@@ -1,0 +1,239 @@
+% layout 'default';
+% title 'Strumenti - Visualizer - Impostazioni';
+
+
+
+
+<link href="<%=url_for(helperGetFileVersion('/css-lily/visualizer.css'))%>" rel="stylesheet">
+
+
+<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+
+
+<link href="css/plugins/colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet">
+<script src="js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+
+
+<link href="js/plugins/magnific-popup/magnific-popup.css" rel="stylesheet">
+<script src="js/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+
+<script src="js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+
+
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/visualizer_settings.js'))%>"></script>
+
+<div class="row animated fadeInTop">
+    <div class="col-md-6">
+        <div class="ibox float-e-margins" id="groups">
+            <div class="ibox-title">
+                <h5 class="text-info">Imposta i gruppi di Visualizer</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <ul class="sortable-list connectList agile-list list_groups" id="list-groups">
+                    % foreach my $group ( @{$groups} )
+                    % {
+                        <li class="success-element" data-grid="<%=$group->{'gr_id'}%>">
+                            <a href="#" class="editor-group" data-type="text" data-title="Cambia nome gruppo"><%=$group->{'name'}%></a>
+                            
+                            <a href="#" class="pull-right btn btn-xs btn-white mrl view-groups"><i class="fa fa-bars"></i></a>
+                        </li>
+                    % }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="ibox float-e-margins" id="sub-groups">
+            <div class="ibox-title">
+                <h5 class="text-success" id="sub-groups-title">Imposta i sottogruppi di <strong>Visualizer</strong></h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <ul class="sortable-list connectList agile-list list_pages" id="list-pages">
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row animated fadeInBottom">
+    <div class="col-md-12">
+
+        <div class="ibox float-e-margins" id="param-groups">
+            <div class="ibox-title">
+                <h5 class="text-warning" id="param-groups-title">Imposta i parametri di <strong>Visualizer</strong></h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+
+            
+
+                <ul class="sortable-list connectList agile-list list_windows" id="list-windows">
+
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="ibox-content white-popup mfp-hide" id="open-popup">
+            <h2 class="text-danger">Modifica le impostazioni del parametro <strong id="txt-param">XXX</strong> in Stazione <strong id="txt-stat">YYY</strong></h2>
+            <div class="hr-line-solid"></div>
+            <form id="form_update_window" method="post" class="form-horizontal" action="">
+
+                <input type="hidden" id="param-wdid" name="param-wdid" value="">
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Stazione</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" name="param-station" id="param-station">
+                            <option>Non utilizzare..</option>
+                        </select>
+                    </div>
+                    <label class="col-sm-2 control-label">Parametro</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" name="param-name" id="param-name">
+                            <option>Non utilizzare..</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10"><h2 class="text-warning">Generali</h2></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Nome</label>
+                    <div class="col-sm-4"><input type="text" class="form-control" id="param-label" name="param-label" /></div>
+                    <label class="col-sm-2 control-label">Giorni visualizzati</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" id="param-days" name="param-days">
+                            <option value="-1">Seleziona...</option>
+                            <option value="1">1 giorno</option>
+                            <option value="2">2 giorni</option>
+                            <option value="4">4 giorni</option>
+                            <option value="8">8 giorni</option>
+                            <option value="16">16 giorni</option>
+                            <option value="31">1 mese</option>
+                            <option value="60">2 mesi</option>
+                            <option value="90">3 mesi</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Decimali</label>
+                    <div class="col-sm-4"><input type="number" class="form-control" id="param-dec" name="param-dec" /></div>
+                    <label class="col-sm-2 control-label">Colore</label>
+                    <input type="hidden" id="param-color-hex" name="param-color-hex" value="">
+                    <div class="col-sm-4"><input type="text" class="form-control color-label" id="param-color" name="param-color" /></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"></label>
+                    <div class="col-sm-4"><label> <div class="i-checks"><input type="checkbox" value="" id="param-maxval" name="param-maxval" /> <i></i> Visualizza valori massimi</label></div></div>
+                    <div class="col-sm-5"><label> <div class="i-checks"><input type="checkbox" value="" id="param-minval" name="param-minval" /> <i></i> Visualizza valori minimi</label></div></div>
+                    
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10"><h2 class="text-warning">Grafico</h2></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Scala asse y</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" name="param-y" id="param-y">
+                            <option value="-1">Seleziona...</option>
+                            <option value="0">Automatica</option>
+                            <option value="1">Semi-Automatica</option>
+                            <option value="2">Non Automatica</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3"><label> <div class="i-checks"><input type="checkbox" value="" id="param-points" name="param-points" /> <i></i> Punti</label></div></div>
+                    <div class="col-sm-3"><label> <div class="i-checks"><input type="checkbox" value="" id="param-values" name="param-values" /> <i></i> Etichette</label></div></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Minimo</label>
+                    <div class="col-sm-2"><input type="number" step="0.01" class="form-control" id="param-min" name="param-min" /></div>
+                    <label class="col-sm-2 control-label">Massimo</label>
+                    <div class="col-sm-2"><input type="number" step="0.01" class="form-control" id="param-max" name="param-max" /></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Alert min</label>
+                    <div class="col-sm-2"><input type="number" step="0.01" class="form-control" id="param-almin" name="param-almin" /></div>
+                    <label class="col-sm-2 control-label">Aler max</label>
+                    <div class="col-sm-2"><input type="number" step="0.01" class="form-control" id="param-almax" name="param-almax" /></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Linea rossa</label>
+                    <div class="col-sm-2"><input type="number" step="0.01" class="form-control" id="param-red" name="param-red" /></div>
+                    <label class="col-sm-2 control-label">Linea arancio</label>
+                    <div class="col-sm-2"><input type="number" step="0.01" class="form-control" id="param-orange" name="param-orange" /></div>
+                    <label class="col-sm-2 control-label">Linea verde</label>
+                    <div class="col-sm-2"><input type="number" step="0.01" class="form-control" id="param-green" name="param-green" /></div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10"><h2 class="text-warning">Formule</h2></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">In uso</label>
+                    <div class="col-sm-4"><input type="text" class="form-control" id="param-formule" name="param-formule" disabled /></div>
+                    <div class="col-sm-6"><label> <div class="i-checks"><input type="checkbox" value="" id="param-formule-correction" name="param-formule-correction" /> <i></i> Utilizza formula correttiva</label></div></div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10"><h2 class="text-warning">Avanzate</h2></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Id tabella verticale</label>
+                    <div class="col-sm-4"><input type="number" class="form-control" id="param-idtable" name="param-idtable" /></div>
+                    <div class="col-sm-6"><label> <div class="i-checks"><input type="checkbox" value="" id="param-vision" name="param-vision" /> <i></i> Utilizza Vista e non tabella (nome della tabella con prefisso "view_")</label></div></div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <button class="btn btn-white" type="button" id="param-cancel" name="param-cancel" />Annulla</button>
+                        <button class="btn btn-primary" type="submit" id="param-save" name="param-save" />Modifica</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

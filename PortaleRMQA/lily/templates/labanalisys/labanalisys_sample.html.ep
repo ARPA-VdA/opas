@@ -1,0 +1,364 @@
+% layout 'default';
+% title 'Gestione campioni';
+
+
+<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/labanalisys_sample.js'))%>"></script>
+
+
+<script type="text/javascript">
+var date1 = '<%=$date_from%>';
+var date2 = '<%=$date_to%>';
+repid     = '<%=$repid%>';
+$(document).ready(function () {
+    // update calendars
+    updateDataRange(date1, date2);
+
+    console.log('repid: '+repid);
+    if (repid)
+        showReportFromGet(repid);
+});
+</script>
+
+
+<% if (my $message = flash 'message' ) { %>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        var msg = '<%=$message%>';
+        bootbox.alert({
+            message: msg,
+        });
+    });
+    </script>
+<% } %>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins ibox-as-bar">
+            <div class="ibox-title mod-title-height">
+                <div class="row">
+
+                    <div class="col-sm-1">
+                        <button class="btn btn-success" type="button" id="btn-add-sample"><i class="fa fa-plus-circle"></i> <span class="bold">New</span></button>
+                        
+                    </div>
+
+                    <div class="col-sm-11">
+                        <select class="form-control m-b short-select" name="filter_prel" id="filter_prel">
+                            <option value="-1">Prelievi - tutti</option>
+                            % foreach my $prel ( @{$prels} )
+                            % {
+                                %   my $selected = '';
+                                %   if ($prel->{'fi_id'} == $filter_fi_id) { $selected = 'selected'; }
+                                    <option value="<%= $prel->{'fi_id'} =%>" <%= $selected %>><%= $prel->{'filter'} =%></option>
+                                }
+                            % }
+                        </select>
+
+                        <select class="form-control m-b short-select" name="filter_analysis" id="filter_analysis">
+                            <option value="-1">Analisi - tutte</option>
+                            % foreach my $analys ( @{$analysis} )
+                            % {
+                                %   my $selected = '';
+                                %   if ($analys->{'an_id'} == $filter_an_id) { $selected = 'selected'; }
+                                    <option value="<%= $analys->{'an_id'} =%>" <%= $selected %>><%= $analys->{'analysis'} =%></option>
+                                }
+                            % }
+                        </select>
+
+                        <select class="form-control m-b short-select" name="filter_stations" id="filter_stations">
+                            <option value="-1">Stazioni - tutte</option>
+                            % foreach my $station ( @{$stations} )
+                            % {
+                                %   my $selected = '';
+                                %   if ($station->{'st_id'} == $filter_st_id) { $selected = 'selected'; }
+                                    <option value="<%= $station->{'st_id'} =%>" <%= $selected %>><%= $station->{'stationname'} =%></option>
+                                }
+                            % }
+                        </select>
+
+                        <div id="reportrange" class="form-control short-range">
+                            <i class="fa fa-calendar"></i>
+                            <span></span> <b class="caret"></b>
+                        </div>
+                        <input class="btn btn-warning" id="refresh-list" type="button" value="aggiorna">
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-11">
+                        <strong>Cerca campioni da</strong>
+                        <input type="number" name="sample-id-from" id="sample-id-from" class="form-control input-sm m-b short-input" maxlength="9" placeholder="inserisci id...">
+                        <strong>a</strong>
+                        <input type="number" name="sample-id-to" id="sample-id-to" class="form-control input-sm m-b short-input" maxlength="9" placeholder="inserisci id...">
+                        <input class="btn btn-info btn-sm" id="refresh-list2" type="button" value="cerca">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" id="add_sample">
+    <div class="col-lg-12">
+
+        <div class="ibox float-e-margins">
+
+            <div class="ibox-title">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h5>Aggiungi campione</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox-content adding-reports">
+                <form action="" method="post" id="sample-form" name="sample-form" class="clearfix form-horizontal form-reports">
+
+                    
+                    <input type="hidden" id="sp-id" name="sp-id" value="">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="sample-id">ID Campione</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="sample-id" name="sample-id">
+                            <div class="btn-verify"><a href="#">Verifica ID &raquo;</a></div>
+                        </div>
+                        <label class="control-label col-sm-2" for="vol-sample">Vol. campion.</label>
+                        <div class="col-sm-4"><input type="text" class="form-control" id="vol-sample" name="vol-sample" placeholder="Sep. decimale: PUNTO"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="prel">Prelievo</label>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" name="prel" id="prel">
+                                <option value="-1">Seleziona...</option>
+                                % foreach my $prel ( @{$prels} )
+                                % {
+                                    <option value="<%= $prel->{'fi_id'} =%>"><%= $prel->{'filter'} =%></option>
+                                % }
+                            </select>
+                        </div>
+                        <label class="control-label col-sm-2" for="analysis">Analisi</label>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" name="analysis" id="analysis">
+                                <option value="-1">Seleziona...</option>
+                                % foreach my $analys ( @{$analysis} )
+                                % {
+                                    <option value="<%= $analys->{'an_id'} =%>"><%= $analys->{'analysis'} =%></option>
+                                % }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group modify-date">
+                        <label class="control-label col-sm-2" for="start-date">Inizio campion.</label>
+                        <div class="input-group date col-sm-4" id="">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" data-date-end-date="0d" value="" name="start-date" id="start-date">
+                        </div>
+                        <label class="control-label col-sm-2" for="days">Num. giorni</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="days" name="days">
+                        </div>
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="station">Stazione</label>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" name="station" id="station">
+                                <option value="-1">Seleziona...</option>
+                                % foreach my $station ( @{$stations} )
+                                % {
+                                    <option value="<%= $station->{'st_id'} =%>"><%= $station->{'stationname'} =%></option>
+                                % }
+                            </select>
+                        </div>
+                        <label class="control-label col-sm-2" for="notes">Note</label>
+                        <div class="col-sm-4">
+                            <textarea id="notes" class="notes" name="notes"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <input type="reset" class="btn btn-white" id="cancel-sample-form" name="cancel-sample-form" value="Annulla" />
+                            <button class="btn btn-primary" type="submit" id="btn-sample-form" name="btn-sample-form">Salva</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" id="view_sample">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+
+            <div class="ibox-title">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h5>Visualizza campione</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox-content adding-reports">
+                <div class="row view-report">
+                    <label class="control-label col-sm-2">ID Campione</label>
+                    <div class="col-sm-4 clear-txt" id="view-sample-id"></div>
+                    <label class="control-label col-sm-2">Vol. campion.</label>
+                    <div class="col-sm-4 clear-txt" id="view-vol-sample"></div>
+                </div>
+                <div class="row view-report">
+                    <label class="control-label col-sm-2">Prelievo</label>
+                    <div class="col-sm-4 clear-txt" id="view-prel"></div>
+                    <label class="control-label col-sm-2">Analisi</label>
+                    <div class="col-sm-4 clear-txt" id="view-analysis"></div>
+                </div>
+                <div class="row view-report">
+                    <label class="control-label col-sm-2">Inizio campion.</label>
+                    <div class="col-sm-4 clear-txt" id="view-start-date"></div>
+                    <label class="control-label col-sm-2">Num. giorni</label>
+                    <div class="col-sm-4 clear-txt" id="view-days"></div>
+                </div>
+                
+                <div class="row view-report">
+                    <label class="control-label col-sm-2">Stazione</label>
+                    <div class="col-sm-4 clear-txt" id="view-station"></div>
+                    <label class="control-label col-sm-2">Note</label>
+                    <div class="col-sm-4 clear-txt" id="view-notes"></div>
+                </div>
+
+                <div class="divider"></div>
+
+            	<table class="table table-striped" id="table-all-data">
+                    <thead>
+                        <tr>
+                            <th>Lab PR ID</th>
+                            <th>Inquinante</th>
+                            <th>Massa</th>
+                            <th>Unità massa</th>
+                            <th>Concentrazione</th>
+                            <th>Unità conc.</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-data-sample">
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Lab PR ID</th>
+                            <th>Inquinante</th>
+                            <th>Massa</th>
+                            <th>Unità massa</th>
+                            <th>Concentrazione</th>
+                            <th>Unità conc.</th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <div class="row view-report">
+                    <div class="col-sm-4">
+                        <button class="btn btn-primary" id="btn-close-view" name="btn-close-view">Chiudi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Lista dei campioni</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                <table class="table table-striped table-bordered table-hover table-sample table-with-tools" >
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>ID Campione</th>
+                            <th>Stazione</th>
+                            <th>Filtro</th>
+                            <th>Analisi</th>
+                            <th>Data inizio</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        % my $lock_s;
+                        % my $mod_sample;
+                        % foreach my $sample ( @{$samples} )
+                        % {
+                            
+                        	% if ( $sample->{'locked_sample'} == 1 && $sample->{'locked_data'} == 1 ) {
+                                % $lock_s = ' <i class="fa fa-lock"></i> ';
+                                % $mod_sample = '';
+                            % } elsif ( $sample->{'locked_sample'} == 1 && $sample->{'locked_data'} == 0 ) {
+                                % $lock_s = ' <i class="fa fa-lock"></i> ';
+                                % $mod_sample = '<a href="javascript:void(0)" class="table-tool text-warning unlock-tool"><i class="fa fa-unlock"></i></a>';
+                            % } else {
+                            	% $lock_s = '';
+                            	% $mod_sample = '<a href="javascript:void(0)" class="table-tool blue set-tool"><i class="fa fa-wrench"></i></a> <a href="javascript:void(0)" class="table-tool blue lock-tool"><i class="fa fa-unlock-alt"></i></a> <a href="javascript:void(0)" class="table-tool light-blue delete-tool"><i class="fa fa-trash"></i></a>';
+                            % }
+                            <tr data-id="<%= $sample->{'id'} =%>">
+                                <td>
+                                    <a href="javascript:void(0)" class="table-tool blue view-tool"><i class="fa fa-search-plus"></i></a>
+                                    <%== $mod_sample =%>
+                                </td>
+                                <td><%= $sample->{'sp_id'} =%></td>
+                                <td><%= $sample->{'stationname'} =%></td>
+                                <td><%= $sample->{'filter_name'} =%></td>
+                                <td><%= $sample->{'analysis_name'} =%></td>
+                                <td><%= $sample->{'date_start_format'} =%></td>
+                                <td class="locked-icon text-danger"><%== $lock_s =%></td>
+                            </tr>
+                        % }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th>ID Campione</th>
+                            <th>Stazione</th>
+                            <th>Filtro</th>
+                            <th>Analisi</th>
+                            <th>Data inizio</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

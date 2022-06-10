@@ -1,0 +1,330 @@
+% layout 'default';
+% title 'Schema hardware';
+
+
+<link href="css-lily/server.css" rel="stylesheet">
+
+
+<link href="css/plugins/codemirror/codemirror.css" rel="stylesheet">
+<link href="css/plugins/codemirror/ambiance.css" rel="stylesheet">
+<script src="js/plugins/codemirror/codemirror.js"></script>
+<script src="js/plugins/codemirror/mode/javascript/javascript.js"></script>
+
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/server_hardware.js'))%>"></script>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Sala Server</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <h4 class="title-little text-info">Hardware</h4>
+                <table class="table table-bordered table-compact server-tower table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>IP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a onclick="openPopup('<%=url_for(helperGetFileVersion('/includes-lily/subpages/juniper.html'))%>');return false;" href="#">Juniper SSG 140</a></td>
+                            <td>192.168.5.21</td>
+                        </tr>
+                        <tr>
+                            <td><a onclick="openPopup('<%=url_for(helperGetFileVersion('/includes-lily/subpages/pc-ced.html'))%>');return false;" href="#">Pc-ced</a></td>
+                            <td>192.168.5.79<br>192.168.0.10</td>
+                        </tr>
+                        <tr>
+                            <td><a onclick="openPopup('<%=url_for(helperGetFileVersion('/includes-lily/subpages/canopy.html'))%>');return false;" href="#">Canopy</a></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><a onclick="openPopup('<%=url_for(helperGetFileVersion('/includes-lily/subpages/pc-periferia.html'))%>');return false;" href="#">PC-Periferia</a></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><a onclick="openPopup('<%=url_for(helperGetFileVersion('/includes-lily/subpages/cr1000.html'))%>');return false;" href="#">CR1000</a></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 class="title-little text-info"><strong>SERVER:</strong>
+                    <a onclick="openPopup('<%=url_for(helperGetFileVersion('/includes-lily/subpages/esxi-srv1.html'))%>');return false;" href="#">
+                        Esxi-srv1 (192.168.5.187)
+                    </a>
+                </h4>
+                <table class="table table-bordered table-compact server-tower table-striped"><thead>
+                    <thead>
+                        <tr>
+                            <th>Include</th>
+                            <th>IP</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td><a onclick="openPopup('<%=url_for(helperGetFileVersion('/includes-lily/subpages/db-srv1.html'))%>');return false;" href="#">Db-srv1</a></td>
+                        <td>192.168.5.186</td>
+                    </tr>
+                    <tr>
+                        <td><a onclick="openPopup('<%=url_for(helperGetFileVersion('/includes-lily/subpages/bin-srv1.html'))%>');return false;" href="#">Bin-srv1</a></td>
+                        <td>192.168.5.190</td>
+                    </tr>
+                    <tr>
+                        <td><a onclick="openPopup('<%=url_for(helperGetFileVersion('/includes-lily/subpages/web-srv1.html'))%>');return false;" href="#">Web-srv1</a></td>
+                        <td>192.168.5.191</td>
+                    </tr>
+                </table>
+                <h4 class="title-little text-info">Altri server</h4>
+                <table class="table table-bordered table-compact server-tower table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>IP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a onclick="openPopup('<%=url_for(helperGetFileVersion('/includes-lily/subpages/esxi-srv2.html'))%>');return false;" href="#">Esxi-srv2</a></td>
+                            <td>192.168.5.189</td>
+                        </tr>
+                        <tr>
+                            <td><a onclick="openPopup('<%=url_for(helperGetFileVersion('/includes-lily/subpages/modellistica.html'))%>');return false;" href="#">Modellistica</a></td>
+                            <td>192.168.5.188</td>
+                        </tr>
+                        <tr>
+                            <td><a onclick="openPopup('<%=url_for(helperGetFileVersion('/includes-lily/subpages/db-srv2.html'))%>');return false;" href="#">Db-srv2</a></td>
+                            <td>192.168.5.193</td>
+                        </tr>
+                        <tr>
+                            <td><a onclick="openPopup('<%=url_for(helperGetFileVersion('/includes-lily/subpages/barman.html'))%>');return false;" href="#">Barman</td>
+                            <td>192.168.5.194</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Stazioni</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <h4 class="title-little text-info">Plouves</h4>
+                <table class="table table-bordered table-compact server-tower">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>IP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>pc</td>
+                            <td>192.168.0.20</td>
+                        </tr>
+                        <tr>
+                            <td>CR1000</td>
+                            <td>192.168.0.126</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 class="title-little text-info">Liconi</h4>
+                <table class="table table-bordered table-compact server-tower">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>IP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>pc</td>
+                            <td>192.168.0.21</td>
+                        </tr>
+                        <tr>
+                            <td>CR1000</td>
+                            <td>192.168.0.120</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 class="title-little text-info">Mt. Fleury</h4>
+                <table class="table table-bordered table-compact server-tower">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>IP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>pc</td>
+                            <td>192.168.0.22</td>
+                        </tr>
+                        <tr>
+                            <td>CR1000</td>
+                            <td>192.168.0.121</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 class="title-little text-info">Pepinière</h4>
+                <table class="table table-bordered table-compact server-tower">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>IP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>pc</td>
+                            <td>192.168.0.24</td>
+                        </tr>
+                        <tr>
+                            <td>CR1000</td>
+                            <td>192.168.0.125</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 class="title-little text-info">La Thuile</h4>
+                <table class="table table-bordered table-compact server-tower">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>IP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>pc</td>
+                            <td>192.168.0.30</td>
+                        </tr>
+                        <tr>
+                            <td>pc Henri</td>
+                            <td>192.168.0.31</td>
+                        </tr>
+                        <tr>
+                            <td>skycam</td>
+                            <td>192.168.0.32</td>
+                        </tr>
+                        <tr>
+                            <td>CR1000</td>
+                            <td>192.168.0.122</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 class="title-little text-info">Cogne</h4>
+                <table class="table table-bordered table-compact server-tower">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>IP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>pc</td>
+                            <td>192.168.0.40</td>
+                        </tr>
+                        <tr>
+                            <td>CR1000</td>
+                            <td>192.168.0.123</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 class="title-little text-info">Donnas</h4>
+                <table class="table table-bordered table-compact server-tower">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>IP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>pc</td>
+                            <td>192.168.0.55</td>
+                        </tr>
+                        <tr>
+                            <td>CR1000</td>
+                            <td>192.168.0.124</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 class="title-little text-info">Lab. Mobile</h4>
+                <table class="table table-bordered table-compact server-tower">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>IP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>pc</td>
+                            <td>192.168.0.60</td>
+                        </tr>
+                        <tr>
+                            <td>router</td>
+                            <td>192.168.0.1</td>
+                        </tr>
+                        <tr>
+                            <td>CR1000</td>
+                            <td>192.168.0.127</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 class="title-little text-info">Anas</h4>
+                <table class="table table-bordered table-compact server-tower">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>IP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>pc</td>
+                            <td>192.168.0.50</td>
+                        </tr>
+                        <tr>
+                            <td>router</td>
+                            <td>192.168.0.1</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,11 @@
+% layout 'default';
+% title 'TODO';
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="alert alert-success alert-dismissable">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            Pagina dedicata allo scaricamento dei dati delle stazioni, ogni stazione avrà il suo download.
+        </div>
+    </div>
+</div>

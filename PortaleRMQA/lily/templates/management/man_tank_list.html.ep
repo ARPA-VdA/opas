@@ -1,0 +1,353 @@
+% layout 'default';
+% title 'Lista delle bombole';
+
+
+<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+
+
+<link href="js-lily/plugins/fileinput/fileinput.css" rel="stylesheet">
+<script src="js-lily/plugins/fileinput/fileinput.js"></script>
+<script src="js-lily/plugins/fileinput/it.js"></script>
+
+
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/man_tank_list.js'))%>"></script>
+
+
+<script type="text/javascript">
+var date1 = '<%=$date_from%>';
+var date2 = '<%=$date_to%>';
+$(document).ready(function () {
+    // update calendars
+    updateDataRange(date1, date2);
+});
+</script>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins ibox-as-bar">
+            <div class="ibox-title mod-title-height">
+
+                <div class="row" id="reportrange_row">
+                    <div class="col-sm-5">
+                        
+                        <button class="btn btn-success" type="button" id="btn-add-tank"><i class="fa fa-plus-circle"></i> <span class="bold">Aggiungi bombola</span></button>
+                        <button class="btn btn-info" type="button" id="download-csv"><i class="fa fa-download"></i> Scarica CSV</button>
+                    </div>
+                    <div class="col-sm-5">
+                        <div id="reportrange" class="form-control">
+                            <i class="fa fa-calendar"></i>
+                            <span></span> <b class="caret"></b>
+                        </div>
+                    </div>
+                    <div class="col-sm-2"><input class="btn btn-warning" id="refresh-list" type="button" value="aggiorna"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" id="add_tank">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+
+            <div class="ibox-title">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h5>Aggiungi bombola</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox-content adding-reports">
+                <form action="" method="post" id="tank-form" name="tank-form" class="clearfix form-horizontal form-reports" enctype="multipart/form-data">
+
+                    
+                    <input type="hidden" id="tank-cy-id" name="tank-cy-id" value="">
+
+                    <div class="form-group modify-date">
+                        <label class="control-label col-sm-2" for="arpa-id">Arpa ID</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="arpa-id" name="arpa-id">
+                            <div class="btn-verify"><a href="#">Verifica ID &raquo;</a></div>
+                        </div>
+                        <label class="control-label col-sm-2" for="tank-description">Miscela</label>
+                        <div class="col-sm-4"><input type="text" class="form-control" id="tank-description" name="tank-description"></div>
+                    </div>
+                    <div class="form-group modify-date">
+                        <label class="control-label col-sm-2" for="tank-date-built">Produzione</label>
+                        <div class="input-group date col-sm-4" id="prod_date">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" data-date-end-date="0d" value="" name="tank-date-built" id="tank-date-built">
+                        </div>
+                        <label class="control-label col-sm-2" for="tank-date-expiry">Scadenza</label>
+                        <div class="input-group date col-sm-4" id="expire_date">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" data-date-end-date="+2y" value="" name="tank-date-expiry" id="tank-date-expiry">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="tank-instrument">Strumento</label>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" name="tank-instrument" id="tank-instrument">
+                                <option value="-1">Seleziona strumento...</option>
+                                % foreach my $instrument ( @{$instruments} )
+                                % {
+                                    <option value="<%= $instrument->{'in_ca_id'} =%>"><%= $instrument->{'instrument_category'} =%></option>
+                                % }
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="i-checks"><label> <input type="checkbox" value="" name="tank-iszero" id="tank-iszero"> <i></i> Bombola di zero</label></div>
+                        </div>
+                    </div>
+                    <div class="form-group modify-date" id="values-ins">
+                        <label class="control-label col-sm-2 show-first" for="val-first">val. NOX</label>
+                        <div class="col-sm-2 show-first"><input type="text" class="form-control" id="val-first" name="val-first" placeholder="S.dec: PUNTO"></div>
+                        <label class="control-label col-sm-2 show-second" for="val-second">val. NO</label>
+                        <div class="col-sm-2 show-second"><input type="text" class="form-control" id="val-second" name="val-second" placeholder="S.dec: PUNTO"></div>
+                        <label class="control-label col-sm-2 show-third" for="val-third">val. NO2</label>
+                        <div class="col-sm-2 show-third"><input type="text" class="form-control" id="val-third" name="val-third" placeholder="S.dec: PUNTO"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="delivery-note">Bolla consegna</label>
+                        <div class="col-sm-4"><input type="text" class="form-control" id="delivery-note" name="delivery-note"></div>
+                        <label class="control-label col-sm-2" for="shipment-note">Bolla spedizione</label>
+                        <div class="col-sm-4"><input type="text" class="form-control" id="shipment-note" name="shipment-note"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="purchase-invoice">Fattura acquisto</label>
+                        <div class="col-sm-4"><input type="text" class="form-control" id="purchase-invoice" name="purchase-invoice"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 label-nopd" for="reversal-invoice">Fattura storno sostituz.</label>
+                        <div class="col-sm-4"><input type="text" class="form-control" id="reversal-invoice" name="reversal-invoice"></div>
+                        <label class="control-label col-sm-2 label-nopd" for="payment-invoice">Fattura pagamento sostituz.</label>
+                        <div class="col-sm-4"><input type="text" class="form-control" id="payment-invoice" name="payment-invoice"></div>
+                    </div>
+                    <div class="form-group ickeck-format">
+                        <label class="control-label col-sm-2"></label>
+                        <div class="col-sm-10">
+                            <div class="i-checks"><label> <input type="checkbox" value="" name="tank-exhausted" id="tank-exhausted"> <i></i> Esaurita</label></div>
+                            <div class="i-checks"><label> <input type="checkbox" value="" name="tank-returned" id="tank-returned"> <i></i> Resa</label></div>
+                            <div class="i-checks"><label> <input type="checkbox" value="" name="not-compliant" id="not-compliant"> <i></i> Non conforme</label></div>
+                            <div class="i-checks"><label> <input type="checkbox" value="" name="all-stations" id="all-stations"> <i></i> Stanziata in tutte le stazioni</label></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="attachment">Pdf</label>
+                        <div class="col-sm-10">
+                            <div><input type="file" class="" id="attachment" name="attachment" data-show-preview="false"></div>
+                            <div id="pdf_current"><strong class="text-danger">PDF inserito:</strong> <span id="pdf_to_insert"></span></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="note">Note</label>
+                        <div class="col-sm-10"><textarea id="note" name="note"></textarea></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <input type="reset" class="btn btn-white" id="cancel-tank-form" name="cancel-tank-form" value="Annulla" />
+                            <button class="btn btn-primary" type="submit" id="btn-tank-form" name="btn-tank-form">Salva</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" id="view_tank">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+
+            <div class="ibox-title">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h5>Visualizza bombola</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox-content adding-reports">
+                <div class="row view-report">
+                    <label class="control-label col-sm-2">Arpa ID</label>
+                    <div class="col-sm-4 clear-txt" id="view-arpa-id"></div>
+                    <label class="control-label col-sm-2">Miscela</label>
+                    <div class="col-sm-4 clear-txt" id="view-tank-description"></div>
+                </div>
+                <div class="row view-report">
+                    <label class="control-label col-sm-2">Produzione</label>
+                    <div class="col-sm-4 clear-txt" id="view-tank-date-built"></div>
+                    <label class="control-label col-sm-2">Scadenza</label>
+                    <div class="col-sm-4 clear-txt" id="view-tank-date-expiry"></div>
+                </div>
+                <div class="row view-report">
+                    <label class="control-label col-sm-2"></label>
+                    <label class="control-label col-sm-2 label-mod" id="label-exhausted"><i class="fa fa-check-square text-success"></i> Esaurita</label>
+                    <label class="control-label col-sm-2 label-mod" id="label-returned"><i class="fa fa-check-square text-success"></i> Resa</label>
+                    <label class="control-label col-sm-2 label-mod" id="label-not-compliant"><i class="fa fa-check-square text-success"></i> Non conforme</label>
+                    <label class="control-label col-sm-2 label-mod" id="label-all-stations"><i class="fa fa-check-square text-success"></i> Stanziata in tutte le stazioni</label>
+                </div>
+                <div class="row view-report">
+                    <label class="control-label col-sm-2">Strumento</label>
+                    <div class="col-sm-4 clear-txt" id="view-tank-instrument"></div>
+                </div>
+                <div class="row view-report" id="label-iszero">
+                    <label class="control-label col-sm-2"></label>
+                    <label class="control-label col-sm-2 label-mod"><i class="fa fa-check-square text-success"></i> Bombola di zero</label>
+                </div>
+                <div class="row view-report">
+                    <label class="control-label col-sm-2" id="view-label-first">val. NOX</label>
+                    <div class="col-sm-2 col2mod clear-txt" id="view-val-first"></div>
+                    <label class="control-label col-sm-2" id="view-label-second">val. NO</label>
+                    <div class="col-sm-2 col2mod clear-txt" id="view-val-second"></div>
+                    <label class="control-label col-sm-2" id="view-label-third">val. NO2</label>
+                    <div class="col-sm-2 col2mod clear-txt" id="view-val-third"></div>
+                </div>
+                <div class="row view-report">
+                    <label class="control-label col-sm-2">Bolla consegna</label>
+                    <div class="col-sm-4 clear-txt" id="view-delivery-note"></div>
+                    <label class="control-label col-sm-2">Bolla spedizione</label>
+                    <div class="col-sm-4 clear-txt" id="view-shipment-note"></div>
+                </div>
+                <div class="row view-report">
+                    <label class="control-label col-sm-2">Fattura acquisto</label>
+                    <div class="col-sm-4 clear-txt" id="view-purchase-invoice"></div>
+                </div>
+                <div class="row view-report">
+                    <label class="control-label col-sm-2">Fattura storno sostituz.</label>
+                    <div class="col-sm-4 clear-txt" id="view-reversal-invoice"></div>
+                    <label class="control-label col-sm-2">Fattura pagamento sostituz.</label>
+                    <div class="col-sm-4 clear-txt" id="view-payment-invoice"></div>
+                </div>
+                <div class="row view-report">
+                    <label class="control-label col-sm-2">Pdf</label>
+                    <div class="col-sm-10 clear-txt" id="view-attachment"></div>
+                </div>
+                <div class="row view-report">
+                    <label class="control-label col-sm-2">Note</label>
+                    <div class="col-sm-10 clear-txt" id="view-note"></div>
+                </div>
+                <div class="row view-report">
+                    <div class="col-sm-4">
+                        <button class="btn btn-primary" id="btn-close-view" name="btn-close-view">Chiudi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Lista delle bombole</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                <table class="table table-striped table-bordered table-hover dataTables-example table-with-tools" >
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Arpa ID</th>
+                            <th>Stazione</th>
+                            <th>Data produzione</th>
+                            <th>Data scadenza</th>
+                            <th>Valori</th>
+                            <th>Esaurita</th>
+                            <th>Resa</th>
+                            <th>Di zero</th>
+                            <th>Non conf.</th>
+                            <th>Miscela</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        % my $exhausted_b;
+                        % my $returned_b;
+                        % my $zero_b;
+                        % my $compliant;
+                        % foreach my $tank ( @{$tanks} )
+                        % {
+                            % if ( $tank->{'exhausted'} == 1 ) {
+                                % $exhausted_b = ' <i class="fa fa-check-circle"></i> ';
+                            % } else { $exhausted_b = ''; }
+
+                            % if ( $tank->{'returned'} == 1 ) {
+                                % $returned_b = ' <i class="fa fa-check-circle"></i> ';
+                            % } else { $returned_b = ''; }
+
+                            % if ( $tank->{'is_zero'} ) {
+                                % $zero_b = ' <i class="fa fa-check-circle"></i> ';
+                            % } else { $zero_b = ''; }
+
+                            % if ( $tank->{'not_compliant'} ) {
+                                % $compliant = ' <i class="fa fa-check-circle"></i> ';
+                            % } else { $compliant = ''; }
+
+                            <tr data-cyid="<%= $tank->{'cy_id'} =%>">
+                                <td>
+                                    <a href="javascript:void(0)" class="table-tool blue view-tool"><i class="fa fa-search-plus"></i></a>
+                                    <a href="javascript:void(0)" class="table-tool blue set-tool"><i class="fa fa-wrench"></i></a>
+                                    <a href="javascript:void(0)" class="table-tool light-blue delete-tool"><i class="fa fa-trash"></i></a>
+                                </td>
+                                <td><%= $tank->{'arpa_id'} =%></td>
+                                <td><%= $tank->{'stationname'} =%></td>
+                                <td><%= $tank->{'date_built'} =%></td>
+                                <td><%= $tank->{'date_expiry'} =%></td>
+                                <td><%= $tank->{'ch_values'} =%></td>
+                                <td><%==$exhausted_b=%></td>
+                                <td><%==$returned_b=%></td>
+                                <td><%==$zero_b=%></td>
+                                <td><%==$compliant=%></td>
+                                <td><%= $tank->{'description'} =%></td>
+                            </tr>
+                        % }
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th>Arpa ID</th>
+                            <th>Stazione</th>
+                            <th>Data produzione</th>
+                            <th>Data scadenza</th>
+                            <th>Valori</th>
+                            <th>Esaurita</th>
+                            <th>Resa</th>
+                            <th>Di zero</th>
+                            <th>Non conf.</th>
+                            <th>Miscela</th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+
+use FindBin;
+BEGIN { unshift @INC, "$FindBin::Bin/../lib" }
+
+# application global env settings
+# https://github.com/kraih/mojo/wiki/%25ENV
+# MOJO_HOME
+$ENV{MOJO_MODE} = 'development'; # development | production
+$ENV{MOJO_APP_NAME} = 'Piattaforma ARPA'; # app name NOT USED SO FAR
+
+# Start command line interface for application
+require Mojolicious::Commands;
+Mojolicious::Commands->start_app('Lily');

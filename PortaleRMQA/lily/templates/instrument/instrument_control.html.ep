@@ -1,0 +1,827 @@
+% layout 'default';
+% title 'Dati - Carte di controllo';
+
+
+<link href="css/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet">
+<script src="js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/instrument_control.js'))%>"></script>
+
+<div class="panel blank-panel" id="stations">
+
+    <div class="panel-heading">
+        <div class="panel-options">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#tab-1">Plouves</a></li>
+                <li class=""><a data-toggle="tab" href="#tab-2">Pepinière</a></li>
+                <li class=""><a data-toggle="tab" href="#tab-3">Mt-Fleury</a></li>
+                <li class=""><a data-toggle="tab" href="#tab-4">La Thuile</a></li>
+                <li class=""><a data-toggle="tab" href="#tab-5">Donnas</a></li>
+                <li class=""><a data-toggle="tab" href="#tab-6">Lab02</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel-body" id="gallery-images">
+
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane active">
+
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 1</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/plouves/01.png" data-gallery="Plouves" title="Dato nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/plouves/01.png" class="img-responsive" alt="Dato 1" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 2 nome piu lungo</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/plouves/01.png" data-gallery="Plouves" title="Dato 2 nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/plouves/01.png" class="img-responsive" alt="Dato 2" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 3</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/plouves/01.png" data-gallery="Plouves" title="Dato 3 nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/plouves/01.png" class="img-responsive" alt="Dato 3" /></a>
+                                <span class="label label-warning"><i class="fa fa-times-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 4</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/plouves/01.png" data-gallery="Plouves" title="Dato 4 nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/plouves/01.png" class="img-responsive" alt="Dato 4" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 5 nome piu lungo</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/plouves/01.png" data-gallery="Plouves" title="Dato 5 nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/plouves/01.png" class="img-responsive" alt="Dato 5" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 6</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/plouves/01.png" data-gallery="Plouves" title="Dato 6 nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/plouves/01.png" class="img-responsive" alt="Dato 6" /></a>
+                                <span class="label label-warning"><i class="fa fa-times-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div id="tab-2" class="tab-pane">
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 1 Pepiniere</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/pepiniere/01.png" data-gallery="Pepiniere" title="Dato Pepiniere nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/pepiniere/01.png" class="img-responsive" alt="Dato 1" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 2 Pepiniere nome piu lungo</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/pepiniere/01.png" data-gallery="Pepiniere" title="Dato 2 Pepiniere nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/pepiniere/01.png" class="img-responsive" alt="Dato 2" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 3 Pepiniere</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/pepiniere/01.png" data-gallery="Pepiniere" title="Dato 3 Pepiniere nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/pepiniere/01.png" class="img-responsive" alt="Dato 3" /></a>
+                                <span class="label label-warning"><i class="fa fa-times-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 4 Pepiniere</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/pepiniere/01.png" data-gallery="Pepiniere" title="Dato 4 Pepiniere nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/pepiniere/01.png" class="img-responsive" alt="Dato 4" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 5 Pepiniere nome piu lungo</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/pepiniere/01.png" data-gallery="Pepiniere" title="Dato 5 Pepiniere nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/pepiniere/01.png" class="img-responsive" alt="Dato 5" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 6 Pepiniere</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/pepiniere/01.png" data-gallery="Pepiniere" title="Dato 6 Pepiniere nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/pepiniere/01.png" class="img-responsive" alt="Dato 6" /></a>
+                                <span class="label label-warning"><i class="fa fa-times-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="tab-3" class="tab-pane">
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 1 Mt-Fleury</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/mt-fleury/01.png" data-gallery="Mt-Fleury" title="Dato Mt-Fleury nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/mt-fleury/01.png" class="img-responsive" alt="Dato 1" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 2 Mt-Fleury nome piu lungo</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/mt-fleury/01.png" data-gallery="Mt-Fleury" title="Dato 2 Mt-Fleury nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/mt-fleury/01.png" class="img-responsive" alt="Dato 2" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 3 Mt-Fleury</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/mt-fleury/01.png" data-gallery="Mt-Fleury" title="Dato 3 Mt-Fleury nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/mt-fleury/01.png" class="img-responsive" alt="Dato 3" /></a>
+                                <span class="label label-warning"><i class="fa fa-times-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 4 Mt-Fleury</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/mt-fleury/01.png" data-gallery="Mt-Fleury" title="Dato 4 Mt-Fleury nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/mt-fleury/01.png" class="img-responsive" alt="Dato 4" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 5 Mt-Fleury nome piu lungo</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/mt-fleury/01.png" data-gallery="Mt-Fleury" title="Dato 5 Mt-Fleury nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/mt-fleury/01.png" class="img-responsive" alt="Dato 5" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 6 Mt-Fleury</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/mt-fleury/01.png" data-gallery="Mt-Fleury" title="Dato 6 Mt-Fleury nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/mt-fleury/01.png" class="img-responsive" alt="Dato 6" /></a>
+                                <span class="label label-warning"><i class="fa fa-times-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="tab-4" class="tab-pane">
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 1 La Thuile</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/la-thuile/01.png" data-gallery="la-thuile" title="Dato La Thuile nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/la-thuile/01.png" class="img-responsive" alt="Dato 1" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 2 La Thuile nome piu lungo</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/la-thuile/01.png" data-gallery="la-thuile" title="Dato 2 La Thuile nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/la-thuile/01.png" class="img-responsive" alt="Dato 2" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 3 La Thuile</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/la-thuile/01.png" data-gallery="la-thuile" title="Dato 3 La Thuile nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/la-thuile/01.png" class="img-responsive" alt="Dato 3" /></a>
+                                <span class="label label-warning"><i class="fa fa-times-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 4 La Thuile</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/la-thuile/01.png" data-gallery="la-thuile" title="Dato 4 La Thuile nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/la-thuile/01.png" class="img-responsive" alt="Dato 4" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 5 La Thuile nome piu lungo</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/la-thuile/01.png" data-gallery="la-thuile" title="Dato 5 La Thuile nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/la-thuile/01.png" class="img-responsive" alt="Dato 5" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 6 La Thuile</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/la-thuile/01.png" data-gallery="la-thuile" title="Dato 6 La Thuile nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/la-thuile/01.png" class="img-responsive" alt="Dato 6" /></a>
+                                <span class="label label-warning"><i class="fa fa-times-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="tab-5" class="tab-pane">
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 1 Donnas</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/donnas/01.png" data-gallery="Donnas" title="Dato Donnas nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/donnas/01.png" class="img-responsive" alt="Dato 1" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 2 Donnas nome piu lungo</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/donnas/01.png" data-gallery="Donnas" title="Dato 2 Donnas nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/donnas/01.png" class="img-responsive" alt="Dato 2" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 3 Donnas</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/donnas/01.png" data-gallery="Donnas" title="Dato 3 Donnas nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/donnas/01.png" class="img-responsive" alt="Dato 3" /></a>
+                                <span class="label label-warning"><i class="fa fa-times-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 4 Donnas</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/donnas/01.png" data-gallery="Donnas" title="Dato 4 Donnas nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/donnas/01.png" class="img-responsive" alt="Dato 4" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 5 Donnas nome piu lungo</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/donnas/01.png" data-gallery="Donnas" title="Dato 5 Donnas nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/donnas/01.png" class="img-responsive" alt="Dato 5" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 6 Donnas</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/donnas/01.png" data-gallery="Donnas" title="Dato 6 Donnas nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/donnas/01.png" class="img-responsive" alt="Dato 6" /></a>
+                                <span class="label label-warning"><i class="fa fa-times-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="tab-6" class="tab-pane">
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 1 Lab02</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/lab02/01.png" data-gallery="Lab02" title="Dato Lab02 nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/lab02/01.png" class="img-responsive" alt="Dato 1" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 2 Lab02 nome piu lungo</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/lab02/01.png" data-gallery="Lab02" title="Dato 2 Lab02 nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/lab02/01.png" class="img-responsive" alt="Dato 2" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 3 Lab02</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/lab02/01.png" data-gallery="Lab02" title="Dato 3 Lab02 nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/lab02/01.png" class="img-responsive" alt="Dato 3" /></a>
+                                <span class="label label-warning"><i class="fa fa-times-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 4 Lab02</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/lab02/01.png" data-gallery="Lab02" title="Dato 4 Lab02 nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/lab02/01.png" class="img-responsive" alt="Dato 4" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 5 Lab02 nome piu lungo</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/lab02/01.png" data-gallery="Lab02" title="Dato 5 Lab02 nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/lab02/01.png" class="img-responsive" alt="Dato 5" /></a>
+                                <span class="label label-primary"><i class="fa fa-check-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Dato 6 Lab02</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content text-center">
+                                <a href="chart-lily/carte-controllo/lab02/01.png" data-gallery="Lab02" title="Dato 6 Lab02 nella lightbox" class="single-image-gallery"><img src="chart-lily/carte-controllo/lab02/01.png" class="img-responsive" alt="Dato 6" /></a>
+                                <span class="label label-warning"><i class="fa fa-times-circle"></i> 3/3/15 11:21 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>

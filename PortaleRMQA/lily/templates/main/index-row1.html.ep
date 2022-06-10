@@ -1,0 +1,126 @@
+% my $visible_class_collapse='fa-chevron-down';
+% my $visible_class_content='display: none;';
+
+% if (1) { # ( $row1_visibility ) {
+    % $visible_class_collapse='fa-chevron-up';
+    % $visible_class_content='';
+% }
+
+<div class="row">
+    
+	<div class="col-lg-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Aggiornamento dati</h5>
+                <span class="label label-primary"><%= scalar(@{$station_status})%></span>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa <%=$visible_class_collapse%>"></i>
+                    </a>
+
+                    
+
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content" style="<%=$visible_class_content%>">
+                <table class="table table-hover no-margins tooltip-table">
+                    <thead>
+                    <tr>
+                        <th>Stazione</th>
+                        <th>Data</th>
+                        <th>Stato</th>
+                        <th>StID</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    
+                    % foreach my $station ( @{$station_status} )
+                    % {
+                        <tr>
+                            <td><%= $station->{'stationname'} =%></td>
+                            <td><i class="fa fa-clock-o"></i>
+                                % if ( $station->{'gap'} == 1 ) { # 2 hour
+                                    <span class="label label-information">
+                                % }
+                                % if ( $station->{'gap'} == 2 ) { # 4 hour
+                                    <span class="label label-warning">
+                                % }
+                                % if ( $station->{'gap'} == 3 ) { # 8 hour
+                                    <span class="label label-danger">
+                                % }
+                                &nbsp;<%= $station->{'lastupdate_format'} =%>
+                                % if ( $station->{'gap'} > 0 ) {
+                                    </span>
+                                % }
+                            </td>
+                            <td><%= $station->{'status_desc'} =%></td>
+                            
+                            <td><%= $station->{'st_id'} =%></td>
+                        </tr>
+                    % }
+                    </tbody>
+                </table>
+                <a class="btn btn-default btn-block m-t" href="<%= url_for('station_late')%>"><i class="fa fa-plus-circle"></i> Visualizza dettagli</a>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="col-lg-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Allarmi nelle ultime 24 ore</h5>
+                <span class="label label-primary"><%= scalar(@{$station_alarms})%></span>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa <%=$visible_class_collapse%>"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content" style="<%=$visible_class_content%>">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Data e ora</th>
+                        <th>Stazione</th>
+                        <th>Tipo allarme</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    
+                    % my ($badge1, $badge2);
+                    % foreach my $station ( @{$station_alarms} )
+                    % {
+                        <tr>
+                            <td><%= $station->{'date_format'} =%></td>
+                            <td><%= $station->{'station'} =%></td>
+                            <td>
+                                % $badge1 = ''; $badge2 = '';
+                                % foreach my $alarm ( @{$station->{'alarm_desc'}} )
+                                % {
+                                    
+                                    % if ( $alarm =~ /Porta/         ) { $badge1 = 'badge-default'; $badge2 = 'fa-sign-out';        }
+                                    % if ( $alarm =~ /Trasformatore/ ) { $badge1 = 'badge-primary'; $badge2 = 'fa-sun-o';           }
+                                    % if ( $alarm =~ /Sonda/         ) { $badge1 = 'badge-info'   ; $badge2 = 'fa-level-down';      }
+                                    % if ( $alarm =~ /Temperatura/   ) { $badge1 = 'badge-success'; $badge2 = 'fa-thermometer-full';}
+                                    % if ( $alarm =~ /Alimentatore/  ) { $badge1 = 'badge-warning'; $badge2 = 'fa-plug';            }
+                                    % if ( $alarm =~ /Mancanza Enel/ ) { $badge1 = 'badge-danger' ; $badge2 = 'fa-bolt';            }
+                                    <span class="badge <%=$badge1%>"><i class="fa <%=$badge2%>"></i> <%=$alarm%></span>
+                                    
+                                % }
+                            </td>
+                        </tr>
+                    % }
+                    </tbody>
+                </table>
+                <a class="btn btn-default btn-block m-t" href="<%= url_for('station_alarm')%>"><i class="fa fa-plus-circle"></i> Visualizza dettagli</a>
+            </div>
+        </div>
+    </div>
+</div>

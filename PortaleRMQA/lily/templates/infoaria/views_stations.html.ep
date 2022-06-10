@@ -1,0 +1,303 @@
+% layout 'default';
+% title 'Infoaria - Homepage';
+
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/views_stations.js'))%>"></script>
+
+
+<div class="row" id="mod-data">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+
+            <div class="ibox-title">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h5>Modifica record</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox-content adding-reports">
+                <form action="" method="post" id="views-station-form" name="views-station-form" class="clearfix form-horizontal form-reports infoaria" enctype="multipart/form-data">
+
+                    
+                    <input type="hidden" id="views-station-id" name="views-station-id" value="">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="europe-code">Codice europeo</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="europe-code" name="europe-code">
+                        </div>
+                        <label class="control-label col-sm-2" for="national-code">Codice nazionale</label>
+                        <div class="col-sm-4"><input type="text" class="form-control" id="national-code" name="national-code"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="name">Nome</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="name" name="name">
+                        </div>
+                        <label class="col-sm-2 control-label" for="network">Rete</label>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" name="network" id="network">
+                                <option value="-1">Seleziona rete...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group modify-date">
+                        <label class="control-label col-sm-2" for="from">Attiva dal</label>
+                        <div class="input-group date col-sm-4" id="">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" data-date-end-date="0d" value="" name="from" id="from">
+                        </div>
+                        <label class="control-label col-sm-2" for="until">Dismessa il</label>
+                        <div class="input-group date col-sm-4" id="">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" data-date-end-date="0d" value="" name="until" id="until">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="province">Provincia</label>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" name="province" id="province">
+                                <option value="-1">Seleziona provincia...</option>
+                            </select>
+                        </div>
+                        <label class="control-label col-sm-2" for="district">Comune</label>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" name="district" id="district">
+                                <option value="-1">Seleziona comune...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="address">Indirizzo</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="address" name="address">
+                        </div>
+                        <label class="control-label col-sm-2" for="height">Quota</label>
+                        <div class="col-sm-4"><input type="text" class="form-control" id="height" name="height"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="long">Longitudine</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="long" name="long">
+                        </div>
+                        <label class="control-label col-sm-2" for="lat">Latitudine</label>
+                        <div class="col-sm-4"><input type="text" class="form-control" id="lat" name="lat"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="mobile-stat">Stazione mobile</label>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" name="mobile-stat" id="mobile-stat">
+                                <option value="-1">Seleziona...</option>
+                            </select>
+                        </div>
+                        <label class="control-label col-sm-2" for="area-class">Classificazione area</label>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" name="area-class" id="area-class">
+                                <option value="-1">Seleziona classificazione...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="dispersion-reg">Dispersione regionale</label>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" name="dispersion-reg" id="dispersion-reg">
+                                <option value="-1">Seleziona...</option>
+                            </select>
+                        </div>
+                        <label class="control-label col-sm-2" for="dispersion-loc">Dispersione locale</label>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" name="dispersion-loc" id="dispersion-loc">
+                                <option value="-1">Seleziona classificazione...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="web-page">Pagina web della stazione</label>
+                        <div class="col-sm-9"><input type="text" class="form-control" id="web-page" name="web-page"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="crossroad-distance">Distanza dall'incrocio principale (m)</label>
+                        <div class="col-sm-2"><input type="text" class="form-control" id="crossroad-distance" name="crossroad-distance"></div>
+                        <label class="col-sm-2 control-label" for="daily-traffic">Traffico giornaliero su media annuale (veicoli/giorno)</label>
+                        <div class="col-sm-2"><input type="text" class="form-control" id="daily-traffic" name="daily-traffic"></div>
+                        <label class="col-sm-2 control-label" for="heavy-traffic">Frazione traffico pesante</label>
+                        <div class="col-sm-2"><input type="text" class="form-control" id="heavy-traffic" name="heavy-traffic"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="car-speed">Velocità media veicoli(km/h)</label>
+                        <div class="col-sm-2"><input type="text" class="form-control" id="car-speed" name="car-speed"></div>
+                        <label class="col-sm-2 control-label" for="road-width">Larghezza strada (m)</label>
+                        <div class="col-sm-2"><input type="text" class="form-control" id="road-width" name="road-width"></div>
+                        <label class="col-sm-2 control-label" for="road-height">Altezza facciate edifici (m)</label>
+                        <div class="col-sm-2"><input type="text" class="form-control" id="road-height" name="road-height"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="meteo-param">Parametri meteo</label>
+                        <div class="col-sm-9">
+                            <select data-placeholder="aggiungi parametri..." class="chosen-select form-control m-b" multiple name="meteo-param" id="meteo-param">
+                                <option value="">Temperature</option>
+                                <option value="">Relative humidity</option>
+                                <option value="">Snow depth</option>
+                                <option value="">Precipitation type</option>
+                                <option value="">Total precipitation rate</option>
+                                <option value="">Evaporation</option>
+                                <option value="">Visibility</option>
+                                <option value="">Wind direction (from which blowing)</option>
+                                <option value="">Wind speed</option>
+                                <option value="">Wind speed (gust)</option>
+                                <option value="">Pressure reduced to MSL</option>
+                                <option value="">Global radiation flux</option>
+                                <option value="">Net short wave radiation flux</option>
+                                <option value="">Net long wave radiation flux</option>
+                                <option value="">Total cloud cover</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <input type="reset" class="btn btn-white" id="cancel-views-station-form" name="cancel-views-station-form" value="Annulla" />
+                            <button class="btn btn-primary" type="submit" id="btn-views-station-form" name="btn-views-station-form">Modifica</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Lista delle stazioni</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                <table class="table table-striped table-bordered table-hover datatables-view table-with-tools" >
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Cod. europeo</th>
+                            <th>Cod. nazionale</th>
+                            <th>Nome</th>
+                            <th>Rete</th>
+                            <th>Attiva dal</th>
+                            <th>Dismessa il</th>
+                            <th>Mobile</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-id="">
+                            <td>
+                                <a href="javascript:void(0)" class="table-tool blue set-tool"><i class="fa fa-wrench"></i></a>
+                                <a href="javascript:void(0)" class="table-tool light-blue delete-tool"><i class="fa fa-trash"></i></a>
+                            </td>
+                            <td>IT2179A</td>
+                            <td>200719</td>
+                            <td>Campagna con il laboratorio mobile nel comune di Aosta</td>
+                            <td>Aosta Valley Air Quality Network</td>
+                            <td>2013-04-23</td>
+                            <td>2014-01-01</td>
+                            <td>SI</td>
+                        </tr>
+                        <tr data-id="">
+                            <td>
+                                <a href="javascript:void(0)" class="table-tool blue set-tool"><i class="fa fa-wrench"></i></a>
+                                <a href="javascript:void(0)" class="table-tool light-blue delete-tool"><i class="fa fa-trash"></i></a>
+                            </td>
+                            <td>IT2178A</td>
+                            <td>200718</td>
+                            <td>Campagna con il laboratorio mobile nel comune di Lillianes</td>
+                            <td>Aosta Valley Air Quality Network</td>
+                            <td>2013-01-01</td>
+                            <td>2014-01-01</td>
+                            <td>SI</td>
+                        </tr>
+                        <tr data-id="">
+                            <td>
+                                <a href="javascript:void(0)" class="table-tool blue set-tool"><i class="fa fa-wrench"></i></a>
+                                <a href="javascript:void(0)" class="table-tool light-blue delete-tool"><i class="fa fa-trash"></i></a>
+                            </td>
+                            <td>IT2234A</td>
+                            <td>200721</td>
+                            <td>Aosta Col du Mont</td>
+                            <td>Aosta Valley Air Quality Network</td>
+                            <td>2015-01-01</td>
+                            <td></td>
+                            <td>NO</td>
+                        </tr>
+                        <tr data-id="">
+                            <td>
+                                <a href="javascript:void(0)" class="table-tool blue set-tool"><i class="fa fa-wrench"></i></a>
+                                <a href="javascript:void(0)" class="table-tool light-blue delete-tool"><i class="fa fa-trash"></i></a>
+                            </td>
+                            <td>IT2233A</td>
+                            <td>200720</td>
+                            <td>Aosta Liconi</td>
+                            <td>Aosta Valley Air Quality Network</td>
+                            <td>2015-01-01</td>
+                            <td></td>
+                            <td>NO</td>
+                        </tr>
+                        <tr data-id="">
+                            <td>
+                                <a href="javascript:void(0)" class="table-tool blue set-tool"><i class="fa fa-wrench"></i></a>
+                                <a href="javascript:void(0)" class="table-tool light-blue delete-tool"><i class="fa fa-trash"></i></a>
+                            </td>
+                            <td>IT0977A</td>
+                            <td>200710</td>
+                            <td>LA THUILE</td>
+                            <td>Aosta Valley Air Quality Network</td>
+                            <td>1994-10-01</td>
+                            <td></td>
+                            <td>NO</td>
+                        </tr>
+                        <tr data-id="">
+                            <td>
+                                <a href="javascript:void(0)" class="table-tool blue set-tool"><i class="fa fa-wrench"></i></a>
+                                <a href="javascript:void(0)" class="table-tool light-blue delete-tool"><i class="fa fa-trash"></i></a>
+                            </td>
+                            <td>IT1725A</td>
+                            <td>200715</td>
+                            <td>AOSTA (Q.RE DORA)</td>
+                            <td>Aosta Valley Air Quality Network</td>
+                            <td>2005-01-01</td>
+                            <td>2015-01-01</td>
+                            <td>NO</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th>Cod. europeo</th>
+                            <th>Cod. nazionale</th>
+                            <th>Nome</th>
+                            <th>Rete</th>
+                            <th>Attiva dal</th>
+                            <th>Dismessa il</th>
+                            <th>Mobile</th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

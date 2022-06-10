@@ -1,0 +1,1017 @@
+% layout 'default';
+% title 'Report tarature';
+
+
+<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/report_calibration.js'))%>"></script>
+
+
+<script type="text/javascript">
+var date1 = '<%=$date_from%>';
+var date2 = '<%=$date_to%>';
+repid     = '<%=$repid%>';
+$(document).ready(function () {
+    // update calendars
+    updateDataRange(date1, date2);
+
+    console.log('repid: '+repid);
+    if (repid)
+        showReportFromGet(repid);
+});
+</script>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins ibox-as-bar">
+            <div class="ibox-title mod-title-height">
+                <div class="row" id="reportrange_row">
+                    <div class="col-sm-3">
+                        
+                        % if ( $grants->{'add'} == 1 ) {
+                            <button class="btn btn-success" type="button" id="btn-add-calibration"><i class="fa fa-plus-circle"></i> <span class="bold">Nuova</span></button>
+                        % }
+                        <button class="btn btn-info" type="button" id="download-csv"><i class="fa fa-download"></i> CSV</button>
+                    </div>
+                    <div class="col-sm-9">
+                        
+                        <select class="form-control m-b change-select" name="filter_station" id="filter_station">
+                            <option value="-1">Tutte le stazioni</option>
+                            % foreach my $station ( @{$stations} )
+                            % {
+                            %   my $selected = '';
+                            %   if ($station->{'st_id'} == $filter_station) { $selected = 'selected'; }
+                                <option value="<%= $station->{'st_id'} =%>" <%= $selected %>><%= $station->{'stationname'} =%></option>
+                            }
+                            % }
+                        </select>
+
+                        <select class="form-control m-b change-select" name="filter_instrument" id="filter_instrument">
+                            <option value="-1">Tutti gli strumenti</option>
+                            % foreach my $instrument ( @{$instruments} )
+                            % {
+                            %   my $selected = '';
+                            %   if ($instrument->{'in_ca_id'} == $filter_instrument) { $selected = 'selected'; }
+                                <option value="<%= $instrument->{'in_ca_id'} =%>" <%= $selected %>><%= $instrument->{'instrument_category'} =%></option>
+                            % }
+                        </select>
+
+                        <div id="reportrange" class="form-control change-select">
+                            <i class="fa fa-calendar"></i>
+                            <span></span> <b class="caret"></b>
+                        </div>
+                        <input class="btn btn-warning" id="refresh-list" type="button" value="aggiorna">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div class="row" id="add-calibration">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Aggiungi taratura</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content table-reports">
+                
+                <form action="" method="post" id="calibration-form" name="calibration-form" class="clearfix form-horizontal form-reports">
+
+                    
+                    <input type="hidden" id="report-caid" name="report-caid" value="">
+
+                    % if ( $ENV{'MOJO_MODE'} eq 'development' ) {
+                    <div class="alert alert-success alert-dismissable">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        Parte iniziale = per tutti
+                    </div>
+                    % }
+
+                    <div class="form-group modify-date">
+                        <label class="control-label col-sm-2" for="date_calib">Data</label>
+                        <div class="input-group date col-sm-4">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            <input type="text" class="form-control" value="" name="date_calib" id="date_calib" data-date-end-date="0d">
+                        </div>
+                        <label class="control-label col-sm-2" for="time_calib">Ora</label>
+                        <div class="input-group date col-sm-4">
+                            <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                            <input type="text" class="form-control" value="" name="time_calib" id="time_calib">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="operator_calib">Operatore</label>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" name="operator_calib" id="operator_calib"></select>
+                        </div>
+                        <label class="col-sm-2 control-label" for="station_calib">Stazione</label>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" name="station_calib" id="station_calib"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="instrument_calib">Strumento</label>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" name="instrument_calib" id="instrument_calib"></select>
+                        </div>
+                        <label class="col-sm-2 control-label" for="reason_calib">Motivo</label>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" name="reason_calib" id="reason_calib"></select>
+                        </div>
+                    </div>
+
+                    <div id="api100">
+                        % if ( $ENV{'MOJO_MODE'} eq 'development' ) {
+                        <div class="alert alert-info alert-dismissable">
+                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                            API 100 - SO2
+                        </div>
+                        % }
+
+                        <h3>Zero</h3>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="find_zero_api100">Zero trovato</label>
+                            <div class="col-sm-4"><input type="text" class="form-control" name="find_zero_api100" id="find_zero_api100" placeholder="Sep. decimale: PUNTO"></div>
+                            <div class="checkbox i-checks col-sm-4 inline-check"><label for="mod_zero_api100">
+                                <input type="checkbox" value="" name="mod_zero_api100" id="mod_zero_api100"> <i></i>&nbsp;&nbsp;Zero modificato</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="tank_zero_api100">Bombola</label>
+                            <div class="col-sm-4">
+                                <select class="form-control m-b" name="tank_zero_api100" id="tank_zero_api100"></select>
+                            </div>
+                            <label class="col-sm-2 control-label" for="method_zero_api100">Metodo</label>
+                            <div class="col-sm-4">
+                                <select class="form-control m-b methods_zero" name="method_zero_api100" id="method_zero_api100"></select>
+                            </div>
+                        </div>
+                        <h3>Span</h3>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="tank_span_api100">Bombola</label>
+                            <div class="col-sm-4">
+                                <select class="form-control m-b tanks_span" name="tank_span_api100" id="tank_span_api100"></select>
+                            </div>
+                            <label class="col-sm-2 control-label" for="method_span_api100">Metodo</label>
+                            <div class="col-sm-4">
+                                <select class="form-control m-b methods_span" name="method_span_api100" id="method_span_api100"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="read_span_api100">Span letto</label>
+                            <div class="col-sm-4"><input type="text" class="form-control" name="read_span_api100" id="read_span_api100" placeholder="Sep. decimale: PUNTO"></div>
+                            <label class="col-sm-2 control-label" for="theory_span_api100">Span teorico</label>
+                            <div class="col-sm-4"><input type="text" class="form-control" name="theory_span_api100" id="theory_span_api100" placeholder="Sep. decimale: PUNTO"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox i-checks col-sm-12"><label for="mod_span_api100">
+                                <input type="checkbox" value="" name="mod_span_api100" id="mod_span_api100"> <i></i>&nbsp;&nbsp;Span modificato</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="api200">
+                        % if ( $ENV{'MOJO_MODE'} eq 'development' ) {
+                        <div class="alert alert-info alert-dismissable">
+                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                            API 200, Horiba - NOx
+                        </div>
+                        % }
+
+                        <h3>Zero</h3>
+                        <div class="form-group form-labels">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-3">NOx</div>
+                            <div class="col-sm-3">NO</div>
+                            <div class="col-sm-3">NO2</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Zero trovato</label>
+                            <div class="col-sm-3"><input type="text" class="form-control" name="nox_zero_api200" id="nox_zero_api200" placeholder="Sep. decimale: PUNTO"></div>
+                            <div class="col-sm-3"><input type="text" class="form-control" name="no_zero_api200"  id="no_zero_api200"  placeholder="Sep. decimale: PUNTO"></div>
+                            <div class="col-sm-3"><input type="text" class="form-control" name="no2_zero_api200" id="no2_zero_api200" placeholder="Sep. decimale: PUNTO"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox i-checks col-sm-4 inline-check"><label for="mod_zero_api200">
+                                <input type="checkbox" value="" name="mod_zero_api200" id="mod_zero_api200"> <i></i>&nbsp;&nbsp;Zero modificato</label>
+                                </div>
+                            <label class="col-sm-2 control-label" for="method_zero_api200">Metodo</label>
+                            <div class="col-sm-4">
+                                <select class="form-control m-b methods_zero" name="method_zero_api200" id="method_zero_api200"></select>
+                            </div>
+                        </div>
+                        <h3>Span</h3>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="tank_span_api200">Bombola</label>
+                            <div class="col-sm-4">
+                                <select class="form-control m-b tanks_span" name="tank_span_api200" id="tank_span_api200"></select>
+                            </div>
+                            <label class="col-sm-2 control-label" for="method_span_api200">Metodo</label>
+                            <div class="col-sm-4">
+                                <select class="form-control m-b methods_span" name="method_span_api200" id="method_span_api200"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">&nbsp;</label>
+                            <label class="col-sm-10 control-label text-green" id="api200_add"><i class="fa fa-plus-circle"></i> Taratura multipla</label>
+                        </div>
+                        <div class="form-group form-labels">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-3">NOx</div>
+                            <div class="col-sm-3">NO</div>
+                            <div class="col-sm-3">NO2</div>
+                        </div>
+                        <div class="form-group form-double-line">
+                            <label class="col-sm-2 control-label">Span letto</label>
+                            <div class="col-sm-3"><input type="text" class="form-control" name="l1_read_nox_span_api200" id="l1_read_nox_span_api200" placeholder="Sep. decimale: PUNTO"></div>
+                            <div class="col-sm-3"><input type="text" class="form-control" name="l1_read_no_span_api200"  id="l1_read_no_span_api200"  placeholder="Sep. decimale: PUNTO"></div>
+                            <div class="col-sm-3"><input type="text" class="form-control" name="l1_read_no2_span_api200" id="l1_read_no2_span_api200" placeholder="Sep. decimale: PUNTO"></div>
+                        </div>
+                        <div class="form-group form-double-line">
+                            <label class="col-sm-2 control-label">Span teorico</label>
+                            <div class="col-sm-3"><input type="text" class="form-control" name="l1_theory_nox_span_api200" id="l1_theory_nox_span_api200" placeholder="Sep. decimale: PUNTO"></div>
+                            <div class="col-sm-3"><input type="text" class="form-control" name="l1_theory_no_span_api200"  id="l1_theory_no_span_api200"  placeholder="Sep. decimale: PUNTO"></div>
+                            <div class="col-sm-3"><input type="text" class="form-control" name="l1_theory_no2_span_api200" id="l1_theory_no2_span_api200" placeholder="Sep. decimale: PUNTO"></div>
+                            <div class="col-sm-1"><span class="limit-value"><i class="fa fa-chevron-left"></i> L1</span></div>
+                        </div>
+                        <div id="api200_multiple_cal">
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group form-double-line">
+                                <label class="col-sm-2 control-label">Span letto</label>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="l2_read_nox_span_api200" id="l2_read_nox_span_api200" placeholder="Sep. decimale: PUNTO"></div>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="l2_read_no_span_api200"  id="l2_read_no_span_api200"  placeholder="Sep. decimale: PUNTO"></div>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="l2_read_no2_span_api200" id="l2_read_no2_span_api200" placeholder="Sep. decimale: PUNTO"></div>
+                            </div>
+                            <div class="form-group form-double-line">
+                                <label class="col-sm-2 control-label">Span teorico</label>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="l2_theory_nox_span_api200" id="l2_theory_nox_span_api200" placeholder="Sep. decimale: PUNTO"></div>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="l2_theory_no_span_api200"  id="l2_theory_no_span_api200"  placeholder="Sep. decimale: PUNTO"></div>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="l2_theory_no2_span_api200" id="l2_theory_no2_span_api200" placeholder="Sep. decimale: PUNTO"></div>
+                                <div class="col-sm-1"><span class="limit-value"><i class="fa fa-chevron-left"></i> L2</span></div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group form-double-line">
+                                <label class="col-sm-2 control-label">Span letto</label>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="l3_read_nox_span_api200" id="l3_read_nox_span_api200" placeholder="Sep. decimale: PUNTO"></div>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="l3_read_no_span_api200"  id="l3_read_no_span_api200"  placeholder="Sep. decimale: PUNTO"></div>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="l3_read_no2_span_api200" id="l3_read_no2_span_api200" placeholder="Sep. decimale: PUNTO"></div>
+                            </div>
+                            <div class="form-group form-double-line">
+                                <label class="col-sm-2 control-label">Span teorico</label>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="l3_theory_nox_span_api200" id="l3_theory_nox_span_api200" placeholder="Sep. decimale: PUNTO"></div>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="l3_theory_no_span_api200"  id="l3_theory_no_span_api200"  placeholder="Sep. decimale: PUNTO"></div>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="l3_theory_no2_span_api200" id="l3_theory_no2_span_api200" placeholder="Sep. decimale: PUNTO"></div>
+                                <div class="col-sm-1"><span class="limit-value"><i class="fa fa-chevron-left"></i> L3</span></div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group form-double-line">
+                                <label class="col-sm-2 control-label">Span letto</label>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="l4_read_nox_span_api200" id="l4_read_nox_span_api200" placeholder="Sep. decimale: PUNTO"></div>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="l4_read_no_span_api200"  id="l4_read_no_span_api200"  placeholder="Sep. decimale: PUNTO"></div>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="l4_read_no2_span_api200" id="l4_read_no2_span_api200" placeholder="Sep. decimale: PUNTO"></div>
+                            </div>
+                            <div class="form-group form-double-line">
+                                <label class="col-sm-2 control-label">Span teorico</label>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="l4_theory_nox_span_api200" id="l4_theory_nox_span_api200" placeholder="Sep. decimale: PUNTO"></div>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="l4_theory_no_span_api200"  id="l4_theory_no_span_api200"  placeholder="Sep. decimale: PUNTO"></div>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="l4_theory_no2_span_api200" id="l4_theory_no2_span_api200" placeholder="Sep. decimale: PUNTO"></div>
+                                <div class="col-sm-1"><span class="limit-value"><i class="fa fa-chevron-left"></i> L4</span></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox i-checks col-sm-12"><label for="mod_span_api200">
+                                <input type="checkbox" value="" name="mod_span_api200" id="mod_span_api200"> <i></i>&nbsp;&nbsp;Span modificato</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="api300">
+                        % if ( $ENV{'MOJO_MODE'} eq 'development' ) {
+                        <div class="alert alert-info alert-dismissable">
+                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                            API 300, CO
+                        </div>
+                        % }
+
+                        <h3>Zero</h3>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="find_zero_api300">Zero trovato</label>
+                            <div class="col-sm-4"><input type="text" class="form-control" name="find_zero_api300" id="find_zero_api300" placeholder="Sep. decimale: PUNTO"></div>
+                            <label class="col-sm-2 control-label" for="method_zero_api300">Metodo</label>
+                            <div class="col-sm-4">
+                                <select class="form-control m-b methods_zero" name="method_zero_api300" id="method_zero_api300"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                        <div class="checkbox i-checks col-sm-12"><label for="mod_zero_api300">
+                            <input type="checkbox" value="" name="mod_zero_api300" id="mod_zero_api300"> <i></i>&nbsp;&nbsp;Zero modificato</label>
+                        </div>
+                        </div>
+                        <h3>Span</h3>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="tank_span_api300">Bombola</label>
+                            <div class="col-sm-4">
+                                <select class="form-control m-b tanks_span" name="tank_span_api300" id="tank_span_api300"></select>
+                            </div>
+                            <label class="col-sm-2 control-label" for="method_span_api300">Metodo</label>
+                            <div class="col-sm-4">
+                                <select class="form-control m-b methods_span" name="method_span_api300" id="method_span_api300"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="read_span_api300">Span letto</label>
+                            <div class="col-sm-4"><input type="text" class="form-control" name="read_span_api300" id="read_span_api300" placeholder="Sep. decimale: PUNTO"></div>
+                            <label class="col-sm-2 control-label" for="theory_span_api300">Span teorico</label>
+                            <div class="col-sm-4"><input type="text" class="form-control" name="theory_span_api300" id="theory_span_api300" placeholder="Sep. decimale: PUNTO"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox i-checks col-sm-12"><label for="mod_span_api300">
+                                <input type="checkbox" value="" name="mod_span_api300" id="mod_span_api300"> <i></i>&nbsp;&nbsp;Span modificato</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="api400">
+                        % if ( $ENV{'MOJO_MODE'} eq 'development' ) {
+                        <div class="alert alert-info alert-dismissable">
+                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                            API 400, O3
+                        </div>
+                        % }
+
+                        <h3>Zero</h3>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="find_zero_api400">Zero trovato</label>
+                            <div class="col-sm-4"><input type="text" class="form-control" name="find_zero_api400" id="find_zero_api400" placeholder="Sep. decimale: PUNTO"></div>
+                            <label class="col-sm-2 control-label" for="method_zero_api400">Metodo</label>
+                            <div class="col-sm-4">
+                                <select class="form-control m-b methods_zero" name="method_zero_api400" id="method_zero_api400"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                        <div class="checkbox i-checks col-sm-12"><label for="mod_zero_api400">
+                            <input type="checkbox" value="" name="mod_zero_api400" id="mod_zero_api400"> <i></i>&nbsp;&nbsp;Zero modificato</label>
+                        </div>
+                        </div>
+                        <h3>Span</h3>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="calib_span_api400">Calibratore</label>
+                            <div class="col-sm-4">
+                                <select class="form-control m-b calibrators" name="calib_span_api400" id="calib_span_api400"></select>
+                            </div>
+                            <label class="col-sm-2 control-label" for="method_span_api400">Metodo</label>
+                            <div class="col-sm-4">
+                                <select class="form-control m-b methods_span" name="method_span_api400" id="method_span_api400"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">&nbsp;</label>
+                            <label class="col-sm-10 control-label text-green" id="api400_add"><i class="fa fa-plus-circle"></i> Taratura multipla</label>
+                        </div>
+                        <div class="form-group multiple-insert">
+                            <label class="col-sm-2 control-label" for="100_read_span_api400">Span letto</label>
+                            <div class="col-sm-3"><input type="text" class="form-control" name="100_read_span_api400" id="100_read_span_api400" placeholder="Sep. decimale: PUNTO"></div>
+                            <label class="col-sm-2 control-label" for="100_theory_span_api400">Span teorico</label>
+                            <div class="col-sm-3"><input type="text" class="form-control" name="100_theory_span_api400" id="100_theory_span_api400" placeholder="Sep. decimale: PUNTO"></div>
+                            <div class="col-sm-2"><span class="limit-value" id="limit-value-label"><i class="fa fa-chevron-left"></i> <b>400</b></span></div>
+                        </div>
+                        <div id="api400_multiple_cal">
+                            <div class="form-group multiple-insert">
+                                <label class="col-sm-2 control-label" for="200_read_span_api400">Span letto</label>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="200_read_span_api400" id="200_read_span_api400" placeholder="Sep. decimale: PUNTO"></div>
+                                <label class="col-sm-2 control-label" for="200_theory_span_api400">Span teorico</label>
+                                <div class="col-sm-3"><input type="text" class="form-control name="200_theory_span_api400" id="200_theory_span_api400"" placeholder="Sep. decimale: PUNTO"></div>
+                                <div class="col-sm-2"><span class="limit-value"><i class="fa fa-chevron-left"></i> 200</span></div>
+                            </div>
+                            <div class="form-group multiple-insert">
+                                <label class="col-sm-2 control-label" for="300_read_span_api400">Span letto</label>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="300_read_span_api400" id="300_read_span_api400" placeholder="Sep. decimale: PUNTO"></div>
+                                <label class="col-sm-2 control-label" for="300_theory_span_api400">Span teorico</label>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="300_theory_span_api400" id="300_theory_span_api400" placeholder="Sep. decimale: PUNTO"></div>
+                                <div class="col-sm-2"><span class="limit-value"><i class="fa fa-chevron-left"></i> 300</span></div>
+                            </div>
+                            <div class="form-group multiple-insert">
+                                <label class="col-sm-2 control-label" for="400_read_span_api400">Span letto</label>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="400_read_span_api400" id="400_read_span_api400" placeholder="Sep. decimale: PUNTO"></div>
+                                <label class="col-sm-2 control-label" for="400_theory_span_api400">Span teorico</label>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="400_theory_span_api400" id="400_theory_span_api400"  placeholder="Sep. decimale: PUNTO"></div>
+                                <div class="col-sm-2"><span class="limit-value"><i class="fa fa-chevron-left"></i> 400</span></div>
+                            </div>
+                            <div class="form-group multiple-insert">
+                                <label class="col-sm-2 control-label" for="500_read_span_api400">Span letto</label>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="500_read_span_api400" id="500_read_span_api400" placeholder="Sep. decimale: PUNTO"></div>
+                                <label class="col-sm-2 control-label" for="500_theory_span_api400">Span teorico</label>
+                                <div class="col-sm-3"><input type="text" class="form-control" name="500_theory_span_api400" id="500_theory_span_api400" placeholder="Sep. decimale: PUNTO"></div>
+                                <div class="col-sm-2"><span class="limit-value"><i class="fa fa-chevron-left"></i> 500</span></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox i-checks col-sm-12"><label for="mod_span_api400">
+                                <input type="checkbox" value="" name="mod_span_api400" id="mod_span_api400"> <i></i>&nbsp;&nbsp;Span modificato</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="syntechgc955">
+                        % if ( $ENV{'MOJO_MODE'} eq 'development' ) {
+                        <div class="alert alert-info alert-dismissable">
+                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                            SYNTECH GC955
+                        </div>
+                        % }
+
+                        <h3>Span</h3>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="tank_span_gc955">Bombola</label>
+                            <div class="col-sm-4">
+                                <select class="form-control m-b tanks_span" name="tank_span_gc955" id="tank_span_gc955"></select>
+                            </div>
+                            <label class="col-sm-2 control-label" for="method_span_gc955">Metodo</label>
+                            <div class="col-sm-4">
+                                <select class="form-control m-b methods_span" name="method_span_gc955" id="method_span_gc955"></select>
+                            </div>
+                        </div>
+                        <div class="form-group form-labels">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-3">Benzene</div>
+                            <div class="col-sm-3">Toluene</div>
+                            <div class="col-sm-3">Xilene</div>
+                        </div>
+                        <div class="form-group form-double-line">
+                            <label class="col-sm-2 control-label">Span letto</label>
+                            <div class="col-sm-3"><input type="text" class="form-control" name="read_ben_span_gc955" id="read_ben_span_gc955" placeholder="Sep. decimale: PUNTO"></div>
+                            <div class="col-sm-3"><input type="text" class="form-control" name="read_tol_span_gc955" id="read_tol_span_gc955" placeholder="Sep. decimale: PUNTO"></div>
+                            <div class="col-sm-3"><input type="text" class="form-control" name="read_xil_span_gc955" id="read_xil_span_gc955" placeholder="Sep. decimale: PUNTO"></div>
+                        </div>
+                        <div class="form-group form-double-line">
+                            <label class="col-sm-2 control-label">Span teorico</label>
+                            <div class="col-sm-3"><input type="text" class="form-control" name="theory_ben_span_gc955" id="theory_ben_span_gc955" placeholder="Sep. decimale: PUNTO"></div>
+                            <div class="col-sm-3"><input type="text" class="form-control" name="theory_tol_span_gc955" id="theory_tol_span_gc955" placeholder="Sep. decimale: PUNTO"></div>
+                            <div class="col-sm-3"><input type="text" class="form-control" name="theory_xil_span_gc955" id="theory_xil_span_gc955" placeholder="Sep. decimale: PUNTO"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox i-checks col-sm-12"><label for="mod_span_gc955">
+                                <input type="checkbox" value="" name="mod_span_gc955" id="mod_span_gc955"> <i></i>&nbsp;&nbsp;Span modificato</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="sampler">
+                        % if ( $ENV{'MOJO_MODE'} eq 'development' ) {
+                        <div class="alert alert-info alert-dismissable">
+                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                            Campionatori, SM200 - Skypost - Teom - MCZ
+                        </div>
+                        % }
+
+                        <h3>Flussi</h3>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="read_flow_sampler">Flusso letto</label>
+                            <div class="col-sm-4"><input type="text" class="form-control" name="read_flow_sampler" id="read_flow_sampler" placeholder="Sep. decimale: PUNTO"></div>
+                            <label class="col-sm-2 control-label" for="reference_flow_sampler">Flusso riferimento</label>
+                            <div class="col-sm-4"><input type="text" class="form-control" name="reference_flow_sampler" id="reference_flow_sampler" placeholder="Sep. decimale: PUNTO"></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="temp_flow_sampler">Temp. Ambiente</label>
+                            <div class="col-sm-4"><input type="text" class="form-control" name="temp_flow_sampler" id="temp_flow_sampler" placeholder="Sep. decimale: PUNTO"></div>
+                            <label class="col-sm-2 control-label" for="press_flow_sampler">Pressione</label>
+                            <div class="col-sm-4"><input type="text" class="form-control" name="press_flow_sampler" id="press_flow_sampler" placeholder="Sep. decimale: PUNTO"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox i-checks col-sm-12"><label for="mod_flow_sampler">
+                                <input type="checkbox" value="" name="mod_flow_sampler" id="mod_flow_sampler"> <i></i>&nbsp;&nbsp;Flusso calibrato</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="ch4">
+                        % if ( $ENV{'MOJO_MODE'} eq 'development' ) {
+                        <div class="alert alert-info alert-dismissable">
+                            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                            CH4
+                        </div>
+                        % }
+
+                        <h3>Zero</h3>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="find_zero_ch4">Zero trovato</label>
+                            <div class="col-sm-4"><input type="text" class="form-control" name="find_zero_ch4" id="find_zero_ch4" placeholder="Sep. decimale: PUNTO"></div>
+                            <label class="col-sm-2 control-label" for="method_zero_ch4">Metodo</label>
+                            <div class="col-sm-4">
+                                <select class="form-control m-b methods_zero" name="method_zero_ch4" id="method_zero_ch4"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                        <div class="checkbox i-checks col-sm-12"><label for="mod_zero_ch4">
+                            <input type="checkbox" value="" name="mod_zero_ch4" id="mod_zero_ch4"> <i></i>&nbsp;&nbsp;Zero modificato</label>
+                        </div>
+                        </div>
+                        <h3>Span</h3>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="tank_span_ch4">Bombola</label>
+                            <div class="col-sm-4">
+                                <select class="form-control m-b tanks_span" name="tank_span_ch4" id="tank_span_ch4"></select>
+                            </div>
+                            <label class="col-sm-2 control-label" for="method_span_ch4">Metodo</label>
+                            <div class="col-sm-4">
+                                <select class="form-control m-b methods_span" name="method_span_ch4" id="method_span_ch4"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="read_span_ch4">Span letto</label>
+                            <div class="col-sm-4"><input type="text" class="form-control" name="read_span_ch4" id="read_span_ch4" placeholder="Sep. decimale: PUNTO"></div>
+                            <label class="col-sm-2 control-label" for="theory_span_ch4">Span teorico</label>
+                            <div class="col-sm-4"><input type="text" class="form-control" name="theory_span_ch4" id="theory_span_ch4" placeholder="Sep. decimale: PUNTO"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox i-checks col-sm-12"><label for="mod_span_ch4">
+                                <input type="checkbox" value="" name="mod_span_ch4" id="mod_span_ch4"> <i></i>&nbsp;&nbsp;Span modificato</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    % if ( $ENV{'MOJO_MODE'} eq 'development' ) {
+                    <div class="alert alert-success alert-dismissable">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        Parte finale = per tutti
+                    </div>
+                    % }
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="notes_calib">Note</label>
+                        <div class="col-sm-10">
+                            <textarea class="textarea-format" name="notes_calib" id="notes_calib"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button class="btn btn-white"   type="cancel" name="cancel_calib" id="cancel_calib">Annulla</button>
+                            <button class="btn btn-primary" type="submit" name="save_calib"   id="save_calib">Salva</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" id="view-calibration">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Visualizza taratura</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content adding-reports">
+                <div class="my-content">
+                    % if ( $ENV{'MOJO_MODE'} eq 'development' ) {
+                    <div class="alert alert-success alert-dismissable personal-alert">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        Parte iniziale = per tutti
+                    </div>
+                    % }
+
+                    <div class="row view-report">
+                        <label class="control-label col-sm-2">Data</label>
+                        <div class="col-sm-4" id="view_date_calib"></div>
+                        <label class="control-label col-sm-2">Ora</label>
+                        <div class="col-sm-4" id="view_time_calib"></div>
+                    </div>
+                    <div class="row view-report">
+                        <label class="control-label col-sm-2">Operatore</label>
+                        <div class="col-sm-4" id="view_operator_calib"></div>
+                        <label class="control-label col-sm-2">Stazione</label>
+                        <div class="col-sm-4" id="view_station_calib"></div>
+                    </div>
+                    <div class="row view-report">
+                        <label class="control-label col-sm-2">Strumento</label>
+                        <div class="col-sm-4" id="view_instrument_calib"></div>
+                        <label class="control-label col-sm-2">Motivo</label>
+                        <div class="col-sm-4" id="view_motiv_calib"></div>
+                    </div>
+
+                    % if ( $ENV{'MOJO_MODE'} eq 'development' ) {
+                    <div class="alert alert-info alert-dismissable personal-alert">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        API 100 - SO2
+                    </div>
+                    % }
+
+                    <div id="view-api100">
+                        <h3>Zero</h3>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Zero trovato</label>
+                            <div class="col-sm-4" id="view_find_zero_api100"></div>
+                            <label class="control-label col-sm-2">Zero modificato</label>
+                            <div class="col-sm-4" id="view_mod_zero_api100">Si</div>
+                        </div>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Bombola</label>
+                            <div class="col-sm-4" id="view_tank_zero_api100"></div>
+                            <label class="control-label col-sm-2">Metodo</label>
+                            <div class="col-sm-4" id="view_method_zero_api100"></div>
+                        </div>
+                        <h3>Span</h3>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Bombola</label>
+                            <div class="col-sm-4" id="view_tank_span_api100"></div>
+                            <label class="control-label col-sm-2">Metodo</label>
+                            <div class="col-sm-4" id="view_method_span_api100"></div>
+                        </div>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Span letto</label>
+                            <div class="col-sm-4" id="view_read_span_api100"></div>
+                            <label class="control-label col-sm-2">Span teorico</label>
+                            <div class="col-sm-4" id="view_theory_span_api100"></div>
+                        </div>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Span modificato</label>
+                            <div class="col-sm-4" id="view_mod_span_api100">No</div>
+                        </div>
+                    </div>
+
+                    % if ( $ENV{'MOJO_MODE'} eq 'development' ) {
+                    <div class="alert alert-info alert-dismissable personal-alert">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        API 200, Horiba - NOx
+                    </div>
+                    % }
+
+                    <div id="view-api200">
+                        <h3>Zero</h3>
+                        <div class="row view-report three-labels">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-3">NOx</div>
+                            <div class="col-sm-3">NO</div>
+                            <div class="col-sm-3">NO2</div>
+                        </div>
+                        <div class="row view-report three-val">
+                            <label class="col-sm-2 control-label">Zero trovato</label>
+                            <div class="col-sm-3" id="view_nox_zero_api200"></div>
+                            <div class="col-sm-3" id="view_no_zero_api200"></div>
+                            <div class="col-sm-3" id="view_no2_zero_api200"></div>
+                        </div>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Zero modificato</label>
+                            <div class="col-sm-4" id="view_mod_zero_api200">No</div>
+                            <label class="control-label col-sm-2">Metodo</label>
+                            <div class="col-sm-4" id="view_method_zero_api200"></div>
+                        </div>
+                        <h3>Span</h3>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Bombola</label>
+                            <div class="col-sm-4" id="view_tank_span_api200"></div>
+                            <label class="control-label col-sm-2">Metodo</label>
+                            <div class="col-sm-4" id="view_method_span_api200"></div>
+                        </div>
+                        <div class="row view-report three-labels">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-3">NOx</div>
+                            <div class="col-sm-3">NO</div>
+                            <div class="col-sm-3">NO2</div>
+                        </div>
+                        <div class="row view-report three-val">
+                            <label class="col-sm-2 control-label">Span letto</label>
+                            <div class="col-sm-3" id="view_l1_read_nox_span_api200"></div>
+                            <div class="col-sm-3" id="view_l1_read_no_span_api200" ></div>
+                            <div class="col-sm-3" id="view_l1_read_no2_span_api200"></div>
+                        </div>
+                        <div class="row view-report three-val">
+                            <label class="col-sm-2 control-label">Span teorico</label>
+                            <div class="col-sm-3" id="view_l1_theory_nox_span_api200"></div>
+                            <div class="col-sm-3" id="view_l1_theory_no_span_api200" ></div>
+                            <div class="col-sm-3" id="view_l1_theory_no2_span_api200"></div>
+                            <div class="col-sm-1"><span class="limit-value"><i class="fa fa-chevron-left"></i> L1</span></div>
+                        </div>
+                        
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Span modificato</label>
+                            <div class="col-sm-4" id="view_mod_span_api200">No</div>
+                        </div>
+                    </div>
+
+                    % if ( $ENV{'MOJO_MODE'} eq 'development' ) {
+                    <div class="alert alert-info alert-dismissable personal-alert">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        API 300, CO
+                    </div>
+                    % }
+
+                    <div id="view-api300">
+                        <h3>Zero</h3>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Zero trovato</label>
+                            <div class="col-sm-4" id="view_find_zero_api300"></div>
+                            <label class="control-label col-sm-2">Metodo</label>
+                            <div class="col-sm-4" id="view_method_zero_api300"></div>
+                        </div>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Zero modificato</label>
+                            <div class="col-sm-4" id="view_mod_zero_api300">Si</div>
+                        </div>
+                        <h3>Span</h3>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Bombola</label>
+                            <div class="col-sm-4" id="view_tank_span_api300"></div>
+                            <label class="control-label col-sm-2">Metodo</label>
+                            <div class="col-sm-4" id="view_method_span_api300"></div>
+                        </div>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Span letto</label>
+                            <div class="col-sm-4" id="view_read_span_api300"></div>
+                            <label class="control-label col-sm-2">Span teorico</label>
+                            <div class="col-sm-4" id="view_theory_span_api300"></div>
+                        </div>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Span modificato</label>
+                            <div class="col-sm-4" id="view_mod_span_api300">No</div>
+                        </div>
+                    </div>
+
+                    % if ( $ENV{'MOJO_MODE'} eq 'development' ) {
+                    <div class="alert alert-info alert-dismissable personal-alert">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        API 400, O3
+                    </div>
+                    % }
+
+                    <div id="view-api400">
+                        <h3>Zero</h3>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Zero trovato</label>
+                            <div class="col-sm-4" id="view_find_zero_api400"></div>
+                            <label class="control-label col-sm-2">Metodo</label>
+                            <div class="col-sm-4" id="view_method_zero_api400"></div>
+                        </div>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Zero modificato</label>
+                            <div class="col-sm-4" id="view_mod_zero_api400">No</div>
+                        </div>
+                        <h3>Span</h3>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Calibratore</label>
+                            <div class="col-sm-4" id="view_calib_span_api400"></div>
+                            <label class="control-label col-sm-2">Metodo</label>
+                            <div class="col-sm-4" id="view_method_span_api400"></div>
+                        </div>
+                        <div class="row multiple-insert view-report labels-w">
+                            <label class="col-sm-2 control-label" for="">Span letto</label>
+                            <div class="col-sm-3" id="view_100_read_span_api400"></div>
+                            <label class="col-sm-2 control-label" for="">Span teorico</label>
+                            <div class="col-sm-3" id="view_100_theory_span_api400"></div>
+                            <div class="col-sm-2"><span class="limit-value"><i class="fa fa-chevron-left"></i> 100</span></div>
+                        </div>
+                        
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Span modificato</label>
+                            <div class="col-sm-4" id="view_mod_span_api400">No</div>
+                        </div>
+                    </div>
+
+                    % if ( $ENV{'MOJO_MODE'} eq 'development' ) {
+                    <div class="alert alert-info alert-dismissable personal-alert">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        SYNTECH GC955
+                    </div>
+                    % }
+
+                    <div id="view-syntechgc955">
+                        <h3>Span</h3>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Bombola</label>
+                            <div class="col-sm-4" id="view_tank_span_gc955"></div>
+                            <label class="control-label col-sm-2">Metodo</label>
+                            <div class="col-sm-4" id="view_method_span_gc955"></div>
+                        </div>
+                        <div class="row view-report three-labels">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-3">Benzene</div>
+                            <div class="col-sm-3">Toluene</div>
+                            <div class="col-sm-3">Xilene</div>
+                        </div>
+                        <div class="row view-report three-val">
+                            <label class="col-sm-2 control-label">Span letto</label>
+                            <div class="col-sm-3" id="view_read_ben_span_gc955"></div>
+                            <div class="col-sm-3" id="view_read_tol_span_gc955" ></div>
+                            <div class="col-sm-3" id="view_read_xil_span_gc955"></div>
+                        </div>
+                        <div class="row view-report three-val">
+                            <label class="col-sm-2 control-label">Span teorico</label>
+                            <div class="col-sm-3" id="view_theory_ben_span_gc955"></div>
+                            <div class="col-sm-3" id="view_theory_tol_span_gc955" ></div>
+                            <div class="col-sm-3" id="view_theory_xil_span_gc955"></div>
+                        </div>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Span modificato</label>
+                            <div class="col-sm-4" id="view_mod_span_syntechgc955">No</div>
+                        </div>
+                    </div>
+
+                    % if ( $ENV{'MOJO_MODE'} eq 'development' ) {
+                    <div class="alert alert-info alert-dismissable personal-alert">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        Campionatori, SM200 - Skypost - Teom - MCZ
+                    </div>
+                    % }
+
+                    <div id="view-sampler">
+                        <h3>Flussi</h3>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Flusso letto</label>
+                            <div class="col-sm-4" id="view_read_flow_sampler"></div>
+                            <label class="control-label col-sm-2">Flusso riferimento</label>
+                            <div class="col-sm-4" id="view_reference_flow_sampler"></div>
+                        </div>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Temp. Ambiente</label>
+                            <div class="col-sm-4" id="view_temp_flow_sampler"></div>
+                            <label class="control-label col-sm-2">Pressione</label>
+                            <div class="col-sm-4" id="view_press_flow_sampler"></div>
+                        </div>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Flusso Calibrato</label>
+                            <div class="col-sm-4" id="view_mod_flow_sampler">Si</div>
+                        </div>
+                    </div>
+
+                    % if ( $ENV{'MOJO_MODE'} eq 'development' ) {
+                    <div class="alert alert-info alert-dismissable personal-alert">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        CH4
+                    </div>
+                    % }
+
+                    <div id="view-ch4">
+                        <h3>Zero</h3>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Zero trovato</label>
+                            <div class="col-sm-4" id="view_find_zero_ch4"></div>
+                            <label class="control-label col-sm-2">Metodo</label>
+                            <div class="col-sm-4" id="view_method_zero_ch4"></div>
+                        </div>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Zero modificato</label>
+                            <div class="col-sm-4" id="view_mod_zero_ch4">Si</div>
+                        </div>
+                        <h3>Span</h3>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Bombola</label>
+                            <div class="col-sm-4" id="view_tank_span_ch4"></div>
+                            <label class="control-label col-sm-2">Metodo</label>
+                            <div class="col-sm-4" id="view_method_span_ch4"></div>
+                        </div>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Span letto</label>
+                            <div class="col-sm-4" id="view_read_span_ch4"></div>
+                            <label class="control-label col-sm-2">Span teorico</label>
+                            <div class="col-sm-4" id="view_theory_span_ch4"></div>
+                        </div>
+                        <div class="row view-report">
+                            <label class="control-label col-sm-2">Span modificato</label>
+                            <div class="col-sm-4" id="view_mod_span_ch4">No</div>
+                        </div>
+                    </div>
+
+                    % if ( $ENV{'MOJO_MODE'} eq 'development' ) {
+                    <div class="alert alert-success alert-dismissable personal-alert">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        Parte finale = per tutti
+                    </div>
+                    % }
+
+                    <div class="row view-report">
+                        <label class="control-label col-sm-2">Note</label>
+                        <div class="col-sm-10" id="view_notes_calib"></div>
+                    </div>
+                    <div class="row view-report">
+                        <label class="control-label col-sm-2">&nbsp;</label>
+                        <div class="col-sm-4">
+                            <button class="btn btn-primary" id="btn-close-view" name="btn-close-view">Chiudi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Tarature effettuate</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content table-reports">
+
+                <table class="table table-striped table-bordered table-hover dataTables-example table-with-tools datatable-ale" >
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Data</th>
+                            <th></th>
+                            <th>Operatore</th>
+                            <th>Stazione</th>
+                            <th>Strumento</th>
+                            <th>Zero T.</th>
+                            <th>Zero</th>
+                            <th>Span T.</th>
+                            <th>Span</th>
+                            <th>Note</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        % foreach my $report ( @{$report_calibrations} )
+                        % {
+                            <tr data-id="<%=$report->{'ca_id'}%>">
+                                <td>
+                                    <a href="" class="table-tool blue view-tool"><i class="fa fa-search-plus"></i></a>
+                                    % if ( $report->{'gr_id'} == $user->{'gr_id'} ) {
+                                        
+                                        % if ( $grants->{'update'} == 1 ) {
+                                            <a href="" class="table-tool blue set-tool"><i class="fa fa-wrench"></i></a>
+                                        % }
+                                        
+                                        % if ( $grants->{'delete'} == 1 ) {
+                                            <a href="" class="table-tool light-blue delete-tool"><i class="fa fa-trash"></i></a>
+                                        % }
+                                    % }
+                                    <a href="" class="table-tool text-danger pdf-tool"><i class="fa fa-file-pdf-o"></i></a>
+                                </td>
+                                <td><%=$report->{'fulldate'}%></td>
+                                <td class="project-people">
+                                    <a href="#"><img alt="image" class="img-circle" src="img-lily/users/<%=$report->{'user_avatar'}%>"></a>
+                                </td>
+                                <td>
+                                    <h4><%= $report->{'user_fullname'} =%></h4>
+                                    <small><%= $report->{'user_group'} =%></small>
+                                </td>
+                                <td><%= $report->{'station_name'} =%></td>
+                                <td><%= $report->{'instrument'} =%></td>
+                                
+                                <td><%= $report->{'zero_info'} =%></td>
+                                % if ( $report->{'zero_changed'} ) {
+                                    <td>Sì</td>
+                                % } else {
+                                    <td>No</td>
+                                % }
+                                
+                                <td><%= $report->{'span_info'} =%></td>
+                                % if ( $report->{'span_changed'} ) {
+                                    <td>Sì</td>
+                                % } else {
+                                    <td>No</td>
+                                % }
+                                <td><%= $report->{'note'} =%></td>
+                            </tr>
+                        % }
+                        
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th>Data</th>
+                            <th></th>
+                            <th>Operatore</th>
+                            <th>Stazione</th>
+                            <th>Strumento</th>
+                            <th>Zero T.</th>
+                            <th>Zero</th>
+                            <th>Span T.</th>
+                            <th>Span</th>
+                            <th>Note</th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

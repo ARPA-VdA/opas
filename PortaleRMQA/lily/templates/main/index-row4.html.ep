@@ -1,0 +1,176 @@
+% my $visible_class_collapse='fa-chevron-down';
+% my $visible_class_content='display: none;';
+
+% if (1) { # ( $row4_visibility ) {
+    % $visible_class_collapse='fa-chevron-up';
+    % $visible_class_content='';
+% }
+
+<div class="row">
+
+    
+    <div class="col-lg-6">
+        <div class="ibox float-e-margins task-list-hp">
+            <div class="ibox-title">
+                <h5>Lista Tasks</h5>
+                <div class="ibox-tools">
+                    <span class="label label-warning-light"><%= $homepage_counters->{'new_tasks'} =%>&nbsp; nuovi</span>
+                    <a class="collapse-link">
+                        <i class="fa <%=$visible_class_collapse%>"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content" style="<%=$visible_class_content%>">
+                <ul class="todo-list m-t small-list">
+
+                    
+                    % my $todo_class1;
+                    % my $todo_class2;
+                    % my $todo_class3;
+                    % my $todo_class4;
+                    % foreach my $report ( @{$report_tasks} )
+                    % {
+                        <li data-id="<%=$report->{'ta_id'}%>">
+                            % if ( $report->{'task_assignee'} eq 'Arpa' ) {
+                                % $todo_class3 = ' label-warning';
+                            % } else {
+                                % $todo_class3 = ' label-info';
+                            % }
+                            % if ( $report->{'ty_id'} == 1 ) {
+                                % $todo_class4 = ' fa-tag ';
+                            % } elsif ( $report->{'ty_id'} == 2 ) {
+                                % $todo_class4 = ' fa-sign-in ';
+                            % } elsif ( $report->{'ty_id'} == 3 ) {
+                                % $todo_class4 = ' fa-wrench ';
+                            % } elsif ( $report->{'ty_id'} == 4 ) {
+                                % $todo_class4 = ' fa-magic ';
+                            % } elsif ( $report->{'ty_id'} == 5 ) {
+                                % $todo_class4 = ' fa-map-marker ';
+                            % }
+                            
+                            % if ( $report->{'task_done'} ) {
+                                % $todo_class1 = ' todo-completed';
+                                % $todo_class2 = ' fa-check';
+                            % } else {
+                                % $todo_class1 = '';
+                                % $todo_class2 = ' fa-times';
+                            % }
+                            
+                            <small class="always-right label <%=$todo_class3=%>">
+                                <i class="fa <%=$todo_class2=%>"></i>
+                                <%= $report->{'task_assignee'} =%>
+                            </small>
+                            <div class="task-details">
+                                <a href="JavaScript:void(0);" class="check-link" disabled="">
+                                    
+                                    % if ( $report->{'task_done'} ) {
+                                        <i class="fa fa-check-square"></i>
+                                    % } else {
+                                        <i class="fa fa-square-o"></i>
+                                    % }
+                                </a>
+                                <span class="m-l-xs <%=$todo_class1=%>">&nbsp;<i class="fa <%=$todo_class4=%> ico-label"></i>&nbsp;&nbsp; <%= $report->{'task_name'} =%></span>
+                            </div>
+
+                            <div class="row task-ouverture">
+                                <div class="col-lg-6 text-muted">
+                                    APERTO:&nbsp;<%= $report->{'user_fullname'} =%>,&nbsp;<%= $report->{'task_insert_time_format'} =%>
+                                </div>
+
+                                % if ( $report->{'task_close_time'} ) {
+                                    <div class="col-lg-6 text-right text-success">
+                                        CHIUSO:&nbsp;<%= $report->{'user_fullname_close'} =%>,&nbsp;<%= $report->{'task_close_time_format'} =%>
+                                    </div>
+                                % }
+                            </div>
+                        </li>
+                    % }
+                </ul>
+                <div class="file-manager clearfix tag-legend">
+                    <h5>Legenda TAG dei Task</h5>
+                    <ul class="tag-list" style="padding: 0">
+                        <li><a href="JavaScript:void(0);"><i class="fa fa-tag font-big"></i> Generale</a></li>
+                        <li><a href="JavaScript:void(0);"><i class="fa fa-sign-in font-big"></i> Verifica</a></li>
+                        <li><a href="JavaScript:void(0);"><i class="fa fa-wrench font-big"></i> Manutenzione</a></li>
+                        <li><a href="JavaScript:void(0);"><i class="fa fa-magic font-big"></i> Taratura</a></li>
+                        <li><a href="JavaScript:void(0);"><i class="fa fa-map-marker font-big"></i> Sopralluogo</a></li>
+                    </ul>
+                </div>
+                <a class="btn btn-default btn-block m-t" href="/task"><i class="fa fa-plus-circle"></i> Visualizza dettagli</a>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="col-lg-6" id="memo_hp">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Verbali</h5>
+                <div class="ibox-tools">
+                    
+                    <a class="collapse-link">
+                        <i class="fa <%=$visible_class_collapse%>"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content" style="<%=$visible_class_content%>">
+                <div>
+                    <div class="feed-activity-list">
+
+                        
+                        % my $g = 0;
+                        % foreach my $report ( @{$report_memos} )
+                        % {
+
+                            
+
+                            <div class="feed-element">
+                                <a href="/report_memo?id=<%=$report->{'me_id'}%>" class="pull-left">
+                                    <img alt="image" class="img-circle" src="img-lily/users/<%=$report->{'user_avatar'}%>">
+                                </a>
+                                <div class="media-body">
+                                    <small class="pull-right text-navy"><%= $report->{'date_gap'} =%></small>
+
+                                    <strong><%= $report->{'user_fullname'} =%></strong> ha inserito un <a href="/report_memo?id=<%=$report->{'me_id'}%>" class="open_link">verbale</a><br>
+
+                                    <div class="well">
+                                        <div class="crop-content">
+                                            <p><strong class="text-success">Titolo:&nbsp;</strong> <%= $report->{'memo_title'} =%></p>
+                                            <p><strong class="text-success">Descrizione</strong><br><%== $report->{'memo_body'} =%></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="attach-hp clearfix lightBoxGallery">
+                                        <div><strong><i class="fa fa-users text-info" aria-hidden="true"></i> Partecipanti:</strong>
+                                            % my @participants = split(',', $report->{'memo_participants'});
+                                            % foreach my $participant ( @participants )
+                                            % {
+                                                <%= $participant =%>,&nbsp;
+                                            % }
+                                        </div>
+                                    </div>
+
+                                    <small class="text-muted"><%= $report->{'memo_date_format'} =%></small>
+                                    <small class="pull-right text-navy"><a href="/report_memo?id=<%=$report->{'me_id'}%>">Apri report&raquo;</a></small>
+
+                                </div>
+                            </div>
+                            
+                            % $g++;
+                        % }
+
+                    </div>
+                    
+                    <a class="btn btn-default btn-block m-t" href="<%= url_for('report_memo')%>"><i class="fa fa-plus-circle"></i> Visualizza tutti</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

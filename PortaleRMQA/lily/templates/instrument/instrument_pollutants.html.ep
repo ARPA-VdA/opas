@@ -1,0 +1,617 @@
+% layout 'default';
+% title 'Strumenti - Inquinanti';
+
+
+<link href="css/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet">
+<script src="js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/instrument_pollutants.js'))%>"></script>
+
+<div class="alert alert-success alert-dismissable">
+    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+    Grafici relativi all'anno 2015.
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="tabs-container" id="curr_sit_stations">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#plouves" aria-expanded="true">Plouves</a></li>
+                <li class=""><a data-toggle="tab" href="#pepiniere" aria-expanded="false">Pepiniere</a></li>
+                <li class=""><a data-toggle="tab" href="#fleury" aria-expanded="false">Mt. Fleury</a></li>
+                <li class=""><a data-toggle="tab" href="#geie" aria-expanded="false">Geie</a></li>
+                <li class=""><a data-toggle="tab" href="#thuile" aria-expanded="false">La Thuile</a></li>
+                <li class=""><a data-toggle="tab" href="#donnas" aria-expanded="false">Donnas</a></li>
+            </ul>
+
+            <div class="tab-content tabs-lily">
+                <div id="plouves" class="tab-pane active">
+                    <div class="panel-body" id="gallery-images">
+                        <h2>Plouves</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rhoncus metus sagittis quam luctus, quis elementum odio gravida. Mauris id ex tortor. Donec ut condimentum metus, nec tincidunt ex.</p>
+                        <h3>Vento</h3>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/plouves_windrose.png" data-gallery="Plouves" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/plouves_windrose.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Rosa dei venti</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/plouves_windrose_season.png" data-gallery="Plouves" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/plouves_windrose_season.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Rosa dei venti stagionale</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Inquinanti - Pollution Rose</h3>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/plouves_pollutionrose_co.png" data-gallery="Plouves" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/plouves_pollutionrose_co.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - CO</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/plouves_pollutionrose_no.png" data-gallery="Plouves" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/plouves_pollutionrose_no.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - NO</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/plouves_pollutionrose_no2.png" data-gallery="Plouves" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/plouves_pollutionrose_no2.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - NO2</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/plouves_pollutionrose_nox.png" data-gallery="Plouves" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/plouves_pollutionrose_nox.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - NOx</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/plouves_pollutionrose_o3.png" data-gallery="plouves" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/plouves_pollutionrose_o3.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - O3</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/plouves_pollutionrose_pm10.png" data-gallery="plouves" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/plouves_pollutionrose_pm10.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - PM10</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/plouves_pollutionrose_so2.png" data-gallery="plouves" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/plouves_pollutionrose_so2.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - SO2</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Inquinanti - Polar Plot</h3>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/plouves_polarplot_co.png" data-gallery="Plouves" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/plouves_polarplot_co.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - CO</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/plouves_polarplot_no.png" data-gallery="Plouves" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/plouves_polarplot_no.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - NO</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/plouves_polarplot_no2.png" data-gallery="Plouves" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/plouves_polarplot_no2.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - NO2</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/plouves_polarplot_nox.png" data-gallery="Plouves" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/plouves_polarplot_nox.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - NOx</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/plouves_polarplot_o3.png" data-gallery="plouves" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/plouves_polarplot_o3.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - O3</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/plouves_polarplot_pm10.png" data-gallery="plouves" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/plouves_polarplot_pm10.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - PM10</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/plouves_polarplot_so2.png" data-gallery="plouves" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/plouves_polarplot_so2.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - SO2</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="pepiniere" class="tab-pane">
+                    <div class="panel-body" id="gallery-images">
+                        <h2>Pepiniere</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rhoncus metus sagittis quam luctus, quis elementum odio gravida. Mauris id ex tortor. Donec ut condimentum metus, nec tincidunt ex.</p>
+                        <h3>Vento</h3>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/pepiniere_windrose.png" data-gallery="Pepiniere" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/pepiniere_windrose.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Rosa dei venti</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/pepiniere_windrose_season.png" data-gallery="Pepiniere" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/pepiniere_windrose_season.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Rosa dei venti stagionale</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Inquinanti - Pollution Rose</h3>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/pepiniere_pollutionrose_co.png" data-gallery="Pepiniere" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/pepiniere_pollutionrose_co.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - CO</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/pepiniere_pollutionrose_no.png" data-gallery="Pepiniere" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/pepiniere_pollutionrose_no.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - NO</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/pepiniere_pollutionrose_no2.png" data-gallery="Pepiniere" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/pepiniere_pollutionrose_no2.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - NO2</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/pepiniere_pollutionrose_nox.png" data-gallery="Pepiniere" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/pepiniere_pollutionrose_nox.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - NOx</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Inquinanti - Polar Plot</h3>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/pepiniere_polarplot_co.png" data-gallery="Pepiniere" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/pepiniere_polarplot_co.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - CO</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/pepiniere_polarplot_no.png" data-gallery="Pepiniere" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/pepiniere_polarplot_no.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - NO</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/pepiniere_polarplot_no2.png" data-gallery="Pepiniere" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/pepiniere_polarplot_no2.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - NO2</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/pepiniere_polarplot_nox.png" data-gallery="Pepiniere" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/pepiniere_polarplot_nox.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - NOx</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="fleury" class="tab-pane">
+                    <div class="panel-body" id="gallery-images">
+                        <h2>Mt. Fleury</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rhoncus metus sagittis quam luctus, quis elementum odio gravida. Mauris id ex tortor. Donec ut condimentum metus, nec tincidunt ex.</p>
+                        <h3>Vento</h3>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/mt_fleury_windrose.png" data-gallery="Fleury" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/mt_fleury_windrose.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Rosa dei venti</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/mt_fleury_windrose_season.png" data-gallery="Fleury" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/mt_fleury_windrose_season.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Rosa dei venti stagionale</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Inquinanti - Pollution Rose</h3>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/mt_fleury_pollutionrose_no.png" data-gallery="Fleury" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/mt_fleury_pollutionrose_no.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - NO</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/mt_fleury_pollutionrose_no2.png" data-gallery="Fleury" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/mt_fleury_pollutionrose_no2.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - NO2</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/mt_fleury_pollutionrose_nox.png" data-gallery="Fleury" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/mt_fleury_pollutionrose_nox.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - NOx</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/mt_fleury_pollutionrose_o3.png" data-gallery="Fleury" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/mt_fleury_pollutionrose_o3.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - O3</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Inquinanti - Polar Plot</h3>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/mt_fleury_polarplot_no.png" data-gallery="Fleury" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/mt_fleury_polarplot_no.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - NO</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/mt_fleury_polarplot_no2.png" data-gallery="Fleury" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/mt_fleury_polarplot_no2.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - NO2</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/mt_fleury_polarplot_nox.png" data-gallery="Fleury" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/mt_fleury_polarplot_nox.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - NOx</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/mt_fleury_polarplot_o3.png" data-gallery="Fleury" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/mt_fleury_polarplot_o3.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - O3</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="geie" class="tab-pane">
+                    <div class="panel-body" id="gallery-images">
+                        <h2>Geie</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rhoncus metus sagittis quam luctus, quis elementum odio gravida. Mauris id ex tortor. Donec ut condimentum metus, nec tincidunt ex.</p>
+                        <h3>Vento</h3>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/tunnel_mb_windrose.png" data-gallery="Geie" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/tunnel_mb_windrose.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Rosa dei venti</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/tunnel_mb_windrose_season.png" data-gallery="Geie" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/tunnel_mb_windrose_season.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Rosa dei venti stagionale</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Inquinanti - Pollution Rose</h3>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/tunnel_mb_pollutionrose_no.png" data-gallery="Geie" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/tunnel_mb_pollutionrose_no.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - NO</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/tunnel_mb_pollutionrose_no2.png" data-gallery="Geie" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/tunnel_mb_pollutionrose_no2.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - NO2</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/tunnel_mb_pollutionrose_nox.png" data-gallery="Geie" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/tunnel_mb_pollutionrose_nox.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - NOx</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/tunnel_mb_pollutionrose_pm10.png" data-gallery="Geie" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/tunnel_mb_pollutionrose_pm10.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - PM10</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Inquinanti - Polar Plot</h3>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/tunnel_mb_polarplot_no.png" data-gallery="Geie" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/tunnel_mb_polarplot_no.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - NO</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/tunnel_mb_polarplot_no2.png" data-gallery="Geie" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/tunnel_mb_polarplot_no2.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - NO2</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/tunnel_mb_polarplot_nox.png" data-gallery="Geie" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/tunnel_mb_polarplot_nox.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - NOx</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/tunnel_mb_polarplot_pm10.png" data-gallery="Geie" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/tunnel_mb_polarplot_pm10.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - PM10</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="thuile" class="tab-pane">
+                    <div class="panel-body" id="gallery-images">
+                        <h2>La Thuile</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rhoncus metus sagittis quam luctus, quis elementum odio gravida. Mauris id ex tortor. Donec ut condimentum metus, nec tincidunt ex.</p>
+                        <h3>Vento</h3>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/la_thuile_windrose.png" data-gallery="Thuile" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/la_thuile_windrose.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Rosa dei venti</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/la_thuile_windrose_season.png" data-gallery="Thuile" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/la_thuile_windrose_season.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Rosa dei venti stagionale</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Inquinanti - Pollution Rose</h3>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/la_thuile_pollutionrose_no.png" data-gallery="Thuile" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/la_thuile_pollutionrose_no.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - NO</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/la_thuile_pollutionrose_no2.png" data-gallery="Thuile" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/la_thuile_pollutionrose_no2.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - NO2</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/la_thuile_pollutionrose_nox.png" data-gallery="Thuile" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/la_thuile_pollutionrose_nox.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - NOx</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/la_thuile_pollutionrose_o3.png" data-gallery="Thuile" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/la_thuile_pollutionrose_o3.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - O3</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/la_thuile_pollutionrose_so2.png" data-gallery="Thuile" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/la_thuile_pollutionrose_so2.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - SO2</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Inquinanti - Polar Plot</h3>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/la_thuile_polarplot_no.png" data-gallery="Thuile" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/la_thuile_polarplot_no.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - NO</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/la_thuile_polarplot_no2.png" data-gallery="Thuile" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/la_thuile_polarplot_no2.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - NO2</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/la_thuile_polarplot_nox.png" data-gallery="Thuile" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/la_thuile_polarplot_nox.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - NOx</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/la_thuile_polarplot_o3.png" data-gallery="Thuile" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/la_thuile_polarplot_o3.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - O3</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/la_thuile_polarplot_so2.png" data-gallery="Thuile" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/la_thuile_polarplot_so2.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - SO2</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="donnas" class="tab-pane">
+                    <div class="panel-body" id="gallery-images">
+                        <h2>Donnas</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rhoncus metus sagittis quam luctus, quis elementum odio gravida. Mauris id ex tortor. Donec ut condimentum metus, nec tincidunt ex.</p>
+                        <h3>Vento</h3>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/donnas_windrose.png" data-gallery="Donnas" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/donnas_windrose.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Rosa dei venti</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/donnas_windrose_season.png" data-gallery="Donnas" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/donnas_windrose_season.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Rosa dei venti stagionale</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Inquinanti - Pollution Rose</h3>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/donnas_pollutionrose_no.png" data-gallery="Donnas" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/donnas_pollutionrose_no.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - NO</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/donnas_pollutionrose_no2.png" data-gallery="Donnas" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/donnas_pollutionrose_no2.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - NO2</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/donnas_pollutionrose_nox.png" data-gallery="Donnas" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/donnas_pollutionrose_nox.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - NOx</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/donnas_pollutionrose_o3.png" data-gallery="Donnas" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/donnas_pollutionrose_o3.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Pollution Rose - O3</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Inquinanti - Polar Plot</h3>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/donnas_polarplot_no.png" data-gallery="Donnas" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/donnas_polarplot_no.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - NO</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/donnas_polarplot_no2.png" data-gallery="Donnas" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/donnas_polarplot_no2.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - NO2</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/donnas_polarplot_nox.png" data-gallery="Donnas" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/donnas_polarplot_nox.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - NOx</h4>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="sit-att-chart">
+                                    <h3 class="alert-info"><i class="fa fa-clock-o"></i>&nbsp;2016-01-26 10:17</h3>
+                                    <a href="chart-lily/inquinanti/donnas_polarplot_o3.png" data-gallery="Donnas" title="" class="single-image-gallery"><img src="chart-lily/inquinanti/donnas_polarplot_o3.png" class="img-responsive" alt=""></a>
+                                    <h4 class="cf-stat">Polar Plot - O3</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>

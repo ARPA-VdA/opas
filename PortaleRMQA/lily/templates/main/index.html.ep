@@ -1,0 +1,58 @@
+% layout 'default';
+% title 'Homepage e dashboard';
+
+
+<link href="css/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet">
+<script src="js/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/index.js'))%>"></script>
+
+% my ($temp_row1, $temp_row2, $temp_row3, $temp_row4, $temp_row5);
+
+% if ( $settings_homepage->{'row1_on'} eq "true" and $settings_homepage->{'row1_pos'} == 1 ) { $temp_row1 = 'main/index-row1'; }
+% if ( $settings_homepage->{'row1_on'} eq "true" and $settings_homepage->{'row1_pos'} == 2 ) { $temp_row2 = 'main/index-row1'; }
+% if ( $settings_homepage->{'row1_on'} eq "true" and $settings_homepage->{'row1_pos'} == 3 ) { $temp_row3 = 'main/index-row1'; }
+% if ( $settings_homepage->{'row1_on'} eq "true" and $settings_homepage->{'row1_pos'} == 4 ) { $temp_row4 = 'main/index-row1'; }
+% if ( $settings_homepage->{'row1_on'} eq "true" and $settings_homepage->{'row1_pos'} == 5 ) { $temp_row5 = 'main/index-row1'; }
+
+% if ( $settings_homepage->{'row2_on'} eq "true" and $settings_homepage->{'row2_pos'} == 1 ) { $temp_row1 = 'main/index-row2'; }
+% if ( $settings_homepage->{'row2_on'} eq "true" and $settings_homepage->{'row2_pos'} == 2 ) { $temp_row2 = 'main/index-row2'; }
+% if ( $settings_homepage->{'row2_on'} eq "true" and $settings_homepage->{'row2_pos'} == 3 ) { $temp_row3 = 'main/index-row2'; }
+% if ( $settings_homepage->{'row2_on'} eq "true" and $settings_homepage->{'row2_pos'} == 4 ) { $temp_row4 = 'main/index-row2'; }
+% if ( $settings_homepage->{'row2_on'} eq "true" and $settings_homepage->{'row2_pos'} == 5 ) { $temp_row5 = 'main/index-row2'; }
+
+% if ( $settings_homepage->{'row3_on'} eq "true" and $settings_homepage->{'row3_pos'} == 1 ) { $temp_row1 = 'main/index-row3'; }
+% if ( $settings_homepage->{'row3_on'} eq "true" and $settings_homepage->{'row3_pos'} == 2 ) { $temp_row2 = 'main/index-row3'; }
+% if ( $settings_homepage->{'row3_on'} eq "true" and $settings_homepage->{'row3_pos'} == 3 ) { $temp_row3 = 'main/index-row3'; }
+% if ( $settings_homepage->{'row3_on'} eq "true" and $settings_homepage->{'row3_pos'} == 4 ) { $temp_row4 = 'main/index-row3'; }
+% if ( $settings_homepage->{'row3_on'} eq "true" and $settings_homepage->{'row3_pos'} == 5 ) { $temp_row5 = 'main/index-row3'; }
+
+% if ( $settings_homepage->{'row4_on'} eq "true" and $settings_homepage->{'row4_pos'} == 1 ) { $temp_row1 = 'main/index-row4'; }
+% if ( $settings_homepage->{'row4_on'} eq "true" and $settings_homepage->{'row4_pos'} == 2 ) { $temp_row2 = 'main/index-row4'; }
+% if ( $settings_homepage->{'row4_on'} eq "true" and $settings_homepage->{'row4_pos'} == 3 ) { $temp_row3 = 'main/index-row4'; }
+% if ( $settings_homepage->{'row4_on'} eq "true" and $settings_homepage->{'row4_pos'} == 4 ) { $temp_row4 = 'main/index-row4'; }
+% if ( $settings_homepage->{'row4_on'} eq "true" and $settings_homepage->{'row4_pos'} == 5 ) { $temp_row5 = 'main/index-row4'; }
+
+% if ( $settings_homepage->{'row5_on'} eq "true" and $settings_homepage->{'row5_pos'} == 1 ) { $temp_row1 = 'main/index-row5'; }
+% if ( $settings_homepage->{'row5_on'} eq "true" and $settings_homepage->{'row5_pos'} == 2 ) { $temp_row2 = 'main/index-row5'; }
+% if ( $settings_homepage->{'row5_on'} eq "true" and $settings_homepage->{'row5_pos'} == 3 ) { $temp_row3 = 'main/index-row5'; }
+% if ( $settings_homepage->{'row5_on'} eq "true" and $settings_homepage->{'row5_pos'} == 4 ) { $temp_row4 = 'main/index-row5'; }
+% if ( $settings_homepage->{'row5_on'} eq "true" and $settings_homepage->{'row5_pos'} == 5 ) { $temp_row5 = 'main/index-row5'; }
+
+
+% if ( defined($temp_row1) and $temp_row1 ne '' ) {
+    %= include $temp_row1
+% }
+% if ( defined($temp_row2) and $temp_row2 ne '' ) {
+    %= include $temp_row2
+% }
+% if ( defined($temp_row3) and $temp_row3 ne '' ) {
+    %= include $temp_row3
+% }
+% if ( defined($temp_row4) and $temp_row4 ne '' ) {
+    %= include $temp_row4
+% }
+% if ( defined($temp_row5) and $temp_row5 ne '' ) {
+    %= include $temp_row5
+% }

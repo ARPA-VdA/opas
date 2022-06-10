@@ -1,0 +1,274 @@
+% layout 'default';
+% title 'report - Verbali';
+
+
+<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+
+
+<script src="js/plugins/summernote/summernote.min.js"></script>
+<script src="js/plugins/summernote/summernote-it-IT.js"></script>
+<link href="css/plugins/summernote/summernote.css" rel="stylesheet">
+<link href="css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+
+
+<link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+<script src="js/plugins/chosen/chosen.jquery.js"></script>
+
+
+<script src="<%=url_for(helperGetFileVersion('/js-lily/report_memo.js'))%>"></script>
+
+
+<script type="text/javascript">
+var date1 = '<%=$date_from%>';
+var date2 = '<%=$date_to%>';
+userid    = '<%=$usid%>';
+repid     = '<%=$repid%>';
+$(document).ready(function () {
+    // update calendars
+    updateDataRange(date1, date2);
+
+    console.log('repid: '+repid);
+    if (repid)
+        showReportFromGet(repid);
+});
+</script>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins ibox-as-bar">
+            <div class="ibox-title mod-title-height">
+
+                <div class="row" id="memorange_row">
+                    <div class="col-sm-3">
+                        
+                        % if ( $grants->{'add'} == 1 ) {
+                            <button class="btn btn-success" type="button" id="btn-add-memo"><i class="fa fa-plus-circle"></i> <span class="bold">Nuovo</span></button>
+                        % }
+                        <button class="btn btn-info" type="button" id="download-csv"><i class="fa fa-download"></i> CSV</button>
+                    </div>
+                    <div class="col-sm-5">
+                        <div id="reportrange" class="form-control">
+                            <i class="fa fa-calendar"></i>
+                            <span></span> <b class="caret"></b>
+                        </div>
+                    </div>
+                    <div class="col-sm-2"><input class="btn btn-warning" id="refresh-list" type="button" value="aggiorna"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" id="add-memo">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Aggiungi verbale</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content adding-memos">
+                <form action="" method="post" id="memo-form" name="memo-form" class="clearfix form-horizontal form-reports">
+
+                    
+                    <input type="hidden" id="memo-meid" name="memo-meid" value="">
+
+                    <div class="form-group modify-date">
+                        <label class="control-label col-sm-2" for="memo-place">Località</label>
+                        <div class="col-sm-4"><input type="text" class="form-control" id="memo-place" name="memo-place"></div>
+                        <label class="control-label col-sm-2" for="memo-date">Data</label>
+                        <div class="input-group date col-sm-4" id="memo_date">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" data-date-end-date="0d" value="" name="memo-date" id="memo-date">
+                        </div>
+                    </div>
+                    <div class="form-group modify-date">
+                        <label class="control-label col-sm-2" for="memo_time_start">Ora inizio</label>
+                        <div class="input-group date col-sm-4" id="memo_time_start">
+                            <span class="input-group-addon"><i class="fa fa-clock-o"></i></span><input type="text" class="form-control" value="" name="memo-time-start" id="memo-time-start">
+                        </div>
+                        <label class="control-label col-sm-2" for="memo_time_end">Ora fine</label>
+                        <div class="input-group date col-sm-4" id="memo_time_end">
+                            <span class="input-group-addon"><i class="fa fa-clock-o"></i></span><input type="text" class="form-control" value="" name="memo-time-end" id="memo-time-end">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="memo-verbalize">Verbalizzante</label>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" name="memo-verbalize" id="memo-verbalize">
+                                
+                                % foreach my $operator ( @{$operators} ) {
+                                    % if ( $operator->{'user_logged'} ) {
+                                        <option value="<%= $operator->{'us_id'} =%>" selected><%= $operator->{'user_fullname'} =%></option>
+                                    % } else {
+                                        <option value="<%= $operator->{'us_id'} =%>"><%= $operator->{'user_fullname'} =%></option>
+                                    % }
+                                % }
+                            </select>
+                        </div>
+                        <label class="col-sm-2 control-label" for="memo-participant">Partecipanti</label>
+                        <div class="col-sm-4">
+                            <select class="form-control m-b" multiple="true" name="memo-participant" id="memo-participant" data-placeholder="seleziona..">
+                                % foreach my $participant ( @{$participants} ) {
+                                    <option value="<%= $participant->{'pa_id'} =%>"><%= $participant->{'name'} =%> &nbsp; <%= $participant->{'surname'} =%></option>
+                                % }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="memo-title">Titolo</label>
+                        <div class="col-sm-10"><input type="text" class="form-control" id="memo-title" name="memo-title"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="memo-body">Corpo verbale</label>
+                        <div class="col-sm-10">
+                            <textarea class="summernote" id="memo-body" name="memo-body"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button class="btn btn-white" type="cancel" id="cancel-memo-form" name="cancel-memo-form">Annulla</button>
+                            <button class="btn btn-primary" type="submit" id="btn-memo-form" name="btn-memo-form">Salva</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row" id="view-memo">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Visualizza verbale</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content adding-reports ">
+                <div class="row view-report">
+                    <label class="control-label col-sm-2">Località</label>
+                    <div class="col-sm-4 clear-txt" id="view_loc"></div>
+                    <label class="control-label col-sm-2">Data</label>
+                    <div class="col-sm-4 clear-txt" id="view_date"></div>
+                </div>
+                <div class="row view-report">
+                    <label class="control-label col-sm-2">Ora inizio</label>
+                    <div class="col-sm-4 clear-txt" id="view_start"></div>
+                    <label class="control-label col-sm-2">Ora fine</label>
+                    <div class="col-sm-4 clear-txt" id="view_end"></div>
+                </div>
+                <div class="row view-report">
+                    <label class="control-label col-sm-2">Verbalizzante</label>
+                    <div class="col-sm-4 clear-txt" id="view_verbalize"></div>
+                    <label class="control-label col-sm-2">Partecipanti</label>
+                    <div class="col-sm-4 clear-txt" id="view_participant"></div>
+                </div>
+                <hr class="line_sep" />
+                <div class="row view-report title_report">
+                    <label class="control-label col-sm-2">Titolo</label>
+                    <div class="col-sm-10 clear-txt" id="view_title"></div>
+                </div>
+                <hr class="line_middle_sep" />
+                <div class="row view-report">
+                    <label class="control-label col-sm-2">Corpo verbale</label>
+                    <div class="col-sm-10 clear-txt" id="view_body"></div>
+                </div>
+                <div class="row view-report">
+                    <div class="col-sm-4">
+                        <button class="btn btn-primary" id="btn-close-view" name="btn-close-view">Chiudi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Verbali inseriti</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content table-reports">
+
+                <table class="table table-striped table-bordered table-hover dataTables-example table-with-tools datatable-ale" >
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Data</th>
+                            <th>Località</th>
+                            <th>Ora inizio</th>
+                            <th>Ora fine</th>
+                            <th>Verbalizzante</th>
+                            <th>Titolo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        % foreach my $memo ( @{$memos} )
+                        % {
+                            <tr data-id="<%= $memo->{'me_id'} =%>">
+                                <td>
+                                    <a href="javascript:void(0)" class="table-tool blue view-tool"><i class="fa fa-search-plus"></i></a>
+                                    % if ( $memo->{'gr_id'} == $user->{'gr_id'} ) {
+                                        
+                                        % if ( $grants->{'update'} == 1 ) {
+                                            <a href="javascript:void(0)" class="table-tool blue set-tool"><i class="fa fa-wrench"></i></a>
+                                        % }
+                                        
+                                        % if ( $grants->{'delete'} == 1 ) {
+                                            <a href="javascript:void(0)" class="table-tool light-blue delete-tool"><i class="fa fa-trash"></i></a>
+                                        % }
+                                    % }
+                                    <a href="" class="table-tool text-danger pdf-tool"><i class="fa fa-file-pdf-o"></i></a>
+                                </td>
+                                <td><%= $memo->{'memo_date'} =%></td>
+                                <td><%= $memo->{'memo_place'} =%></td>
+                                <td><%= $memo->{'memo_start_time'} =%></td>
+                                <td><%= $memo->{'memo_end_time'} =%></td>
+                                <td><%= $memo->{'memo_username'} =%></td>
+                                <td><%= $memo->{'memo_title'} =%></td>
+                            </tr>
+                        % }
+                    </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th>Data</th>
+                            <th>Località</th>
+                            <th>Ora inizio</th>
+                            <th>Ora fine</th>
+                            <th>Verbalizzante</th>
+                            <th>Titolo</th>
+                        </tr>
+                    </tfoot>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

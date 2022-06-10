@@ -1,0 +1,48 @@
+% layout 'default';
+% title 'Tutorial';
+
+<script src="js/plugins/video/responsible-video.js"></script>
+
+
+<div class="row animated fadeInRight">
+    <div class="col-lg-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Inserire un report manutenzioni - Staz. Anas Etroubles</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <figure>
+                    <iframe width="425" height="349" src="http://www.youtube.com/embed/KhI8MHlRdJ0" frameborder="0" allowfullscreen></iframe>
+                </figure>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Inserire un report taratura - Staz. Anas Etroubles</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <figure>
+                    <iframe width="425" height="349" src="http://www.youtube.com/embed/kfwfGH--9Xk" frameborder="0" allowfullscreen></iframe>
+                </figure>
+            </div>
+        </div>
+    </div>
+</div>

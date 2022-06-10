@@ -1,0 +1,230 @@
+% my $visible_class_collapse='fa-chevron-down';
+% my $visible_class_content='display: none;';
+
+% if (1) { # ( $row2_visibility ) {
+    % $visible_class_collapse='fa-chevron-up';
+    % $visible_class_content='';
+% }
+
+<div class="row">
+    
+    <div class="col-lg-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Sopralluoghi</h5>
+                <div class="ibox-tools">
+                    <span class="label label-warning-light"><%= $homepage_counters->{'new_surveys'} =%>&nbsp; nuovi</span>
+                    <a class="collapse-link">
+                        <i class="fa <%=$visible_class_collapse%>"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content" style="<%=$visible_class_content%>">
+                <div>
+                    <div class="feed-activity-list">
+
+                        
+                        % my $g = 0;
+                        % foreach my $report ( @{$report_surveys} )
+                        % {
+                            <div class="feed-element">
+                                <a href="/report_survey?id=<%=$report->{'su_id'}%>" class="pull-left">
+                                    <img alt="image" class="img-circle" src="img-lily/users/<%=$report->{'user_avatar'}%>">
+                                </a>
+                                <div class="media-body">
+                                    <small class="pull-right text-navy"><%= $report->{'date_gap'} =%></small>
+
+                                    <strong><%= $report->{'user_fullname'} =%></strong> ha inserito un <a href="/report_survey?id=<%=$report->{'su_id'}%>" class="open_link">sopralluogo</a><br>
+
+                                    <div class="well">
+                                        <div class="crop-content">
+                                            <strong>Località:&nbsp;</strong> <%= $report->{'survey_place'} =%>
+                                            <br />
+                                            <strong>Info:&nbsp;</strong> <%= $report->{'survey_desc'} =%>
+                                        </div>
+                                    </div>
+
+                                    <div class="attach-hp clearfix lightBoxGallery">
+
+                                        % my @thumbs = split(',', $report->{'stored_attachments'});
+                                        % my @thumbs_name = split(',', $report->{'attachments'});
+                                        % my $i = 0;
+                                        % foreach my $thumb ( @thumbs )
+                                        % {
+                                            % $thumb =~ s/^\s+|\s+$//g;
+                                            % my $imgurl = "/uploads/sopralluoghi/allegati_".$report->{'path_id'}."/".$thumb;
+
+                                            % if ( $thumb =~ m/^.*(jpg|jpeg|gif|png)$/ ) {
+                                                <div class="single-image clearfix">
+                                                    <a href="<%=$imgurl%>" title='' class='single-image-gallery' data-gallery='#gallery<%=$g=%>'><img alt="image" src="<%=$imgurl%>"></a>
+                                                </div>
+                                            % }else{
+                                                <div><a href="<%=$imgurl%>" title='' class='pdf-attacch text-info' target='_blank'><i class='fa fa-file-pdf-o'></i>&nbsp;<%= @thumbs_name[$i] =%></a>&nbsp;&nbsp;&nbsp;</div>
+                                            % }
+
+                                            % $i++;
+                                        % }
+
+                                    </div>
+
+                                    <small class="text-muted"><%= $report->{'survey_date_format'} =%></small>
+                                    <small class="pull-right text-navy"><a href="/report_survey?id=<%=$report->{'su_id'}%>">Apri report&raquo;</a></small>
+
+                                </div>
+                            </div>
+                            
+                            % $g++;
+                        % }
+
+                        
+
+                    </div>
+                    
+                    <a class="btn btn-default btn-block m-t" href="<%= url_for('report_survey')%>"><i class="fa fa-plus-circle"></i> Visualizza tutti</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="col-lg-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Tarature</h5>
+                <div class="ibox-tools">
+                    <span class="label label-warning-light"><%= $homepage_counters->{'new_calibrations'} =%>&nbsp; nuove</span>
+                    <a class="collapse-link">
+                        <i class="fa <%=$visible_class_collapse%>"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content" style="<%=$visible_class_content%>">
+                <div>
+                    <div class="feed-activity-list">
+                        % foreach my $report ( @{$report_calibrations} )
+                        % {
+                            % my $note = '';
+                            % if ( $report->{'note'} )         { $note =  "<strong>Note:</strong> $report->{'note'} <br/>"; }
+
+                            % if ( $report->{'instrument'} )   { $note .= "<strong>Strumento:</strong> $report->{'instrument'} <br/>"; }
+
+                            
+                            % my @instrarr = (1050, 1060, 1070, 1150, 1160, 1170, 1210);
+                            % if (grep {$_ eq $report->{'instrument_type'}} @instrarr) {
+                                
+                                % if ( $report->{'span_found'} )   { $note .= "<strong>Flusso trovato:</strong> $report->{'span_found'} <br/>"; }
+                                % if ( $report->{'span_set'} )     { $note .= "<strong>Flusso taratura:</strong> $report->{'span_set'} <br/>"; }
+                                % if ( $report->{'span_changed'} ) { $note .= "<strong>Flusso modificato:</strong> $report->{'flux_changed'} <br/>"; }
+
+                            % } else {
+
+                                % if ( $report->{'span_found'} )   { $note .= "<strong>Span trovato:</strong> $report->{'span_found'} <br/>"; }
+                                % if ( $report->{'span_set'} )     { $note .= "<strong>Span taratura:</strong> $report->{'span_set'} <br/>"; }
+                                % if ( $report->{'span_changed'} ) { $note .= "<strong>Span modificato:</strong> $report->{'span_changed'} <br/>"; }
+
+                            % }
+
+                            % if ( $report->{'zero_tank'} )    { $note .= "<strong>Bombola span:</strong> $report->{'zero_tank'} <br/>"; }
+                            % if ( $report->{'span_tank'} )    { $note .= "<strong>Bombola zero:</strong> $report->{'span_tank'} <br/>"; }
+                            % if ( $report->{'calibrator'} )   { $note .= "<strong>Calibratore:</strong> $report->{'calibrator'} <br/>"; }
+                            
+                            <div class="feed-element">
+                                <a href="/report_calibration?id=<%=$report->{'id'}%>" class="pull-left">
+                                    <img alt="image" class="img-circle" src="img-lily/users/<%=$report->{'user_avatar'}%>">
+                                </a>
+                                <div class="media-body">
+                                    <small class="pull-right text-navy"><%= $report->{'date_gap'} =%></small>
+                                    <strong><%= $report->{'user_fullname'} =%></strong> ha inserito un <a href="/report_calibration?id=<%=$report->{'id'}%>" class="open_link">report</a> in Stazione&nbsp; <%= $report->{'station_name'} =%> <br>
+                                    <div class="well">
+                                        <div class="crop-content"><%== $note =%></div>
+                                    </div>
+                                    <small class="text-muted"><%= $report->{'date_format'} =%></small>
+                                    <small class="pull-right text-navy"><a href="/report_calibration?id=<%=$report->{'id'}%>">Apri report&raquo;</a></small>
+                                </div>
+                            </div>
+
+                        % }
+
+                        
+
+                    </div>
+                    
+                    <a class="btn btn-default btn-block m-t" href="<%= url_for('report_calibration')%>"><i class="fa fa-plus-circle"></i> Visualizza tutti</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="col-lg-4" id="maintenance_hp">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Manutenzione</h5>
+                <div class="ibox-tools">
+                    <span class="label label-warning-light"><%= $homepage_counters->{'new_maintenances'} =%>&nbsp; nuove</span>
+                    <a class="collapse-link">
+                        <i class="fa <%=$visible_class_collapse%>"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content" style="<%=$visible_class_content%>">
+                <div>
+                    <div class="feed-activity-list">
+
+                        
+                        % foreach my $report ( @{$report_maintenances} )
+                        % {
+                            <div class="feed-element">
+                                <a href="/report_maintenance?id=<%=$report->{'ma_id'}%>" class="pull-left">
+                                    <img alt="image" class="img-circle" src="img-lily/users/<%=$report->{'user_avatar'}%>">
+                                </a>
+                                <div class="media-body">
+                                    <small class="pull-right text-navy"><%= $report->{'date_gap'} =%></small>
+                                    <strong><%= $report->{'user_fullname'} =%></strong>: <a href="/report_maintenance?id=<%=$report->{'ma_id'}%>" class="open_link">manutenzione</a> in&nbsp;<%= $report->{'station_name'} =%> <br>
+                                    <div class="well">
+                                        <div class="crop-content">
+                                            % if ( $report->{'note'} ) {
+                                                <strong>Note:</strong>
+                                                <%== $report->{'note'} =%><hr>
+                                            % }
+                                            % if ( $report->{'operations'} ) {
+                                                <%== $report->{'operations'} =%>
+                                            % }
+                                        </div>
+                                    </div>
+                                    <small class="text-muted"><%= $report->{'date_format'} =%></small>
+                                    <small class="pull-right text-navy"><a href="/report_maintenance?id=<%=$report->{'ma_id'}%>">Apri report&raquo;</a></small>
+                                </div>
+                            </div>
+                        % }
+
+                        
+
+                    </div>
+                    
+                    <a class="btn btn-default btn-block m-t" href="<%= url_for('report_maintenance')%>"><i class="fa fa-plus-circle"></i> Visualizza tutti</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>

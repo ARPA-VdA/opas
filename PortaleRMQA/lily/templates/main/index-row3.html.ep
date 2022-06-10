@@ -1,0 +1,179 @@
+% my $visible_class_collapse='fa-chevron-down';
+% my $visible_class_content='display: none;';
+
+% if (1) { # ( $row3_visibility ) {
+    % $visible_class_collapse='fa-chevron-up';
+    % $visible_class_content='';
+% }
+
+<div class="row">
+    
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Statistiche</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa <%=$visible_class_collapse%>"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+                
+            </div>
+
+            % my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
+            % $year = $year+1900;
+
+            <div class="ibox-content" style="<%=$visible_class_content%>">
+                <div class="row btn-circle-little">
+
+                    <div class="col-sm-4">
+                        <h2>Superamenti PM10</h2>
+                        <small>Anno <%=$year%>. Limite 50.5 µg/m³ su base giornaliera.</small>
+                        <ul class="list-group clear-list m-t">
+                            <li class="list-group-item first-item head-item">
+                                <span class="pull-right text-success">
+                                    ULTIMO SUP.
+                                </span>
+                                SOGLIA 50.5 µg/m³ MEDIA GIORNALIERA
+                            </li>
+
+                            % my $color_class;
+                            % foreach my $data ( @{$data_pm10_stats} )
+                            % {
+                                % if ( $data->{'count'} < 10 ) {
+                                    % $color_class = ' btn-primary ';
+                                % } elsif ( $data->{'count'} < 20 ) {
+                                    % $color_class = ' btn-info ';
+                                % } elsif ( $data->{'count'} <= 35 ) {
+                                    % $color_class = ' btn-warning ';
+                                % } elsif ( $data->{'count'} > 35 ) {
+                                    % $color_class = ' btn-danger ';
+                                % }
+                                <li class="list-group-item">
+                                    <span class="pull-right">
+                                        <%= $data->{'last_date'} =%>
+                                    </span>
+                                    <span class="btn btn-circle <%=$color_class=%>"><%= $data->{'count'} =%></span> <%= $data->{'station'} =%>
+                                </li>
+                            % }
+
+                            <li class="list-group-item first-item legend-block">
+                                <h5 class="text-success">LEGENDA - Numero di superamenti</h5>
+                                <span class="btn btn-circle btn-primary">N</span> <span class="legend-label">&#60; 10</span>&nbsp;&nbsp;&nbsp;
+                                <span class="btn btn-circle btn-info">N</span> <span class="legend-label">&#60; 20</span>&nbsp;&nbsp;&nbsp;
+                                <span class="btn btn-circle btn-warning">N</span> <span class="legend-label">&#60;= 35</span>&nbsp;&nbsp;&nbsp;
+                                <span class="btn btn-circle btn-danger">N</span> <span class="legend-label">&#62; 35</span>&nbsp;&nbsp;&nbsp;
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <h2>Superamenti NO2</h2>
+                        <small>Anno <%=$year%>. Limite 200.5 µg/m³ su base oraria, 40.5 µg/m³ su base annua.</small>
+                        <ul class="list-group clear-list m-t">
+                            <li class="list-group-item first-item head-item">
+                                <span class="pull-right text-success">
+                                    ULTIMO SUP.
+                                </span>
+                                SOGLIA 200.5 µg/m³ MEDIA ORARIA
+                            </li>
+
+                            % my $color_class2;
+                            % foreach my $data ( @{$data_no2_stats} )
+                            % {
+                                % if ( $data->{'count'} < 10 ) {
+                                    % $color_class2 = ' btn-primary ';
+                                % #### elsif ( $data->{'count'} < 20 ) {
+                                    % ####$color_class2 = ' btn-info ';
+                                % } elsif ( $data->{'count'} <= 18 ) {
+                                    % $color_class2 = ' btn-warning ';
+                                % } elsif ( $data->{'count'} >= 18 ) {
+                                    % $color_class2 = ' btn-danger ';
+                                % }
+
+                                <li class="list-group-item">
+                                    <span class="pull-right">
+                                        <%= $data->{'last_date'} =%>
+                                    </span>
+                                    <span class="btn btn-circle <%=$color_class2=%>"><%= $data->{'count'} =%></span> <%= $data->{'station'} =%>
+                                </li>
+                            % }
+                            <li class="list-group-item first-item legend-block">
+                                <h5 class="text-success">LEGENDA - Numero di superamenti</h5>
+                                <span class="btn btn-circle btn-primary">N</span> <span class="legend-label">&#60; 10</span>&nbsp;&nbsp;&nbsp;
+                                <span class="btn btn-circle btn-warning">N</span> <span class="legend-label">&#60;= 18</span>&nbsp;&nbsp;&nbsp;
+                                <span class="btn btn-circle btn-danger">N</span> <span class="legend-label">&#62; 18</span>&nbsp;&nbsp;&nbsp;
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <h2>Superamenti O3</h2>
+                        <small>Anno <%=$year%>. Limite 120.5 µg/m³ media mobile, 180.5 µg/m³ oraria, 240.5 µg/m³ oraria.</small>
+
+                        <ul class="list-group clear-list m-t">
+                            <li class="list-group-item first-item head-item">
+                                <span class="pull-right text-success">
+                                    ULTIMO SUP.
+                                </span>
+                                SOGLIA 120.5 ΜG/M³ MEDIA MOBILE
+                            </li>
+                            % my $color_class3;
+                            % foreach my $data ( @{$data_o3_stats} )
+                            % {
+                                % if ( $data->{'count'} < 10 ) {
+                                    % $color_class3 = ' btn-primary ';
+                                % } elsif ( $data->{'count'} < 20 ) {
+                                    % $color_class3 = ' btn-info ';
+                                % } elsif ( $data->{'count'} <= 25 ) {
+                                    % $color_class3 = ' btn-warning ';
+                                % } elsif ( $data->{'count'} > 25 ) {
+                                    % $color_class3 = ' btn-danger ';
+                                % }
+
+                                <li class="list-group-item">
+                                    <span class="pull-right">
+                                        <%= $data->{'last_date'} =%>
+                                    </span>
+                                    <span class="btn btn-circle <%=$color_class3=%>"><%= $data->{'count'} =%></span> <%= $data->{'station'} =%>
+                                </li>
+                            % }
+
+                            <li class="list-group-item first-item legend-block">
+                                <h5 class="text-success">LEGENDA - Numero di superamenti</h5>
+                                <span class="btn btn-circle btn-primary">N</span> <span class="legend-label">&#60; 10</span>&nbsp;&nbsp;&nbsp;
+                                <span class="btn btn-circle btn-info">N</span> <span class="legend-label">&#60; 20</span>&nbsp;&nbsp;&nbsp;
+                                <span class="btn btn-circle btn-warning">N</span> <span class="legend-label">&#60;= 25</span>&nbsp;&nbsp;&nbsp;
+                                <span class="btn btn-circle btn-danger">N</span> <span class="legend-label">&#62; 25</span>&nbsp;&nbsp;&nbsp;
+                            </li>
+
+                        </ul>
+
+                        <ul class="list-group clear-list m-t">
+                            <li class="list-group-item first-item head-item">
+                                <span class="pull-right text-success">
+                                    ULTIMO SUP.
+                                </span>
+                                SOGLIA 180.5 ΜG/M³ MEDIA ORARIA
+                            </li>
+                            % foreach my $data ( @{$data_o3_180_stats} )
+                            % {
+                                <li class="list-group-item">
+                                    <span class="pull-right">
+                                        <%= $data->{'last_date'} =%>
+                                    </span>
+                                    <span class="btn btn-circle btn-success"><%= $data->{'count'} =%></span> <%= $data->{'station'} =%>
+                                </li>
+                            % }
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

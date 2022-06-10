@@ -1,0 +1,121 @@
+% my $visible_class_collapse='fa-chevron-down';
+% my $visible_class_content='display: none;';
+
+% if (1) { # ( $row5_visibility ) {
+    % $visible_class_collapse='fa-chevron-up';
+    % $visible_class_content='';
+% }
+
+<div class="row">
+    
+    <div class="col-lg-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Bombole in scadenza nei prossimi 60 giorni</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa <%=$visible_class_collapse%>"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content" style="<%=$visible_class_content%>">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Stazione</th>
+                        <th>Descriz.</th>
+                        <th class="text-danger"><i class="fa fa-exclamation-triangle font-big"></i></th>
+                        <th class="text-success"><i class="fa fa-reply-all font-big"></i></th>
+                        <th>Scadenza</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        % my $exhausted_b;
+                        % my $returned_b;
+                        % foreach my $data ( @{$data_tank_status} )
+                        % {
+                            % if ( $data->{'exhausted'} == 1 ) {
+                                % $exhausted_b = ' <i class="fa fa-check text-navy"></i> ';
+                            % } else { $exhausted_b = '';
+                            % }
+                            % if ( $data->{'returned'} == 1 ) {
+                                % $returned_b = ' <i class="fa fa-check text-navy"></i> ';
+                            % } else { $returned_b = '';
+                            % }
+                            <tr>
+                                <td><%= $data->{'arpa_id'} =%></td>
+                                <td><%= $data->{'stationname'} =%></td>
+                                <td><%= $data->{'description'} =%></td>
+                                <td><%==$exhausted_b=%></td>
+                                <td><%==$returned_b=%></td>
+                                <td><%= $data->{'date_expiry'} =%></td>
+                            </tr>
+                        % }
+                    </tbody>
+                </table>
+
+                <div class="file-manager clearfix tag-legend">
+                    <h5 class="text-info">Legenda</h5>
+                    <ul class="tag-list" style="padding: 0">
+                        <li><a href="JavaScript:void(0);"><i class="fa fa-exclamation-triangle font-big text-danger"></i> Esaurita</a></li>
+                        <li><a href="JavaScript:void(0);"><i class="fa fa-reply-all font-big text-success"></i> Restituita</a></li>
+                    </ul>
+                </div>
+                <a class="btn btn-default btn-block m-t" href="/man_tank_list"><i class="fa fa-plus-circle"></i> Visualizza dettagli</a>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="col-lg-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Filtri campionatori in scadenza nei prossimi 14 giorni</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa <%=$visible_class_collapse%>"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+
+            
+
+            <div class="ibox-content" style="<%=$visible_class_content%>">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Stazione</th>
+                        <th>Operatore</th>
+                        <th>Strumento</th>
+                        <th>ArpaID</th>
+                        <th>Scadenza</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        % my $exhausted_b;
+                        % my $returned_b;
+                        % foreach my $data ( @{$data_filters_status} )
+                        % {
+                            <tr>
+                                <td><%= $data->{'station_name'} =%></td>
+                                <td><%= $data->{'user_name'} =%></td>
+                                <td><%= $data->{'instr_name'} =%></td>
+                                <td><%= $data->{'oper_arpa_id'} =%></td>
+                                <td><%= $data->{'oper_filter_expdate'} =%></td>
+                            </tr>
+                        % }
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+    </div>
+
+</div>

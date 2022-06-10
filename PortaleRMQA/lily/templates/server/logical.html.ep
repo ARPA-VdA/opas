@@ -1,0 +1,358 @@
+% layout 'default';
+% title 'Schema logico';
+
+
+<link href="css-lily/server.css" rel="stylesheet">
+
+
+
+<link href="css/plugins/codemirror/codemirror.css" rel="stylesheet">
+<link href="css/plugins/codemirror/ambiance.css" rel="stylesheet">
+
+
+<script src="js/plugins/codemirror/codemirror.js"></script>
+<script src="js/plugins/codemirror/mode/javascript/javascript.js"></script>
+
+<script type="text/javascript">
+function MyFunction(){
+    console.log('hello');
+
+        $.magnificPopup.open({
+              items: {
+                src: 'includes-lily/subpages/juniper.html?=v2',
+                type: 'ajax',closeOnContentClick : false, closeOnBgClick :true, showCloseBtn : false, enableEscapeKey : false,
+                closeMarkup: '<button class="mfp-close mfp-new-close" type="button" title="Close (Esc)"> { costume button with close icon image } </button>'
+              },
+                callbacks: {
+                    open: function() {
+                        console.log('open');
+                      // Will fire when this exact popup is opened
+                      // this - is Magnific Popup object
+                      setTimeout(function () { explode(); }, 10);
+
+                    },
+                    close: function() {
+                      // Will fire when popup is closed
+                    }
+                }
+            });
+}
+function explode(){
+    console.log('explode');
+    var editor_one = CodeMirror.fromTextArea(document.getElementById("code1"), {
+     lineNumbers: true,
+     matchBrackets: true,
+     styleActiveLine: true,
+     theme:"ambiance"
+    });
+}
+</script>
+
+<div class="row">
+    <div class="col-xs-12">
+
+        <a id="myLink" title="Click to do something" href="#" onclick="MyFunction();return false;">link text</a>
+        <br/>
+
+        <a href="includes-lily/subpages/juniper.html?v=1" class="ajax-popup-link">juniper</a>
+        <br/>
+        <a href="includes-lily/subpages/pippo.html" class="ajax-popup-link">esxi-srv1</a>
+        <br/>
+        <a href="includes-lily/subpages/esxi-srv2.html" class="ajax-popup-link">esxi-srv2</a>
+        <br/>
+        <a href="includes-lily/subpages/db-srv1.html" class="ajax-popup-link">db-srv1</a>
+        <br/>
+        <a href="includes-lily/subpages/db-srv2.html" class="ajax-popup-link">db-srv2</a>
+        <br/>
+        <a href="includes-lily/subpages/bin-srv1.html" class="ajax-popup-link">bin-srv1</a>
+        <br/>
+        <a href="includes-lily/subpages/web-srv1.html" class="ajax-popup-link">web-srv1</a>
+        <br/>
+        <a href="includes-lily/subpages/barman.html" class="ajax-popup-link">barman</a>
+        <br/>
+        <a href="includes-lily/subpages/modellistica.html" class="ajax-popup-link">modellistica</a>
+        <br/>
+        <a href="includes-lily/subpages/pc-ced.html" class="ajax-popup-link">pc-ced</a>
+        <br/>
+        <a href="includes-lily/subpages/pc-periferia.html" class="ajax-popup-link">pc-periferia</a>
+        <br/>
+        <a href="includes-lily/subpages/cr1000.html" class="ajax-popup-link">cr1000</a>
+        <br/>
+        <a href="includes-lily/subpages/canopy.html" class="ajax-popup-link">canopy</a>
+        <br/>
+        <a href="includes-lily/subpages/qnap.html" class="ajax-popup-link">qnap</a>
+
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-xs-5"></div>
+
+    <div class="col-xs-2">
+        <div class="ibox-content little-widget text-center">
+            <h4 class="little-widget-title text-danger"><i class="ace-icon fa fa-hdd-o"></i> SWITCH</h4>
+            <div class="little-widget-body text-danger">
+                <i class="ace-icon fa fa-wifi" style="font-size:16px;"></i> Ponte Radio
+            </div>
+        </div>
+        <div class="dashed-ver"></div>
+    </div>
+
+    <div class="col-xs-5"></div>
+</div>
+
+<div class="row">
+
+    <div class="col-xs-2"></div>
+    <div class="col-xs-2">
+        <div class="ibox-content little-widget">
+            <h4 class="little-widget-title"><i class="ace-icon fa fa-desktop"></i> <a href="subpages/" class="ajax-popup-link">esxi-srv2</a></h4>
+            <div class="little-widget-body">
+                192.168.5.189
+                <hr />
+                <small class="text-info">PowerEdge 1950 - Slave</small>
+            </div>
+        </div>
+        <div class="dashed-ver"></div>
+    </div>
+    <div class="col-xs-1"><div class="dashed-orr"></div></div>
+
+    <div class="col-xs-2">
+
+        <div class="ibox-content little-widget">
+            <h4 class="little-widget-title"><i class="ace-icon fa fa-desktop"></i> <a href="subpages/" class="ajax-popup-link">esxi-srv1</a></h4>
+            <div class="little-widget-body">
+                192.168.5.187
+                <hr />
+                <small class="text-info">PowerEdge R415 - Master</small>
+            </div>
+        </div>
+        <div class="dashed-ver"></div>
+    </div>
+    <div class="col-xs-1"><div class="dashed-orr"></div></div>
+    <div class="col-xs-2">
+        <div class="ibox-content little-widget">
+            <h4 class="little-widget-title"><i class="ace-icon fa fa-desktop"></i> <a href="subpages/" class="ajax-popup-link">modellistica</a></h4>
+            <div class="little-widget-body">
+                192.168.5.188
+                <hr />
+                <small class="text-info">PowerEdge r715 - Modellistica meteo</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-2"></div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-xs-2">
+        <div class="row">
+            <div class="col-xs-10">
+                <div class="ibox-content little-widget">
+                    <h4 class="little-widget-title"><i class="ace-icon fa fa-cube"></i> <a href="subpages/" class="ajax-popup-link text-warning">db-srv2</a></h4>
+                    <div class="little-widget-body">
+                        192.168.5.193
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2"><div class="dashed-orr"></div></div>
+        </div>
+    </div>
+
+    <div class="col-xs-2">
+        <div class="ibox-content little-widget">
+            <h4 class="little-widget-title"><i class="ace-icon fa fa-cube"></i> <a href="subpages/" class="ajax-popup-link text-warning">barman</a></h4>
+            <div class="little-widget-body">
+                192.168.5.194
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-1"></div>
+
+    <div class="col-xs-2">
+        <div class="row">
+            <div class="col-xs-10">
+                <div class="ibox-content little-widget">
+                    <h4 class="little-widget-title"><i class="ace-icon fa fa-cube"></i> <a href="subpages/" class="ajax-popup-link text-warning">db-srv1</a></h4>
+                    <div class="little-widget-body">
+                        192.168.5.186
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2"><div class="dashed-orr"></div></div>
+        </div>
+    </div>
+
+    <div class="col-xs-2">
+        <div class="row">
+            <div class="col-xs-10">
+                <div class="ibox-content little-widget">
+                    <h4 class="little-widget-title"><i class="ace-icon fa fa-cube"></i> <a href="subpages/" class="ajax-popup-link text-warning">bin-srv1</a></h4>
+                    <div class="little-widget-body">
+                        192.168.5.190
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2"><div class="dashed-orr"></div></div>
+        </div>
+    </div>
+
+    <div class="col-xs-2">
+        <div class="ibox-content little-widget">
+            <h4 class="little-widget-title"><i class="ace-icon fa fa-cube"></i> <a href="subpages/" class="ajax-popup-link text-warning">web-srv1</a></h4>
+            <div class="little-widget-body">
+                192.168.5.191
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row m-t">
+    <div class="col-xs-5"></div>
+
+    <div class="col-xs-2 m-t">
+        <div class="ibox-content little-widget text-center m-t">
+            <h4 class="little-widget-title text-danger"><i class="ace-icon fa fa-wifi"></i> Ponte Radio</h4>
+            <div class="little-widget-body">
+                PC periferici
+            </div>
+        </div>
+        <div class="dashed-ver"></div>
+    </div>
+
+    <div class="col-xs-5"></div>
+</div>
+
+<div class="row">
+    <div class="col-xs-1"></div>
+
+    <div class="col-xs-2">
+        <div class="row">
+            <div class="col-xs-10">
+                <div class="ibox-content little-widget">
+                    <h4 class="little-widget-title"><i class="ace-icon fa fa-folder-open"></i> <a href="subpages/" class="ajax-popup-link text-info">Pc-ced</a></h4>
+                    <div class="little-widget-body">
+                        192.168.5.79<br>
+                        192.168.0.10
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2"><div class="dashed-orr"></div></div>
+        </div>
+    </div>
+
+    <div class="col-xs-2">
+        <div class="row">
+            <div class="col-xs-10">
+                <div class="ibox-content little-widget">
+                    <h4 class="little-widget-title"><i class="ace-icon fa fa-folder-open"></i> <a href="subpages/" class="ajax-popup-link text-info">Plouves</a></h4>
+                    <div class="little-widget-body">
+                        192.168.0.20
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2"><div class="dashed-orr"></div></div>
+        </div>
+    </div>
+
+    <div class="col-xs-2">
+        <div class="ibox-content little-widget">
+            <h4 class="little-widget-title"><i class="ace-icon fa fa-folder-open"></i> <a href="subpages/" class="ajax-popup-link text-info">Liconi</a></h4>
+            <div class="little-widget-body">
+                192.168.0.21
+            </div>
+        </div>
+        <div class="dashed-ver"></div>
+    </div>
+
+    <div class="col-xs-2">
+        <div class="row">
+            <div class="col-xs-2"><div class="dashed-orr"></div></div>
+            <div class="col-xs-10">
+                <div class="ibox-content little-widget">
+                    <h4 class="little-widget-title"><i class="ace-icon fa fa-folder-open"></i> <a href="subpages/" class="ajax-popup-link text-info">Mont-Fleury</a></h4>
+                    <div class="little-widget-body">
+                        192.168.0.22
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-2">
+        <div class="row">
+            <div class="col-xs-2"><div class="dashed-orr"></div></div>
+            <div class="col-xs-10">
+                <div class="ibox-content little-widget">
+                    <h4 class="little-widget-title"><i class="ace-icon fa fa-folder-open"></i> <a href="subpages/" class="ajax-popup-link text-info">Dora</a></h4>
+                    <div class="little-widget-body">
+                        192.168.0.23
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-1"></div>
+</div>
+
+<div class="row m-b">
+    <div class="col-xs-3"></div>
+
+    <div class="col-xs-2">
+        <div class="row">
+            <div class="col-xs-10">
+                <div class="ibox-content little-widget">
+                    <h4 class="little-widget-title"><i class="ace-icon fa fa-folder-open"></i> <a href="subpages/" class="ajax-popup-link text-info">Pepinière</a></h4>
+                    <div class="little-widget-body">
+                        192.168.0.24
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2"><div class="dashed-orr"></div></div>
+        </div>
+    </div>
+
+    <div class="col-xs-2">
+        <div class="ibox-content little-widget">
+            <h4 class="little-widget-title"><i class="ace-icon fa fa-folder-open"></i> <a href="subpages/" class="ajax-popup-link text-info">La-Thuile</a></h4>
+            <div class="little-widget-body">
+                192.168.0.30
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-2">
+        <div class="row">
+            <div class="col-xs-2"><div class="dashed-orr"></div></div>
+            <div class="col-xs-10">
+                <div class="ibox-content little-widget">
+                    <h4 class="little-widget-title"><i class="ace-icon fa fa-folder-open"></i> <a href="subpages/" class="ajax-popup-link text-info">Cogne</a></h4>
+                    <div class="little-widget-body">
+                        192.168.0.40
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-2 m-b">
+        <div class="row">
+            <div class="col-xs-2"><div class="dashed-orr"></div></div>
+            <div class="col-xs-10">
+                <div class="ibox-content little-widget">
+                    <h4 class="little-widget-title"><i class="ace-icon fa fa-folder-open"></i> <a href="subpages/" class="ajax-popup-link text-info">Donnas</a></h4>
+                    <div class="little-widget-body">
+                        192.168.0.55
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-1"></div>
+</div>
